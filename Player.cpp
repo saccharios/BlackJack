@@ -34,7 +34,7 @@ void Player::Play()
 {
 	std::cout << "-------" << GetName() <<  "'s turn-------" << std::endl;
 	std::vector<HandManager>::size_type i = 0;
-	while(i < _handManager.size()) // Spliting creates more hands
+	while(i < _handManager.size()) // Spliting cards creates more hands
 	{
 		while( !_handManager[i]->IsPlayed() ) // Play current hand as long as you are allowed to
 		{
@@ -197,7 +197,7 @@ void Player::PrintCards() const
 
 void Player::PutCardsBack()
 {
-
+	// Put all cards of each hand back to the deck
 	for( auto const & currentHand : _handManager)
 	{
 		while(!currentHand->IsEmpty())
@@ -205,6 +205,7 @@ void Player::PutCardsBack()
 			_deck.AddCard(std::move(currentHand->RemoveLastCard()));
 		}
 	}
+	// Clear all ptrs that now point to empty hole cards
 	_handManager.clear();
 
 }
