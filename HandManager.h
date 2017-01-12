@@ -13,6 +13,10 @@
 #include <memory>
 #include "Deck.h"
 
+// The HandManager is a wrapper Class for the HoleCards for a Player.
+// Note that a Dealer is not a Player, as a Player has many more options available.
+// In comparison this Class lets you set wagers on HoleCards, evaluate the payout,
+// keeps track whether a player can keep playing these HoleCards.
 class HandManager {
 	typedef std::unique_ptr<Card> pCard;
 public:
@@ -29,9 +33,7 @@ public:
 	void ActionDouble();
 	void ActionHit();
 	void ActionStand();
-
 	void SetWager(float const & wager) { _wager = wager; }
-
 	float const & GetWager() const { return _wager; }
 	void PrintCards() const { _holeCards.PrintCards(); }
 	unsigned int GetValue() const { return _holeCards.GetValue(); }

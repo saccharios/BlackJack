@@ -23,7 +23,7 @@ public:
 
 	void Start();
 	void Play();
-	void PlayBasicStrategy();
+	std::string PlayBasicStrategy();
 	std::set<std::string> GetAvailableActionSet(pHandManager const & currentHand);
 	void Evaluate(	bool const & dealerHasBlackJack, bool const & dealerIsBusted, unsigned int const & dealerValue);
 	void PrintCards() const;

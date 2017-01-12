@@ -33,7 +33,6 @@ void Player::Start()
 void Player::Play()
 {
 	std::cout << "-------" << GetName() <<  "'s turn-------" << std::endl;
-
 	std::vector<HandManager>::size_type i = 0;
 	while(i < _handManager.size()) // Spliting creates more hands
 	{
@@ -51,8 +50,9 @@ void Player::Play()
 
 			// Get action from user
 			auto availableactions = GetAvailableActionSet(_handManager[i]);
-			std::cout << "Enter action:";
+			std::cout << "Enter action: ";
 			auto action = UserInput::ReadInStr(availableactions);
+//			auto action = PlayBasicStrategy(); // AutoPlayer
 			std::cout << "You choose to ";
 
 			// Evaluate action
@@ -100,15 +100,20 @@ void Player::Play()
 
 
 }
-void Player::PlayBasicStrategy()
+
+std::string Player::PlayBasicStrategy()
 {
-	std::cout << "-------Base::GetName()-------" << std::endl;
-	while(_handManager.at(0)->GetValue() < 17) // Basic Strategy
+	if( _handManager.at(0)->GetValue() < 17 )
 	{
-		_handManager.at(0)->ActionHit();
+		return "h";
+	}
+	else
+	{
+		return "s";
 	}
 
 }
+
 
 std::set<std::string> Player::GetAvailableActionSet(pHandManager const & currentHand)
 {
@@ -129,7 +134,6 @@ std::set<std::string> Player::GetAvailableActionSet(pHandManager const & current
 	}
 	return Standard;
 }
-
 
 void Player::Evaluate(	bool const & dealerHasBlackJack,
 		bool const & dealerIsBusted,
