@@ -33,7 +33,7 @@ public:
 	void AddSets(std::size_t N);
 	pCard Draw();
 	pCard  Draw(int number) { return Base::RemoveCard(number); }
-	void PrintNumCards();
+	void PrintNumCards() const;
 
 private:
 	Deck() {}

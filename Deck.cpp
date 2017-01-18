@@ -20,7 +20,7 @@ void Deck::AddSets(std::size_t N)
 
 Deck::pCard Deck::Draw()
 {
-	// Randomggenerator, copied from http://stackoverflow.com/questions/5008804/generating-random-integer-from-a-range
+	// Random generator, copied from http://stackoverflow.com/questions/5008804/generating-random-integer-from-a-range
 	std::mt19937 rng(_rd());    // random-number engine used (Mersenne-Twister in this case)
 	std::uniform_int_distribution<int> uniformDist(0, Base::NumCards()-1); // guaranteed unbiased
 	auto random_integer = uniformDist(rng);
@@ -28,7 +28,7 @@ Deck::pCard Deck::Draw()
 }
 
 
-void Deck::PrintNumCards()
+void Deck::PrintNumCards() const
 {
 	std::cout << "Cards in Deck = " << Base::NumCards() << std::endl;
 }
@@ -37,16 +37,11 @@ void Deck::PrintNumCards()
 
 void Deck::AddCompleteSet()
 {
-	for( int i = 0; i < 4;++i) // Iterate over Suits
+	for( const auto & suit : Suit)
 	{
-		for( int j = 0; j < 13;++j) // Iterate over Numbers
+		for(const auto & face : Face)
 		{
-			try {
-				AddCard(pCard(new Card(Face[j], Suit[i])));
-			}
-			catch( const std::invalid_argument& e ) {
-				std::cerr << e.what() << std::endl;
-			}
+			AddCard(pCard(new Card(face.first, suit)));
 		}
 	}
 }

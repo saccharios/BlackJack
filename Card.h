@@ -21,8 +21,6 @@ public:
 	void Print() const { std::cout << _face << _suit; }
 
 private:
-	void ConvertFaceToValue(std::string const & face);
-
 	std::string _face;
 	std::string _suit;
 	unsigned int _value;
