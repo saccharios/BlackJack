@@ -5,15 +5,14 @@
  *      Author: Stefan
  */
 
-#include "Game.h"
-#include "Deck.h"
-#include "player.h"
-#include "Dealer.h"
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "StaticDeclarations.h"
-
+#include "Game.h"
+#include "Deck.h"
+#include "Player.h"
+#include "Dealer.h"
+#include "UserInput.h"
 
 void Game::AddDecks()
 {

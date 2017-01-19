@@ -10,6 +10,7 @@
 
 #include <string>
 #include "StaticDeclarations.h"
+#include <iostream>
 
 
 class Card {

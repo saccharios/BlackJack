@@ -6,10 +6,11 @@
  */
 
 
+#include <memory>
+#include <iostream>
 #include "HandManager.h"
 #include "HoleCards.h"
 #include "Card.h"
-#include <memory>
 #include "Deck.h"
 
 HandManager::HandManager (Deck & deck, float const & wager, std::size_t const & handNumber):

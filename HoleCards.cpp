@@ -4,8 +4,9 @@
  *  Created on: 11.01.2017
  *      Author: Stefan
  */
-#include "HoleCards.h"
 #include <memory>
+#include "HoleCards.h"
+#include <iostream>
 
 HoleCards::HoleCards():
 _areBlackJack(false),

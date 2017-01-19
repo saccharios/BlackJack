@@ -13,7 +13,7 @@
 #include "Card.h"
 #include "HandManager.h"
 #include "Deck.h"
-#include "StaticDeclarations.h"
+#include "UserInput.h"
 
 
 Player::Player(Deck & deck, std::string name) :
