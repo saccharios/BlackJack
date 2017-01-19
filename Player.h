@@ -8,6 +8,7 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 #include <memory>
+#include <set>
 #include "HoleCards.h"
 #include "Card.h"
 #include "HandManager.h"
@@ -42,6 +43,12 @@ private:
 	Deck & _deck;
 	std::vector<pHandManager> _handManager;
 	std::string _name;
+
+	// The actions of a player are identified by a string
+	const std::set<std::string> ACTION_SPLIT_DOUBLE{"h","s","d","p"};
+	const std::set<std::string> ACTION_DOUBLE{"h","s","d"};
+	const std::set<std::string> ACTION_STANDARD{"h","s"};
+
 };
 
 

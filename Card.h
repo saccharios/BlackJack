@@ -10,8 +10,6 @@
 
 #include <string>
 #include <iostream>
-#include "GlobalDeclarations.h"
-
 
 class Card {
 public:
@@ -25,6 +23,7 @@ private:
 	std::string _face;
 	std::string _suit;
 	unsigned int _value;
+
 };
 
 

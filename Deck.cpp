@@ -5,10 +5,11 @@
  *      Author: Stefan
  */
 
-#include "Deck.h"
-#include "Card.h"
 #include <memory>
 #include <random>
+#include "Deck.h"
+#include "Card.h"
+#include "GlobalDeclarations.h"
 
 void Deck::AddSets(std::size_t N)
 {
@@ -37,9 +38,9 @@ void Deck::PrintNumCards() const
 
 void Deck::AddCompleteSet()
 {
-	for( const auto & suit : Suit)
+	for( const auto & suit : SUIT)
 	{
-		for(const auto & face : Face)
+		for(const auto & face : FACE)
 		{
 			AddCard(pCard(new Card(face.first, suit)));
 		}

@@ -5,16 +5,16 @@
  *      Author: Stefan
  */
 
-#include "Player.h"
 #include <memory>
 #include <sstream>
 #include <iostream>
+#include "Player.h"
 #include "HoleCards.h"
 #include "Card.h"
 #include "HandManager.h"
 #include "Deck.h"
 #include "UserInput.h"
-
+#include "GlobalDeclarations.h"
 
 Player::Player(Deck & deck, std::string name) :
 _balance(0),
@@ -121,18 +121,18 @@ std::set<std::string> Player::GetAvailableActionSet(pHandManager const & current
 	{
 		if(  currentHand->IsPair())
 		{
-			return SplitDouble;
+			return ACTION_SPLIT_DOUBLE;
 		}
 		else
 		{
-			return Double;
+			return ACTION_DOUBLE;
 		}
 	}
 	else if(currentHand->IsFirstAction() && currentHand->IsPair() &&  _balance < _orignialWager)
 	{
 		std::cout << "Your balance is too low to Split or Double." << std::endl;
 	}
-	return Standard;
+	return ACTION_STANDARD;
 }
 
 void Player::Evaluate(	bool const & dealerHasBlackJack,
@@ -212,7 +212,7 @@ void Player::PutCardsBack()
 void Player::SetWager ()
 {
 	std::cout << GetName()<< " set your Wager: " << std::endl;
-	_orignialWager = UserInput::ReadInNumber<float>( minWager, _balance);
+	_orignialWager = UserInput::ReadInNumber<float>( MIN_WAGER, _balance);
 	_balance -= _orignialWager;
 	PrintWager();
 }
@@ -226,7 +226,7 @@ void Player::PrintWager () const
 void Player::SetBalance()
 {
 	std::cout << "Set Balance of " << GetName() << ": " << std::endl;
-	_balance = UserInput::ReadInNumber<float>( minInitBalance, maxInitBalance);
+	_balance = UserInput::ReadInNumber<float>( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
 	PrintBalance();
 }
 
@@ -237,11 +237,8 @@ float const & Player::GetBalance () const
 
 void Player::PrintBalance () const
 {
-	if(GetBalance() > 0)
-	{
-		std::cout << GetName()<< "'s new balance is " << GetBalance() << "." << std::endl;
-	}
-	else
+	std::cout << GetName()<< "'s new balance is " << GetBalance() << "." << std::endl;
+	if( GetBalance() < MIN_WAGER)
 	{
 		std::cout << GetName() << " is broke! You will be removed from the game." << std::endl;
 	}

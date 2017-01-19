@@ -17,14 +17,14 @@
 void Game::AddDecks()
 {
 	std::cout << "With how many decks do you want to play?" << std::endl;
-	auto NSets = UserInput::ReadInNumber<std::size_t>(1, maxDecks);
+	auto NSets = UserInput::ReadInNumber<std::size_t>(1, MAX_DECKS);
 	_deck.AddSets(NSets);
 }
 
 void Game::AddPlayers()
 {
 	std::cout <<"How many players want to play?" << std::endl;
-	auto NPlayers = UserInput::ReadInNumber<std::size_t>(1, maxPlayers);
+	auto NPlayers = UserInput::ReadInNumber<std::size_t>(1, MAX_PLAYERS);
 	std::cout << "Enter names for each player:" << std::endl;
 	for( std::size_t i = 0; i < NPlayers; ++i )
 	{
@@ -100,7 +100,6 @@ void Game::Evaluate()
 
 void Game::PutCardsBack()
 {
-
 	for(auto const & player : _players)
 	{
 		player->PutCardsBack();
@@ -112,7 +111,7 @@ void Game::RemoveBrokePlayers()
 {
 	for( std::vector<pPlayer>::size_type i = 0; i <_players.size(); ++i)
 	{
-		if(_players[i]->GetBalance() <= minWager)
+		if(_players[i]->GetBalance() < MIN_WAGER)
 		{
 			_players.erase(_players.begin()+i);
 			--i; // Dont forget to decrement the counter as you just have removed player i
@@ -134,7 +133,7 @@ void Game::PrintRules()
 	std::cout<< "   The Rules are:                             	" << std::endl;
 	std::cout<< "                                              	" << std::endl;
 	std::cout<< "1) Each player places a wager at the beginning	" << std::endl;
-	std::cout<< "   of a round. The minimum wager is "<<minWager<<"." << std::endl;
+	std::cout<< "   of a round. The minimum wager is "<<MIN_WAGER<<"." << std::endl;
 	std::cout<< "                                              	" << std::endl;
 	std::cout<< "2) Each player is dealt two cards. The dealer 	" << std::endl;
 	std::cout<< "   receives one card. If you have 21 points	" << std::endl;
