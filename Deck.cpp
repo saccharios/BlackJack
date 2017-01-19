@@ -7,10 +7,10 @@
 
 #include <memory>
 #include <random>
+#include <chrono>
 #include "Deck.h"
 #include "Card.h"
 #include "GlobalDeclarations.h"
-#include <chrono>
 
 void Deck::AddSets(std::size_t N)
 {
@@ -22,6 +22,7 @@ void Deck::AddSets(std::size_t N)
 
 void Deck::AddCompleteSet()
 {
+	// Adds single cards to the deck. The cards are owned by the desk unless it is drawn.
 	for( const auto & suit : SUIT)
 	{
 		for(const auto & face : FACE)
@@ -38,6 +39,7 @@ Deck::pCard Deck::Draw()
 	std::default_random_engine rng(seed);
 	std::uniform_int_distribution<int> uniformDist(0, Base::NumCards()-1);
 	auto random_integer = uniformDist(rng);
+	// Transfers ownership of the drawn card to the caller
 	return Base::RemoveCard(random_integer);
 }
 

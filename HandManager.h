@@ -8,21 +8,22 @@
 #ifndef HANDMANAGER_H_
 #define HANDMANAGER_H_
 
+#include <memory>
 #include "HoleCards.h"
 #include "Card.h"
-#include <memory>
 #include "Deck.h"
 
-// The HandManager is a wrapper Class for the HoleCards for a Player.
-// Note that a Dealer is not a Player, as a Player has many more options available.
-// In comparison this Class lets you set wagers on HoleCards, evaluate the payout,
-// keeps track whether a player can keep playing these HoleCards.
+// The HandManager is a wrapper class for the hole cards for a player.
+// Note that a dealer is not a player, as a player has more options available.
+// A dealer also has hole cards. In addition, this class lets you set wagers
+// on hole cards, evaluate the payout, keeps track whether a player can keep playing
+// and evaluates possible user actions.
 class HandManager {
 	typedef std::unique_ptr<Card> pCard;
 public:
 	HandManager (Deck & deck, float const & wager, std::size_t const & handNumber);
 
-	// Not allowed to copy or assign
+	// Not allowed to copy or assign, because it contains a card container (which has unique_ptrs)
 	HandManager (HandManager const & player) = delete;
 	HandManager & operator= (const HandManager & other) = delete;
 

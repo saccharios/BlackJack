@@ -16,6 +16,7 @@
 
 void Game::AddDecks()
 {
+	// Adds sets to the deck
 	std::cout << "With how many decks do you want to play?" << std::endl;
 	auto NSets = UserInput::ReadInNumber<std::size_t>(1, MAX_DECKS);
 	_deck.AddSets(NSets);
@@ -23,6 +24,7 @@ void Game::AddDecks()
 
 void Game::AddPlayers()
 {
+	// Player creator function. Needs user input.
 	std::cout <<"How many players want to play?" << std::endl;
 	auto NPlayers = UserInput::ReadInNumber<std::size_t>(1, MAX_PLAYERS);
 	std::cout << "Enter names and balances for each player:" << std::endl;
@@ -40,6 +42,7 @@ void Game::AddPlayers()
 
 void Game::PlayRound()
 {
+	// Play one round.
 	std::cout << "-------New Round------" << std::endl;
 	SetWagers();
 	GetStartCards();
@@ -51,6 +54,7 @@ void Game::PlayRound()
 
 void Game::SetWagers()
 {
+	// Set wager for each player
 	std::cout << "-------Set Wagers------" << std::endl;
 	for(auto const & player : _players)
 	{
@@ -71,8 +75,8 @@ void Game::GetStartCards()
 }
 void Game::PlayCards()
 {
-	std::cout << "-------Players are playing------" << std::endl;
 	//	Let all player play, then the dealer
+	std::cout << "-------Players are playing------" << std::endl;
 	for(auto const & player : _players)
 	{
 		player->Play();
@@ -82,6 +86,7 @@ void Game::PlayCards()
 }
 void Game::Evaluate()
 {
+	// Evaluate payout for each player
 	std::cout <<"------Payout Time------" << std::endl;
 	for(auto const & player : _players)
 	{
@@ -93,8 +98,11 @@ void Game::Evaluate()
 	}
 }
 
+
 void Game::PutCardsBack()
 {
+	// As you would in the real card game, at the end of a round all players and the dealer
+	// put their cards back to the deck
 	for(auto const & player : _players)
 	{
 		player->PutCardsBack();
@@ -104,12 +112,13 @@ void Game::PutCardsBack()
 
 void Game::RemoveBrokePlayers()
 {
+	// If a player has less than the minimum wager, they are removed
 	for( std::vector<pPlayer>::size_type i = 0; i <_players.size(); ++i)
 	{
 		if(_players[i]->GetBalance() < MIN_WAGER)
 		{
 			_players.erase(_players.begin()+i);
-			--i; // Dont forget to decrement the counter as you just have removed player i
+			--i; // Dont forget to decrement the counter as you just have removed player nr i
 		}
 	}
 }
@@ -181,6 +190,7 @@ void Game::PrintNumPlayers () const
 
 bool Game::PlayAnotherRound () const
 {
+	// Ask the user if they want to play another round if there are still players with enough money
 	if ( _players.size() < 1)
 	{
 		std::cout << "There are no more players left!" << std::endl;
@@ -206,7 +216,7 @@ bool Game::PlayAnotherRound () const
 
 }
 
-
+// Private constructor
 Game::Game() :
 				_dealer (_deck),
 				_players()

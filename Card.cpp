@@ -5,13 +5,12 @@
  *      Author: Stefan
  */
 
-#include "Card.h"
 #include <iostream>
 #include <array>
 #include <string>
 #include <algorithm>
 #include <stdexcept>
-
+#include "Card.h"
 #include "GlobalDeclarations.h"
 
 

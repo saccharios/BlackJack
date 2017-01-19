@@ -12,6 +12,9 @@
 
 #ifndef GAME_H_
 #define GAME_H_
+
+// Class game is the glue code which binds all other classes together.
+// It guides the game.
 class Game {
 	typedef std::unique_ptr<Player> pPlayer;
 public:

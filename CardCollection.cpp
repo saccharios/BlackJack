@@ -5,10 +5,10 @@
  *      Author: Stefan
  */
 
-#include "CardCollection.h"
-#include "Card.h"
 #include <vector>
 #include <memory>
+#include "CardCollection.h"
+#include "Card.h"
 
 
 CardCollection::pCard CardCollection::RemoveCard(unsigned int num)

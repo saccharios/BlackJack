@@ -7,10 +7,11 @@
 
 #ifndef CARDCOLLECTION_H_
 #define CARDCOLLECTION_H_
-#include "Card.h"
 #include <vector>
 #include <memory>
+#include "Card.h"
 
+// Base Class for a group of cards.
 class CardCollection {
 	typedef std::unique_ptr<Card> pCard;
 public:

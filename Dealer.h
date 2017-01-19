@@ -12,6 +12,8 @@
 #include "HoleCards.h"
 #include "Deck.h"
 
+// The dealer is very different from a player, so they cannot have a common base class
+// The dealer only has two actions, and their strategy is given.
 class Dealer {
 	typedef std::unique_ptr<Card> pCard;
 public:

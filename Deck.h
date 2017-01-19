@@ -8,11 +8,10 @@
 #ifndef DECK_H_
 #define DECK_H_
 
-#include "CardCollection.h"
-#include "Card.h"
 #include <cstdlib>
 #include <memory>
-#include <random>
+#include "CardCollection.h"
+#include "Card.h"
 
 
 class Deck : public CardCollection
@@ -38,8 +37,6 @@ public:
 private:
 	Deck() {}
 	void AddCompleteSet();
-
-	std::random_device _rd; // only used once to initialise (seed) engine
 };
 
 #endif /* DECK_H_ */

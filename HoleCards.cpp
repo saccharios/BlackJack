@@ -5,8 +5,8 @@
  *      Author: Stefan
  */
 #include <memory>
-#include "HoleCards.h"
 #include <iostream>
+#include "HoleCards.h"
 
 HoleCards::HoleCards():
 _areBlackJack(false),
@@ -23,6 +23,7 @@ void HoleCards::StartCards(pCard card)
 
 void HoleCards::StartCards(pCard card1, pCard card2)
 {
+
 	Reset();
 	// Check for a pair at start:
 	if ( card1->GetFace() == card2->GetFace())
@@ -33,13 +34,14 @@ void HoleCards::StartCards(pCard card1, pCard card2)
 			_arePairAces = true;
 		}
 	}
+
 	AddCard(std::move(card1));
 	AddCard(std::move(card2));
 }
 
 void HoleCards::AddCard(pCard card)
 {
-	auto face = card->GetFace();
+	// Transfer ownership to cardcontainer
 	Base::AddCard(std::move(card));
 
 	const unsigned int value = GetValue();
@@ -68,10 +70,10 @@ unsigned int HoleCards::GetValue() const
 			++numAces;
 		}
 	}
-	// If the value is >21 and you have aces, you use the ace as a 1
+	// If the value is > 21 and you have aces, you use as many aces as you need to get value <= 21
 	while( value > 21 && numAces >0)
 	{
-		value -=10;
+		value -= 10;
 		--numAces;
 	}
 	return value;
