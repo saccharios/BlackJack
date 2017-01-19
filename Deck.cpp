@@ -10,6 +10,7 @@
 #include "Deck.h"
 #include "Card.h"
 #include "GlobalDeclarations.h"
+#include <chrono>
 
 void Deck::AddSets(std::size_t N)
 {
@@ -21,9 +22,10 @@ void Deck::AddSets(std::size_t N)
 
 Deck::pCard Deck::Draw()
 {
-	// Random generator, copied from http://stackoverflow.com/questions/5008804/generating-random-integer-from-a-range
-	std::mt19937 rng(_rd());    // random-number engine used (Mersenne-Twister in this case)
-	std::uniform_int_distribution<int> uniformDist(0, Base::NumCards()-1); // guaranteed unbiased
+	// Use the time for a new seed each time a card is darwn
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine rng(seed);
+	std::uniform_int_distribution<int> uniformDist(0, Base::NumCards()-1);
 	auto random_integer = uniformDist(rng);
 	return Base::RemoveCard(random_integer);
 }
