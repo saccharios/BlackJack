@@ -18,7 +18,6 @@ int main() {
 	Game & game = Game::getInstance();
 	game.AddDecks();
 	game.AddPlayers();
-	game.SetBalances();
 	do
 	{
 		game.PlayRound();

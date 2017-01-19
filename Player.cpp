@@ -16,8 +16,8 @@
 #include "UserInput.h"
 #include "GlobalDeclarations.h"
 
-Player::Player(Deck & deck, std::string name) :
-_balance(0),
+Player::Player(Deck & deck, std::string name, float balance) :
+_balance(balance),
 _orignialWager(0),
 _deck(deck),
 _handManager(),
@@ -221,13 +221,6 @@ void Player::SetWager ()
 void Player::PrintWager () const
 {
 	std::cout << GetName() <<"'s wager is: " << _orignialWager << std::endl;
-}
-
-void Player::SetBalance()
-{
-	std::cout << "Set Balance of " << GetName() << ": " << std::endl;
-	_balance = UserInput::ReadInNumber<float>( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
-	PrintBalance();
 }
 
 float const & Player::GetBalance () const

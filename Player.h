@@ -18,7 +18,7 @@ class Player {
 	typedef std::unique_ptr<HandManager> pHandManager;
 public:
 
-	Player(Deck & deck, std::string name);
+	Player(Deck & deck, std::string name, float balance);
 	Player (Player const & player) = delete;
 	Player & operator= (const Player & other) = delete;
 
@@ -31,7 +31,6 @@ public:
 	void PutCardsBack();
 	void SetWager ();
 	void PrintWager () const;
-	void SetBalance();
 	float const & GetBalance () const;
 	void PrintBalance () const;
 	std::string const & GetName() const;

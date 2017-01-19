@@ -25,12 +25,15 @@ void Game::AddPlayers()
 {
 	std::cout <<"How many players want to play?" << std::endl;
 	auto NPlayers = UserInput::ReadInNumber<std::size_t>(1, MAX_PLAYERS);
-	std::cout << "Enter names for each player:" << std::endl;
+	std::cout << "Enter names and balances for each player:" << std::endl;
 	for( std::size_t i = 0; i < NPlayers; ++i )
 	{
 		auto name = UserInput::ReadInName(i);
-		_players.push_back(std::move(pPlayer(new Player(_deck,name))));
-		std::cout << "Welcome " << name <<"."<< std::endl;
+
+		std::cout << "Welcome " << name <<". Set your balance. "<< std::endl;
+		auto balance = UserInput::ReadInNumber<float>( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
+
+		_players.push_back(std::move(pPlayer(new Player(_deck, name, balance))));
 	}
 }
 
@@ -46,14 +49,6 @@ void Game::PlayRound()
 	RemoveBrokePlayers();
 }
 
-void Game::SetBalances()
-{
-	for(auto const & player : _players)
-	{
-		player->SetBalance();
-
-	}
-}
 void Game::SetWagers()
 {
 	std::cout << "-------Set Wagers------" << std::endl;

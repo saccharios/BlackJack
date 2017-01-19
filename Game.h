@@ -28,7 +28,6 @@ public:
 	void AddDecks();
 	void AddPlayers();
 	void PlayRound();
-	void SetBalances();
 	void SetWagers();
 	void GetStartCards();
 	void PlayCards();
@@ -44,6 +43,7 @@ private:
 
 	Deck & _deck = Deck::getInstance();
 	Dealer _dealer;
+	// Players are pointers to avoid issues with card pointers
 	std::vector<pPlayer> _players;
 };
 
