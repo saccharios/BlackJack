@@ -11,7 +11,8 @@
 #include <string>
 #include <algorithm>
 #include <stdexcept>
-#include "StaticDeclarations.h"
+
+#include "GlobalDeclarations.h"
 
 
 

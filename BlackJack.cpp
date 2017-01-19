@@ -7,8 +7,8 @@
 #include "Game.h"
 #include <memory>
 #include "Card.h"
+#include "GlobalDeclarations.h"
 #include "HoleCards.h"
-#include "StaticDeclarations.h"
 
 // TODO Write Unittest with gtest
 // TODO check for const correctness

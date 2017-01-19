@@ -8,7 +8,7 @@
 #include "Deck.h"
 #include "player.h"
 #include "Dealer.h"
-#include "StaticDeclarations.h"
+#include "GlobalDeclarations.h"
 
 #ifndef GAME_H_
 #define GAME_H_

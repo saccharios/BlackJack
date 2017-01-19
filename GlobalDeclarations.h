@@ -5,8 +5,8 @@
  *      Author: Stefan
  */
 
-#ifndef STATICDECLARATIONS_H_
-#define STATICDECLARATIONS_H_
+#ifndef GLOBALDECLARATIONS_H_
+#define GLOBALDECLARATIONS_H_
 
 
 #include <set>

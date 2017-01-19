@@ -9,8 +9,8 @@
 #define CARD_H_
 
 #include <string>
-#include "StaticDeclarations.h"
 #include <iostream>
+#include "GlobalDeclarations.h"
 
 
 class Card {
