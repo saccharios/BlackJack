@@ -18,6 +18,7 @@ static constexpr std::size_t maxDecks = 8;
 static constexpr std::size_t maxPlayers = 8;
 static constexpr float minInitBalance = 1.0;
 static constexpr float maxInitBalance = 100000.0;
+constexpr std::string::size_type maxChars = 20 ;
 
 const std::array<std::string,4> Suit{"h","d","c","s"};
 // Face is a map, so assigning the value to a card is easy.

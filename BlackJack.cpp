@@ -11,8 +11,6 @@
 #include "HoleCards.h"
 
 // TODO Write Unittest with gtest
-// TODO check for const correctness
-
 
 void basicHoleCardsUnittest();
 int main() {

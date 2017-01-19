@@ -23,30 +23,12 @@ void Game::AddDecks()
 
 void Game::AddPlayers()
 {
-	std::string readinstring;
 	std::cout <<"How many players want to play?" << std::endl;
 	auto NPlayers = UserInput::ReadInNumber<std::size_t>(1, maxPlayers);
-
-	std::string name;
 	std::cout << "Enter names for each player:" << std::endl;
-	// TODO Use UserInput class ?
 	for( std::size_t i = 0; i < NPlayers; ++i )
 	{
-		while(1)
-		{
-			std::cout << "Enter name of player " << i <<": " << std::endl;
-			std::getline (std::cin, readinstring);
-			std::stringstream(readinstring) >> name;
-			if(name.size() > 20)
-			{
-				std::cout << "Use a maximum of 20 characters" << std::endl;
-			}
-			else
-			{
-				break;
-			}
-			readinstring.clear();
-		}
+		auto name = UserInput::ReadInName(i);
 		_players.push_back(std::move(pPlayer(new Player(_deck,name))));
 		std::cout << "Welcome " << name <<"."<< std::endl;
 	}
@@ -212,7 +194,7 @@ bool Game::PlayAnotherRound () const
 		return false;
 	}
 	std::cout << "Do you want to play another round?";
-	auto yesOrNo = UserInput::ReadInStr({"y","n"});
+	auto yesOrNo = UserInput::ReadInAction({"y","n"});
 	if( yesOrNo == "y" )
 	{
 		return true;

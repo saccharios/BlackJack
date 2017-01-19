@@ -14,8 +14,8 @@
 class UserInput {
 public:
 	static void PrintStringSet (std::set<std::string> const & stringSet);
-	static std::string ReadInStr(std::set<std::string> const & stringSet);
-
+	static std::string ReadInAction(std::set<std::string> const & stringSet);
+	static std::string ReadInName(std::size_t const & i);
 	// Templated functions cannot be implemented in the .cpp file
 	template<typename T>
 	static T ReadInNumber( T const & min, T const & max)

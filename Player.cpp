@@ -51,7 +51,7 @@ void Player::Play()
 			// Get action from user
 			auto availableactions = GetAvailableActionSet(_handManager[i]);
 			std::cout << "Enter action: ";
-			auto action = UserInput::ReadInStr(availableactions);
+			auto action = UserInput::ReadInAction(availableactions);
 //			auto action = PlayBasicStrategy(); // AutoPlayer
 			std::cout << "You choose to ";
 

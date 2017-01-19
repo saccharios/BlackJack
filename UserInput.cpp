@@ -5,10 +5,12 @@
  *      Author: Stefan
  */
 
-#include "UserInput.h"
 #include <iostream>
 #include <string>
 #include <sstream>
+#include "UserInput.h"
+#include "GlobalDeclarations.h"
+
 void UserInput::PrintStringSet (std::set<std::string> const & stringSet)
 {
 	std::cout << " ";
@@ -18,12 +20,12 @@ void UserInput::PrintStringSet (std::set<std::string> const & stringSet)
 	}
 	std::cout << std::endl;
 }
-std::string UserInput::ReadInStr(std::set<std::string> const & stringSet)
+std::string UserInput::ReadInAction(std::set<std::string> const & stringSet)
 {
 	std::string readIn;
 	PrintStringSet(stringSet);
 	std::getline (std::cin, readIn);
-	while(stringSet.find(readIn) ==stringSet.end())
+	while(stringSet.find(readIn) == stringSet.end())
 	{
 		std::cout << "Enter";
 		PrintStringSet(stringSet);
@@ -32,3 +34,19 @@ std::string UserInput::ReadInStr(std::set<std::string> const & stringSet)
 	return readIn;
 }
 
+
+std::string UserInput::ReadInName(std::size_t const & numPlayer)
+{
+	std::string name;
+	std::string readIn;
+	std::cout << "Enter name of player " << numPlayer <<": " << std::endl;
+	std::getline (std::cin, readIn);
+	std::stringstream(readIn) >> name;
+
+	if( name.size() > maxChars )
+	{
+		std::cout << "Your name is too long, truncating after " << maxChars << " characters." << std::endl;
+		name = name.substr( 0, maxChars ) ;
+	}
+	return name;
+}
