@@ -10,7 +10,6 @@
 
 
 #include <set>
-#include <array>
 #include <map>
 
 static constexpr float minWager = 1.0;
@@ -20,7 +19,7 @@ static constexpr float minInitBalance = 1.0;
 static constexpr float maxInitBalance = 100000.0;
 constexpr std::string::size_type maxChars = 20 ;
 
-const std::array<std::string,4> Suit{"h","d","c","s"};
+const std::set<std::string> Suit{"h","d","c","s"};
 // Face is a map, so assigning the value to a card is easy.
 const std::map<std::string, unsigned int> Face = {{"2", 2}, {"3", 3}, {"4", 4}, {"5", 5}, {"6", 6}, {"7", 7}, {"8", 8}, {"9", 9}, {"T", 10}, {"J", 10}, {"Q", 10}, {"K", 10}, {"A", 11}};
 

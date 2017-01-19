@@ -23,14 +23,16 @@ void UserInput::PrintStringSet (std::set<std::string> const & stringSet)
 std::string UserInput::ReadInAction(std::set<std::string> const & stringSet)
 {
 	std::string readIn;
-	PrintStringSet(stringSet);
-	std::getline (std::cin, readIn);
-	while(stringSet.find(readIn) == stringSet.end())
+	int i = 0;
+	do
 	{
+		if(++i > 1)
+		{
 		std::cout << "Enter";
+		}
 		PrintStringSet(stringSet);
 		std::getline (std::cin, readIn);
-	}
+	}while(stringSet.find(readIn) == stringSet.end());
 	return readIn;
 }
 

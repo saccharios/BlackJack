@@ -88,7 +88,7 @@ void HoleCards::Reset()
 void HoleCards::PrintCards() const
 {
 	Base::Print();
-	std::cout << ", value is = ";
+	std::cout << ", Value is = ";
 	if( AreBlackJack() )
 	{
 		std::cout << "BlackJack";
