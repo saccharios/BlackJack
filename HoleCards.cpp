@@ -12,7 +12,8 @@ HoleCards::HoleCards():
 _areBlackJack(false),
 _arePair(false),
 _arePairAces(false),
-_areBusted(false)
+_areBusted(false),
+_cardContainer()
 {}
 
 void HoleCards::StartCards(pCard card)
@@ -41,11 +42,10 @@ void HoleCards::StartCards(pCard card1, pCard card2)
 
 void HoleCards::AddCard(pCard card)
 {
-	// Transfer ownership to cardcontainer
-	Base::AddCard(std::move(card));
-
-	const unsigned int value = GetValue();
-	if( Base::NumCards() == 2 && value ==  21)
+	// Transfer ownership to cardContainer
+	 _cardContainer.push_back(std::move(card));
+	unsigned int value = GetValue();
+	if( _cardContainer.size() == 2 && value ==  21)
 	{
 		_areBlackJack = true;
 		std::cout << "BLACK JACK!" << std::endl;
@@ -62,7 +62,7 @@ unsigned int HoleCards::GetValue() const
 	unsigned int value = 0;
 	unsigned int numAces = 0;
 
-	for(auto const & Card : Base::_card_container)
+	for(auto const & Card : _cardContainer)
 	{
 		value += Card->GetValue();
 		if(Card->GetFace() == "A") // While adding the values, count how many aces you have
@@ -89,7 +89,10 @@ void HoleCards::Reset()
 
 void HoleCards::PrintCards() const
 {
-	Base::Print();
+	for(pCard const & card : _cardContainer)
+		{
+			card->Print();
+		}
 	std::cout << ", Value is = ";
 	if( AreBlackJack() )
 	{
@@ -108,9 +111,22 @@ void HoleCards::PrintCards() const
 
 void HoleCards::PrintNumCards() const
 {
-	std::cout << "You have = " << Base::NumCards() <<" Cards" << std::endl;
+	std::cout << "You have = " << _cardContainer.size() <<" Cards" << std::endl;
 }
 
+HoleCards::pCard HoleCards::RemoveLastCard()
+{
+	pCard Card;
+	if(!IsEmpty())
+	{
+		Card =  std::move(_cardContainer.back());
+		_cardContainer.pop_back();
+	}
+	else
+	{
+		std::cerr << "ERROR - Card container is empty!" << std::endl;
+	}
 
-
+	return Card;
+}
 

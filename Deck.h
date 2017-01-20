@@ -10,13 +10,12 @@
 
 #include <cstdlib>
 #include <memory>
-#include "CardCollection.h"
+#include <vector>
 #include "Card.h"
 
 
-class Deck : public CardCollection
+class Deck
 {
-	typedef CardCollection Base;
 	typedef std::unique_ptr<Card> pCard;
 public:
 
@@ -30,13 +29,15 @@ public:
 	void operator=(Deck const&) = delete;
 
 	void AddSets(std::size_t N);
+	void AddCard( pCard  card) { _cardContainer.push_back(std::move(card)); }
 	pCard Draw();
-	pCard  Draw(int number) { return Base::RemoveCard(number); }
+	pCard Draw(unsigned int number);
 	void PrintNumCards() const;
 
 private:
-	Deck() {}
+	Deck() : _cardContainer(){}
 	void AddCompleteSet();
+	std::vector<pCard> _cardContainer;
 };
 
 #endif /* DECK_H_ */
