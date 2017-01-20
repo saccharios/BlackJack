@@ -45,6 +45,8 @@ private:
 	bool _arePair;
 	bool _arePairAces;
 	bool _areBusted;
+	unsigned int _value;
+	unsigned int _numSoftAce;
 	std::vector<pCard> _cardContainer;
 };
 

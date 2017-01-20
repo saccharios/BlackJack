@@ -13,6 +13,8 @@ _areBlackJack(false),
 _arePair(false),
 _arePairAces(false),
 _areBusted(false),
+_value(0),
+_numSoftAce(0),
 _cardContainer()
 {}
 
@@ -42,6 +44,18 @@ void HoleCards::StartCards(pCard card1, pCard card2)
 
 void HoleCards::AddCard(pCard card)
 {
+	// Keep track of the value while adding a card, deal with aces and save how many aces are used soft
+	if( card->GetFace() == "A")
+	{
+		++_numSoftAce;
+	}
+	_value += card->GetValue();
+	if( _value > 21 && _numSoftAce > 0)
+	{
+		_value -= 10;
+		--_numSoftAce;
+	}
+
 	// Transfer ownership to cardContainer
 	 _cardContainer.push_back(std::move(card));
 	unsigned int value = GetValue();
@@ -59,24 +73,7 @@ void HoleCards::AddCard(pCard card)
 
 unsigned int HoleCards::GetValue() const
 {
-	unsigned int value = 0;
-	unsigned int numAces = 0;
-
-	for(auto const & Card : _cardContainer)
-	{
-		value += Card->GetValue();
-		if(Card->GetFace() == "A") // While adding the values, count how many aces you have
-		{
-			++numAces;
-		}
-	}
-	// If the value is > 21 and you have aces, you use as many aces as you need to get value <= 21
-	while( value > 21 && numAces >0)
-	{
-		value -= 10;
-		--numAces;
-	}
-	return value;
+	return _value;
 }
 
 void HoleCards::Reset()
@@ -85,28 +82,34 @@ void HoleCards::Reset()
 	_arePair = false;
 	_arePairAces = false;
 	_areBusted = false;
+	_value = 0;
+	_numSoftAce = 0;
 }
 
 void HoleCards::PrintCards() const
 {
 	for(pCard const & card : _cardContainer)
-		{
-			card->Print();
-		}
-	std::cout << ", Value is = ";
+	{
+		card->Print();
+	}
+
 	if( AreBlackJack() )
 	{
-		std::cout << "BlackJack";
+		std::cout << ", you have BLACKJACK."<<std::endl;;
 	}
 	else if (AreBusted())
 	{
-		std::cout <<"(" << GetValue() <<") Busted";
+		std::cout <<" you are BUSTED (" << GetValue() <<")."<<std::endl;;
 	}
 	else
 	{
-		std::cout << GetValue();
+		std::cout << ", value is ";
+		if( _numSoftAce > 0)
+		{
+			std::cout << "soft ";
+		}
+		std::cout << GetValue() << "."<<std::endl;
 	}
-	std::cout << "."<<std::endl;;
 }
 
 void HoleCards::PrintNumCards() const
