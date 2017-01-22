@@ -24,11 +24,14 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.2029061270" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug">
 								<option id="gnu.cpp.compiler.mingw.exe.debug.option.optimization.level.321462186" name="Optimization Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.optimization.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level.511029949" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
-								<option id="gnu.cpp.compiler.option.dialect.std.25276731" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.default" valueType="enumerated"/>
-								<option id="gnu.cpp.compiler.option.other.other.1867155300" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" useByScannerDiscovery="false" value="-c -fmessage-length=0 -std=gnu++11" valueType="string"/>
+								<option id="gnu.cpp.compiler.option.dialect.std.25276731" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.c++11" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.other.other.1867155300" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" useByScannerDiscovery="false" value="-c -fmessage-length=0 -std=c++11 -std=gnu++11" valueType="string"/>
 								<option id="gnu.cpp.compiler.option.include.paths.1584568145" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;E:\Code\GTest\googletestlib\include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/BlackJack/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;E:\Code\GTest\googletest-release-1.7.0\include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${gtest_loc:/googletest-release-1.7.0/include}&quot;"/>
 								</option>
+								<option id="gnu.cpp.compiler.option.dialect.flags.1287519020" name="Other dialect flags" superClass="gnu.cpp.compiler.option.dialect.flags" useByScannerDiscovery="true" value="" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1183042494" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug.1751167751" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug">
@@ -41,10 +44,22 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.631121657" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
 								<option id="gnu.cpp.link.option.libs.142446061" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" useByScannerDiscovery="false" valueType="libs">
 									<listOptionValue builtIn="false" value="gtest"/>
+									<listOptionValue builtIn="false" value="gtest_main"/>
 									<listOptionValue builtIn="false" value="pthread"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1051388239" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;E:\Code\GTest\googletestlib\make&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;{$GTEST_LOC:\gtestbuild-1.7.0}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;E:\Code\GTest\gtestbuild-1.7.0&quot;"/>
+								</option>
+								<option id="gnu.cpp.link.option.userobjs.1389705018" name="Other objects" superClass="gnu.cpp.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
+									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\UserInput.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\Dealer.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\Deck.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\Game.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\HandManager.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\HoleCards.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\Player.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\Card.o&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1942626633" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -74,6 +89,10 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/UnitTest_BlackJack"/>
+		</configuration>
+	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>

@@ -45,7 +45,7 @@ Deck::pCard Deck::Draw()
 Deck::pCard Deck::Draw(unsigned int number)
 {
 	Deck::pCard Card;
-	if(!_cardContainer.empty() && _cardContainer.size() > number)
+	if(!_cardContainer.empty() && Size() > number)
 	{
 		Card =  std::move(_cardContainer.at(number));
 		_cardContainer.erase(_cardContainer.begin()+number);
@@ -61,7 +61,7 @@ Deck::pCard Deck::Draw(unsigned int number)
 
 void Deck::PrintNumCards() const
 {
-	std::cout << "Cards in Deck = " << _cardContainer.size() << std::endl;
+	std::cout << "Cards in Deck = " << Size() << std::endl;
 }
 
 

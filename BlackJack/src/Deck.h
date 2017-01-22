@@ -33,6 +33,7 @@ public:
 	pCard Draw();
 	pCard Draw(unsigned int number);
 	void PrintNumCards() const;
+	std::size_t Size() const {return _cardContainer.size();}
 
 private:
 	Deck() : _cardContainer(){}

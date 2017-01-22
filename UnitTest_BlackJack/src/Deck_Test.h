@@ -7,12 +7,23 @@
 
 #ifndef DECK_TEST_H_
 #define DECK_TEST_H_
+#include <memory>
 #include "gtest/gtest.h"
+#include "Deck.h"
+#include "Card.h"
+#include "string"
 
-
-TEST(Deck, yoo)
+TEST(Deck, AddOneCard)
 {
-	std::cout << "YOO" << std::endl;
+	typedef std::unique_ptr<Card> pCard;
+	Deck & deck = Deck::getInstance();
+	std::string face = "5";
+	std::string suit = "s";
+	pCard card(new Card(face ,  suit ));
+
+	deck.AddCard(std::move(card));
+	EXPECT_EQ(1u, deck.Size());
+
 }
 
 #endif

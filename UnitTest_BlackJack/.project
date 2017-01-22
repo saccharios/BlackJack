@@ -3,6 +3,7 @@
 	<name>UnitTest_BlackJack</name>
 	<comment></comment>
 	<projects>
+		<project>BlackJack</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -24,11 +25,14 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>imported_src</name>
-			<type>2</type>
-			<location>E:/Code/BlackJack/src</location>
-		</link>
-	</linkedResources>
+	<variableList>
+		<variable>
+			<name>REPO_LOC</name>
+			<value>file:/E:/Code/BlackJack_Repo</value>
+		</variable>
+		<variable>
+			<name>gtest_loc</name>
+			<value>file:/E:/Code/GTest</value>
+		</variable>
+	</variableList>
 </projectDescription>
