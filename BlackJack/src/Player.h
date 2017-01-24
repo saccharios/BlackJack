@@ -19,6 +19,7 @@ class Player {
 public:
 
 	Player(Deck & deck, std::string name, float balance);
+	// Not allowed to copy or assign
 	Player (Player const & player) = delete;
 	Player & operator= (const Player & other) = delete;
 

@@ -217,7 +217,7 @@ bool Game::PlayAnotherRound () const
 }
 
 // Private constructor
-Game::Game() :
+Game::Game() :	_deck(),
 				_dealer (_deck),
 				_players()
 {}

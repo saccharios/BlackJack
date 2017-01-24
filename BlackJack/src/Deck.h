@@ -25,6 +25,8 @@ public:
 		static Deck instance;
 		return instance;
 	}
+	Deck() : _cardContainer(){}
+	// Not allowed to copy or assign,
 	Deck(Deck const &) = delete ;
 	void operator=(Deck const&) = delete;
 
@@ -36,7 +38,7 @@ public:
 	std::size_t Size() const {return _cardContainer.size();}
 
 private:
-	Deck() : _cardContainer(){}
+
 	void AddCompleteSet();
 	std::vector<pCard> _cardContainer;
 };

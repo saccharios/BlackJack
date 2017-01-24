@@ -44,7 +44,7 @@ public:
 private:
 	Game();
 
-	Deck & _deck = Deck::getInstance();
+	Deck _deck;
 	Dealer _dealer;
 	// Players are pointers to avoid issues with card pointers
 	std::vector<pPlayer> _players;

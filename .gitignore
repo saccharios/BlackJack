@@ -27,4 +27,9 @@
 *.exe
 *.out
 *.app
-Debug
+
+
+
+BlackJack/Debug
+BlackJack/Release
+

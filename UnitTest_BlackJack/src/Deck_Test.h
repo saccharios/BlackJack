@@ -13,16 +13,39 @@
 #include "Card.h"
 #include "string"
 
-TEST(Deck, AddOneCard)
+TEST(Deck, AddAndRemoveOneCard)
 {
 	typedef std::unique_ptr<Card> pCard;
-	Deck & deck = Deck::getInstance();
+	Deck deck;
 	std::string face = "5";
 	std::string suit = "s";
 	pCard card(new Card(face ,  suit ));
 
 	deck.AddCard(std::move(card));
 	EXPECT_EQ(1u, deck.Size());
+	deck.Draw();
+	EXPECT_EQ(0u, deck.Size());
+}
+
+TEST(Deck, RemoveOneCard_EmptyDesk)
+{
+	Deck deck;
+	EXPECT_EQ(nullptr, deck.Draw());
+	EXPECT_EQ(nullptr, deck.Draw(1));
+}
+
+TEST(Deck, AddEigthSets)
+{
+	Deck deck;
+	std::size_t N = 8;
+	std::size_t M = 52;
+	deck.AddSets(N);
+	EXPECT_EQ(N*M, deck.Size());
+	for(std::size_t i = 0; i < N*M; ++i)
+	{
+		deck.Draw();
+	}
+	EXPECT_EQ(0u, deck.Size());
 
 }
 
