@@ -8,7 +8,7 @@
 #include <iostream>
 #include "gtest/gtest.h"
 #include "Deck_Test.h"
-
+#include "Card_Test.h"
 
 
 int main(int argc, char ** argv)

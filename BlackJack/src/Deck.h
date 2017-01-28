@@ -18,13 +18,6 @@ class Deck
 {
 	typedef std::unique_ptr<Card> pCard;
 public:
-
-	// Class Deck is a Singleton
-	static Deck & getInstance()
-	{
-		static Deck instance;
-		return instance;
-	}
 	Deck() : _cardContainer(){}
 	// Not allowed to copy or assign,
 	Deck(Deck const &) = delete ;
@@ -38,7 +31,6 @@ public:
 	std::size_t Size() const {return _cardContainer.size();}
 
 private:
-
 	void AddCompleteSet();
 	std::vector<pCard> _cardContainer;
 };

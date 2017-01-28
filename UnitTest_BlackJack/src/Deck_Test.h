@@ -5,8 +5,8 @@
  *      Author: Stefan
  */
 
-#ifndef DECK_TEST_H_
-#define DECK_TEST_H_
+#ifndef SRC_DECK_TEST_H_
+#define SRC_DECK_TEST_H_
 #include <memory>
 #include "gtest/gtest.h"
 #include "Deck.h"
@@ -37,11 +37,11 @@ TEST(Deck, RemoveOneCard_EmptyDesk)
 TEST(Deck, AddEigthSets)
 {
 	Deck deck;
-	std::size_t N = 8;
-	std::size_t M = 52;
-	deck.AddSets(N);
-	EXPECT_EQ(N*M, deck.Size());
-	for(std::size_t i = 0; i < N*M; ++i)
+	std::size_t NumDecks = 8;
+	std::size_t NumCardsDeck = 52;
+	deck.AddSets(NumDecks);
+	EXPECT_EQ(NumDecks*NumCardsDeck, deck.Size());
+	for(std::size_t i = 0; i < NumDecks*NumCardsDeck; ++i)
 	{
 		deck.Draw();
 	}
