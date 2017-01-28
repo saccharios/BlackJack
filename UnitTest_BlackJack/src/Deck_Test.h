@@ -26,8 +26,8 @@ TEST(Deck, AddAndRemoveOneCard)
 TEST(Deck, RemoveOneCard_EmptyDesk)
 {
 	Deck deck;
-	EXPECT_EQ(nullptr, deck.Draw());
-	EXPECT_EQ(nullptr, deck.Draw(1));
+	EXPECT_THROW(deck.Draw(), std::invalid_argument);
+	EXPECT_THROW(deck.Draw(1), std::invalid_argument);
 }
 
 TEST(Deck, AddEigthSets)

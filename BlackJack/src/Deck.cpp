@@ -7,7 +7,7 @@
 
 #include <memory>
 #include <random>
-#include <chrono>
+#include <stdexcept>
 #include "Deck.h"
 #include "Card.h"
 #include "GlobalDeclarations.h"
@@ -34,40 +34,29 @@ void Deck::AddCompleteSet()
 }
 
 
-Deck::pCard Deck::Draw(unsigned int number)
+Deck::pCard Deck::Draw(std::size_t number)
 {
-	Deck::pCard Card = nullptr;
-	if(!_cardContainer.empty() && Size() > number)
+	if( number >= Size() || _cardContainer.empty())
 	{
-		Card =  std::move(_cardContainer.at(number));
-		_cardContainer.erase(_cardContainer.begin()+number);
+		throw std::invalid_argument("ERROR - Card to draw exceeds index");
+		return nullptr;
 	}
 	else
 	{
-		std::cerr << "ERROR - Cannot draw card " << number << " as it exceeds deck size "<< Size() << std::endl;
+		Deck::pCard Card = nullptr;
+		Card =  std::move(_cardContainer.at(number));
+		_cardContainer.erase(_cardContainer.begin()+number);
+		return Card;
 	}
-	return Card;
 }
 
 Deck::pCard Deck::Draw()
 {
-
-	Deck::pCard Card = nullptr;
-	if( _cardContainer.size() > 0)
-	{
-		// Use the time for a new seed each time a card is darwn
-		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-		std::default_random_engine rng(seed);
-		std::uniform_int_distribution<int> uniformDist(0, _cardContainer.size()-1);
-		auto random_integer = uniformDist(rng);
-		// Transfers ownership of the drawn card to the caller
-		Card =  Draw(random_integer);
-	}
-	else
-	{
-		std::cerr << "ERROR - No cards in desk " << std::endl;
-	}
-	return Card;
+	std::default_random_engine rng(_seed);
+	std::uniform_int_distribution<int> uniformDist(0, _cardContainer.size()-1);
+	auto random_integer = uniformDist(rng);
+	// Transfers ownership of the drawn card to the caller
+	return Draw(random_integer);
 }
 
 

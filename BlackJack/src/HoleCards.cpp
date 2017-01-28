@@ -20,10 +20,10 @@ _cardContainer()
 {}
 
 void HoleCards::StartCards(pCard card)
-{ // Size must be 1
-	if(Size() != 1)
+{
+	if(!IsEmpty())
 	{
-		throw std::invalid_argument( "Cannot start hand, as size is " + Size());
+		throw std::invalid_argument( "Cannot start hand, hand is non-empty");
 	}
 	else{
 

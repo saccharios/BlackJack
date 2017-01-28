@@ -25,13 +25,14 @@ TEST(HoleCards, OneStartCard)
 {
 	typedef std::unique_ptr<Card> pCard;
 	HoleCards holeCards;
-	// Invoke StartCard(Card) card and empty holeCards
-	EXPECT_THROW( holeCards.StartCards(pCard(new Card("A","s"))), std::invalid_argument);
-	EXPECT_EQ(0u, holeCards.Size());
-	// Add 1 Card and then invoke StartCard(Card)
+	// Add 1 Card and then invoke StartCard(Card), expect throw
 	holeCards.AddCard(pCard(new Card("A","s")));
-	EXPECT_NO_THROW( holeCards.StartCards(pCard(new Card("K","s"))));
-	EXPECT_EQ(2u, holeCards.Size());
+	EXPECT_THROW( holeCards.StartCards(pCard(new Card("K","s"))), std::invalid_argument);
+	EXPECT_EQ(1u, holeCards.Size());
+	// Remove Card and test StartCard(Card) with empty container.
+	holeCards.RemoveLastCard();
+	EXPECT_NO_THROW( holeCards.StartCards(pCard(new Card("A","s"))));
+	EXPECT_EQ(1u, holeCards.Size());
 }
 
 TEST(HoleCards, TwoStartCard)

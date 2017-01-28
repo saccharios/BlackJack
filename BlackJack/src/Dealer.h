@@ -27,6 +27,7 @@ public:
 	bool const & HasBlackJack() const { return _holeCards.AreBlackJack(); }
 	unsigned int GetValue () const { return _holeCards.GetValue(); }
 	void PrintCards() const;
+	auto const & GetHoleCards () const {return _holeCards;}
 
 private:
 	Deck & _deck;
