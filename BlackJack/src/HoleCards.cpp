@@ -7,6 +7,7 @@
 #include <memory>
 #include <iostream>
 #include "HoleCards.h"
+#include <stdexcept>
 
 HoleCards::HoleCards():
 _areBlackJack(false),
@@ -14,32 +15,44 @@ _arePair(false),
 _arePairAces(false),
 _areBusted(false),
 _value(0),
-_numSoftAce(0),
+_numSoftAces(0),
 _cardContainer()
 {}
 
 void HoleCards::StartCards(pCard card)
-{
-	Reset();
-	AddCard(std::move(card));
+{ // Size must be 1
+	if(Size() != 1)
+	{
+		throw std::invalid_argument( "Cannot start hand, as size is " + Size());
+	}
+	else{
+
+		Reset();
+		AddCard(std::move(card));
+	}
 }
 
 void HoleCards::StartCards(pCard card1, pCard card2)
 {
-
-	Reset();
-	// Check for a pair at start:
-	if ( card1->GetFace() == card2->GetFace())
+	if(!IsEmpty())
 	{
-		_arePair = true;
-		if ( card1->GetFace() == "A")
-		{
-			_arePairAces = true;
-		}
+		throw std::invalid_argument( "Cannot start hand, hand is non-empty");
 	}
+	else{
+		Reset();
+		// Check for a pair at start:
+		if ( card1->GetFace() == card2->GetFace())
+		{
+			_arePair = true;
+			if ( card1->GetFace() == "A")
+			{
+				_arePairAces = true;
+			}
+		}
 
-	AddCard(std::move(card1));
-	AddCard(std::move(card2));
+		AddCard(std::move(card1));
+		AddCard(std::move(card2));
+	}
 }
 
 void HoleCards::AddCard(pCard card)
@@ -47,18 +60,18 @@ void HoleCards::AddCard(pCard card)
 	// Keep track of the value while adding a card, deal with aces and save how many aces are used soft
 	if( card->GetFace() == "A")
 	{
-		++_numSoftAce;
+		++_numSoftAces;
 	}
 	_value += card->GetValue();
-	if( _value > 21 && _numSoftAce > 0)
+	while( _value > 21 && _numSoftAces > 0)
 	{
 		_value -= 10;
-		--_numSoftAce;
+		--_numSoftAces;
 	}
 
 	// Transfer ownership to cardContainer
 	 _cardContainer.push_back(std::move(card));
-	unsigned int value = GetValue();
+	auto value = GetValue();
 	if( _cardContainer.size() == 2 && value ==  21)
 	{
 		_areBlackJack = true;
@@ -83,7 +96,7 @@ void HoleCards::Reset()
 	_arePairAces = false;
 	_areBusted = false;
 	_value = 0;
-	_numSoftAce = 0;
+	_numSoftAces = 0;
 }
 
 void HoleCards::PrintCards() const
@@ -104,7 +117,7 @@ void HoleCards::PrintCards() const
 	else
 	{
 		std::cout << ", value is ";
-		if( _numSoftAce > 0)
+		if( _numSoftAces > 0)
 		{
 			std::cout << "soft ";
 		}

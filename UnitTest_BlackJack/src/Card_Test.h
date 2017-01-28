@@ -9,14 +9,14 @@
 #define SRC_CARD_TEST_H_
 
 #include "gtest/gtest.h"
-#include "Card.h"
+#include "../../BlackJack/src/Card.h"
 #include <string>
-#include "GlobalDeclarations.h"
+#include "../../BlackJack/src/GlobalDeclarations.h"
 
 TEST(Card, CreateCard)
 {
 	// Catch exceptions thrown by card ctor
-	EXPECT_NO_THROW(Card card("A","s")); // Vaild face and suit
+	EXPECT_NO_THROW(Card card("A","s")); // Valid face and suit
 	EXPECT_THROW(Card card("P","s"), std::invalid_argument); // False face
 	EXPECT_THROW(Card card("A","l"), std::invalid_argument); // False suit
 }
@@ -33,13 +33,12 @@ TEST(Card, TestSuits)
 
 TEST(Card, TestFaces)
 {
-	// Check if all faces and values are assignedn correctly
+	// Check if all faces and values are assigned correctly
 	for(const auto & face : FACE)
 	{
 		Card card(face.first, "s");
 		EXPECT_EQ(face.first, card.GetFace()) << "Error assigning face " << face.first;
 		EXPECT_EQ(face.second, card.GetValue()) << "Error assigning value " << face.second;
-
 	}
 }
 

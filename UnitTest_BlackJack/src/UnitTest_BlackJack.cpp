@@ -9,6 +9,11 @@
 #include "gtest/gtest.h"
 #include "Deck_Test.h"
 #include "Card_Test.h"
+#include "Dealer_Test.h"
+#include "HandManager_Test.h"
+#include "HoleCards_Test.h"
+#include "Player_Test.h"
+#include "UserInput_Test.h"
 
 
 int main(int argc, char ** argv)

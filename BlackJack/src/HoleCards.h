@@ -38,7 +38,7 @@ public:
 	void PrintCards() const;
 	void PrintNumCards() const;
 	bool IsEmpty() const { return _cardContainer.empty(); }
-	std::size_t NumCards() const { return _cardContainer.size(); }
+	std::size_t Size() const { return _cardContainer.size(); }
 
 private:
 	bool _areBlackJack;
@@ -46,7 +46,7 @@ private:
 	bool _arePairAces;
 	bool _areBusted;
 	unsigned int _value;
-	unsigned int _numSoftAce;
+	unsigned int _numSoftAces;
 	std::vector<pCard> _cardContainer;
 };
 

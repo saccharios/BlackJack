@@ -9,19 +9,15 @@
 #define SRC_DECK_TEST_H_
 #include <memory>
 #include "gtest/gtest.h"
-#include "Deck.h"
-#include "Card.h"
+#include "../../BlackJack/src/Deck.h"
+#include "../../BlackJack/src/Card.h"
 #include "string"
 
 TEST(Deck, AddAndRemoveOneCard)
 {
 	typedef std::unique_ptr<Card> pCard;
 	Deck deck;
-	std::string face = "5";
-	std::string suit = "s";
-	pCard card(new Card(face ,  suit ));
-
-	deck.AddCard(std::move(card));
+	deck.AddCard(pCard(new Card("A","s")));
 	EXPECT_EQ(1u, deck.Size());
 	deck.Draw();
 	EXPECT_EQ(0u, deck.Size());
