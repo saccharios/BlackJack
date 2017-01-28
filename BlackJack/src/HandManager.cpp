@@ -31,11 +31,6 @@ void HandManager::Start()
 	}
 	pCard card1 = _deck.Draw();
 	pCard card2 = _deck.Draw();
-	// TODO Debugging only
-	//		pCard card1 = _deck.Draw(1); //Pair 3
-	//		pCard card2 = _deck.Draw(13); //Pair 3
-	//		pCard card1 = _deck.Draw(12); //Pair  A
-	//		pCard card2 = _deck.Draw(24);//Pair A
 
 	_holeCards.StartCards(std::move(card1), std::move(card2));
 	_isPlayed = false;

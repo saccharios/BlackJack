@@ -11,6 +11,11 @@
 #include "HoleCards.h"
 
 // TODO Write Unittest with gtest
+// TODO Check where "auto" can be used
+// TODO Check instantiation with auto, and () {}
+// TODO Find better way for cards characteristics instead of strings
+// TODO Add exception handling
+
 
 int main(int argc, char ** argv)
 {
