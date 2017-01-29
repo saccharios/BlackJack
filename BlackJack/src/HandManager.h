@@ -43,7 +43,6 @@ public:
 	bool const & IsBlackJack();
 	bool IsEmpty() const { return _holeCards.IsEmpty(); }
 	pCard RemoveLastCard() { return _holeCards.RemoveLastCard(); }
-	void AddCard( pCard  card) { _holeCards.AddCard(std::move(card)); }
 	void PrintNumCards() const { _holeCards.PrintNumCards(); }
 	float PayoutPush ();
 	float PayoutLoose ();
@@ -52,6 +51,7 @@ public:
 	std::size_t const & GetHandNumber() const { return _handNumber; }
 	void PrintHandNumber() const;
 	bool const & IsPlayed() const { return _isPlayed; }
+	HoleCards const & GetHoleCards() const { return _holeCards;}
 
 private:
 	Deck & _deck;

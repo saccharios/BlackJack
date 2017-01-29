@@ -114,7 +114,11 @@ std::string Player::PlayBasicStrategy()
 
 }
 
-
+// Available actions depen on two things:
+// 1) The wager and balance of a player
+// 2) State of the hand
+// TODO Can those two be separated in a better way?
+// Take the intersection of two sets maybe?
 std::set<std::string> Player::GetAvailableActionSet(pHandManager const & currentHand)
 {
 	if(currentHand->IsFirstAction() &&  _balance >= _orignialWager)

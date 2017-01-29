@@ -36,9 +36,13 @@ public:
 //		Test::TearDown();
 //	}
 	void Run_Payouts();
-	void Run_Actions();
+	void Run_ActionDouble();
+	void Run_ActionHit();
+	void Run_ActionStand();
+	void Run_ActionSplit();
 	void Run_Wager();
 	void Run_Start();
+	void Run_IsBlackJack();
 
 private:
 	Deck _deck;
@@ -48,9 +52,21 @@ TEST_F(HandManagerTest, Payouts)
 {
 	Run_Payouts();
 }
-TEST_F(HandManagerTest, Actions)
+TEST_F(HandManagerTest, ActionDouble)
 {
-	Run_Actions();
+	Run_ActionDouble();
+}
+TEST_F(HandManagerTest, ActionHit)
+{
+	Run_ActionHit();
+}
+TEST_F(HandManagerTest, ActionStand)
+{
+	Run_ActionStand();
+}
+TEST_F(HandManagerTest, ActionSplit)
+{
+	Run_ActionSplit();
 }
 TEST_F(HandManagerTest, Wager)
 {
