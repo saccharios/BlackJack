@@ -31,19 +31,15 @@ void DealerTest::Run_ActionHit()
 
 void DealerTest::Run_PutCardsBack()
 {
-	for(auto i = 0u; i < _numDecks*52u; ++i)
-	{
-		_dealer.ActionHit();
-	}
-	EXPECT_EQ(_numDecks*52u, _dealer.GetHoleCards().Size());
-	EXPECT_EQ(0u, _deck.Size());
+	_dealer.ActionHit();
+	EXPECT_EQ(1u, _dealer.GetHoleCards().Size());
+	EXPECT_EQ(_numDecks*52u - 1u, _deck.Size());
 	_dealer.PutCardsBack();
 	EXPECT_EQ(0u, _dealer.GetHoleCards().Size());
 	EXPECT_EQ(_numDecks*52u, _deck.Size());
 }
 void DealerTest::Run_BlackJack()
 { // This test case is easier if the deck contains only {As, Ks}
-	using pCard = std::unique_ptr<Card>;
 	Deck deck(0);
 	Dealer dealer(deck);
 	deck.AddCard(pCard(new Card("A","s")));
@@ -54,7 +50,7 @@ void DealerTest::Run_BlackJack()
 }
 void DealerTest::Run_IsBusted()
 {
-	for(auto i = 0u; i < 12u; ++i)
+	for(auto i = 0u; i < 7u; ++i)
 	{
 		_dealer.ActionHit();
 	}

@@ -20,7 +20,13 @@ TEST(HoleCards, AddAndRemoveOneCard)
 	holeCards.RemoveLastCard();
 	EXPECT_EQ(0u, holeCards.Size());
 }
-
+TEST(HoleCards, RemoveCard)
+{
+	HoleCards holeCards;
+	// Remove on card from empty hole cards
+	holeCards.RemoveLastCard();
+	EXPECT_EQ(0u, holeCards.Size());
+}
 TEST(HoleCards, OneStartCard)
 {
 	using pCard = std::unique_ptr<Card>;
@@ -35,20 +41,22 @@ TEST(HoleCards, OneStartCard)
 	EXPECT_EQ(1u, holeCards.Size());
 }
 
+//TEST(HoleCards, TwoStartCard_Death)
+//{
+//	using pCard = std::unique_ptr<Card>;
+//	HoleCards holeCards;
+//	// Add 1 Card and then invoke StartCard(Card, Card), expect throw
+//	holeCards.AddCard(pCard(new Card("A","s")));
+//	EXPECT_DEATH( holeCards.StartCards(pCard(new Card("K","s")),pCard(new Card("Q","s"))),"");
+//}
+
 TEST(HoleCards, TwoStartCard)
 {
 	using pCard = std::unique_ptr<Card>;
 	HoleCards holeCards;
-	// Add 1 Card and then invoke StartCard(Card, Card), expect throw
-	holeCards.AddCard(pCard(new Card("A","s")));
-	EXPECT_THROW( holeCards.StartCards(pCard(new Card("K","s")),pCard(new Card("Q","s"))), std::invalid_argument);
-	EXPECT_EQ(1u, holeCards.Size());
-	// Remove Card and test StartCard(Card, Card) with empty container.
-	holeCards.RemoveLastCard();
 	EXPECT_NO_THROW( holeCards.StartCards(pCard(new Card("K","s")),pCard(new Card("Q","s"))));
 	EXPECT_EQ(2u, holeCards.Size());
 }
-
 TEST(HoleCards, GetValue)
 {
 	using pCard = std::unique_ptr<Card>;
