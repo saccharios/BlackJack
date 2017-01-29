@@ -8,6 +8,7 @@
 #include <iostream>
 #include "HoleCards.h"
 #include <stdexcept>
+#include "assert.h"
 
 HoleCards::HoleCards():
 _areBlackJack(false),
@@ -34,11 +35,14 @@ void HoleCards::StartCards(pCard card)
 
 void HoleCards::StartCards(pCard card1, pCard card2)
 {
-	if(!IsEmpty())
-	{
-		throw std::invalid_argument( "Cannot start hand, hand is non-empty");
-	}
-	else{
+
+	assert(IsEmpty());//, "Cannot start hand, hand is non-empty"));
+
+//	if(!IsEmpty())
+//	{
+//		throw std::invalid_argument( "Cannot start hand, hand is non-empty");
+//	}
+//	else{
 		Reset();
 		// Check for a pair at start:
 		if ( card1->GetFace() == card2->GetFace())
@@ -52,7 +56,7 @@ void HoleCards::StartCards(pCard card1, pCard card2)
 
 		AddCard(std::move(card1));
 		AddCard(std::move(card2));
-	}
+//	}
 }
 
 void HoleCards::AddCard(pCard card)
@@ -132,7 +136,7 @@ void HoleCards::PrintNumCards() const
 
 HoleCards::pCard HoleCards::RemoveLastCard()
 {
-	pCard Card;
+	pCard Card = nullptr;
 	if(!IsEmpty())
 	{
 		Card =  std::move(_cardContainer.back());
@@ -140,7 +144,8 @@ HoleCards::pCard HoleCards::RemoveLastCard()
 	}
 	else
 	{
-		std::cerr << "ERROR - Card container is empty!" << std::endl;
+		// TODO Get better error handling
+		//std::cerr << "ERROR - Card container is empty!" << std::endl;
 	}
 
 	return Card;

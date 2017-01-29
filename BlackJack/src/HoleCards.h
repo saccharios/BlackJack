@@ -25,8 +25,8 @@ public:
 	HoleCards (HoleCards const & player) = delete;
 	HoleCards & operator= (const HoleCards & other) = delete;
 
-	void StartCards(pCard card);
-	void StartCards(pCard card1, pCard card2);
+	void StartCards(pCard card); // Only used by dealer
+	void StartCards(pCard card1, pCard card2); // Only used by player
 	void AddCard(pCard card);
 	pCard RemoveLastCard();
 	unsigned int GetValue() const;

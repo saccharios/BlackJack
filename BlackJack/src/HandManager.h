@@ -34,7 +34,6 @@ public:
 	void ActionDouble();
 	void ActionHit();
 	void ActionStand();
-	void SetWager(float const & wager) { _wager = wager; }
 	float const & GetWager() const { return _wager; }
 	void PrintCards() const { _holeCards.PrintCards(); }
 	unsigned int GetValue() const { return _holeCards.GetValue(); }

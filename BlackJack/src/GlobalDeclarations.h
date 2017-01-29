@@ -12,6 +12,7 @@
 
 // constexpr because all values are known at compile time
 constexpr float MIN_WAGER = 1.0;
+constexpr float MAX_WAGER = 500.0;
 constexpr std::size_t MAX_DECKS = 8;
 constexpr std::size_t MAX_PLAYERS = 8;
 constexpr float MIN_INIT_BALANCE = 1.0;

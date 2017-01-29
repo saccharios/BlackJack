@@ -12,13 +12,29 @@
 #include "HoleCards.h"
 #include "Card.h"
 #include "Deck.h"
+#include "GlobalDeclarations.h"
 
 HandManager::HandManager (Deck & deck, float const & wager, std::size_t const & handNumber):
 _deck(deck),
-_wager(wager),
 _handNumber(handNumber),
 _isPlayed(false)
-{}
+{
+	// Make sure that the wager at the creation is within bounds. Hard force it.
+	if( wager < MIN_WAGER)
+	{
+		_wager = MIN_WAGER;
+		std::cout << "Your wager is too low, setting to minimum wager (1.0)" << std::endl;
+	}
+	else if (wager > MAX_WAGER)
+	{
+		std::cout << "Your wager is too high, setting to maximum wager (500.0)" << std::endl;
+		_wager = MAX_WAGER;
+	}
+	else
+	{
+		_wager = wager;
+	}
+}
 
 
 void HandManager::Start()
@@ -59,7 +75,7 @@ void HandManager::ActionSplit()
 }
 void HandManager::ActionDouble()
 {
-	SetWager(_wager *2.0);
+	_wager *= 2.0;
 	ActionHit();
 	_isPlayed = true;
 }
@@ -80,8 +96,6 @@ void HandManager::ActionStand()
 	_isPlayed = true;
 }
 
-
-
 bool const & HandManager::IsBlackJack()
 {
 	_isPlayed = true;
@@ -91,7 +105,7 @@ bool const & HandManager::IsBlackJack()
 float HandManager::PayoutPush ()
 {
 	std::cout << "is a push" << std::endl;
-	return _wager;
+	return GetWager();
 }
 float HandManager::PayoutLoose ()
 {
@@ -102,12 +116,12 @@ float HandManager::PayoutLoose ()
 float HandManager::PayoutWin ()
 {
 	std::cout << "wins" << std::endl;
-	return 2.0*_wager;
+	return 2.0*GetWager();
 }
 float HandManager::PayoutBlackJack ()
 {
 	std::cout << "BlackJack pays 5 to 2" << std::endl;
-	return 2.5*_wager;
+	return 2.5*GetWager();
 }
 
 

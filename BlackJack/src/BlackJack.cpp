@@ -13,10 +13,9 @@
 // TODO Write Unittest with gtest
 // TODO Check where "auto" can be used
 // TODO Check instantiation with auto, and () {}
-// TODO Find better way for cards characteristics instead of strings
-// TODO Add exception handling
-
-
+// TODO Find better way for cards characteristics instead of strings,  Change Face and Suit, as classes and check for types
+// TODO Add exception handling, use assert() where possible
+// TODO Change float to double
 int main(int argc, char ** argv)
 {
 
