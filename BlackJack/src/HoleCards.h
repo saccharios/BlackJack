@@ -29,6 +29,7 @@ public:
 	void StartCards(pCard card1, pCard card2); // Only used by player
 	void AddCard(pCard card);
 	pCard RemoveLastCard();
+	void CalculateValue();
 	unsigned int GetValue() const;
 	bool const & AreBlackJack() const { return _areBlackJack; }
 	bool const & ArePair() const { return _arePair; }

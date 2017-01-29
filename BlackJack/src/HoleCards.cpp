@@ -48,7 +48,7 @@ void HoleCards::StartCards(pCard card1, pCard card2)
 		if ( card1->GetFace() == card2->GetFace())
 		{
 			_arePair = true;
-			if ( card1->GetFace() == "A")
+			if ( card1->IsAce())
 			{
 				_arePairAces = true;
 			}
@@ -61,20 +61,9 @@ void HoleCards::StartCards(pCard card1, pCard card2)
 
 void HoleCards::AddCard(pCard card)
 {
-	// Keep track of the value while adding a card, deal with aces and save how many aces are used soft
-	if( card->GetFace() == "A")
-	{
-		++_numSoftAces;
-	}
-	_value += card->GetValue();
-	while( _value > 21 && _numSoftAces > 0)
-	{
-		_value -= 10;
-		--_numSoftAces;
-	}
-
 	// Transfer ownership to cardContainer
 	 _cardContainer.push_back(std::move(card));
+	CalculateValue();
 	auto value = GetValue();
 	if( _cardContainer.size() == 2 && value ==  21)
 	{
@@ -88,6 +77,24 @@ void HoleCards::AddCard(pCard card)
 
 }
 
+void HoleCards::CalculateValue()
+{
+	_value = 0u;
+	_numSoftAces = 0u;
+	for( const auto & card : _cardContainer)
+	{
+		_value += card->GetValue();
+		if(card->IsAce())
+		{
+			++_numSoftAces;
+		}
+	}
+	while( _value > 21u && _numSoftAces > 0u)
+	{
+		_value -= 10;
+		--_numSoftAces;
+	}
+}
 unsigned int HoleCards::GetValue() const
 {
 	return _value;
@@ -150,4 +157,6 @@ HoleCards::pCard HoleCards::RemoveLastCard()
 
 	return Card;
 }
+
+
 

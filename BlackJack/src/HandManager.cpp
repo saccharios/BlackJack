@@ -64,7 +64,7 @@ void HandManager::Start( pCard card1 )
 }
 
 // TODO Action Split should return one of the hole cards and add a new card to the current hand.
-// This implies that the value of holeCards must be implemented differently!
+
 void HandManager::ActionSplit()
 {
 	_isPlayed = false;

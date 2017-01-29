@@ -114,7 +114,7 @@ std::string Player::PlayBasicStrategy()
 
 }
 
-// Available actions depen on two things:
+// Available actions depend on two things:
 // 1) The wager and balance of a player
 // 2) State of the hand
 // TODO Can those two be separated in a better way?
