@@ -14,8 +14,8 @@
 #include "HandManager.h"
 #include "Deck.h"
 class Player {
-	typedef std::unique_ptr<Card> pCard;
-	typedef std::unique_ptr<HandManager> pHandManager;
+	using pCard = std::unique_ptr<Card>;
+	using pHandManager = std::unique_ptr<HandManager>;
 public:
 
 	Player(Deck & deck, std::string name, float balance);

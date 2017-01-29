@@ -19,7 +19,7 @@
 // on hole cards, evaluate the payout, keeps track whether a player can keep playing
 // and evaluates possible user actions.
 class HandManager {
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 public:
 	HandManager (Deck & deck, float const & wager, std::size_t const & handNumber);
 

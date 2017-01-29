@@ -15,7 +15,7 @@
 class DealerTest : public ::testing::Test
 {
 public:
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 	DealerTest() : _deck(0), _dealer(_deck)
 	{
 //		auto N = 1;
@@ -51,7 +51,7 @@ TEST_F(DealerTest, Play)
 
 //TEST(Dealer, Play)
 //{
-//	typedef std::unique_ptr<Card> pCard;
+//	using pCard = std::unique_ptr<Card>;
 //	Deck deck(0);
 //	Dealer dealer(deck);
 //	deck.AddCard(pCard(new Card("2","s")));
@@ -70,7 +70,7 @@ TEST_F(DealerTest, Play)
 //}
 //TEST(Dealer, ActionHit)
 //{
-//	typedef std::unique_ptr<Card> pCard;
+//	using pCard = std::unique_ptr<Card>;
 //	Deck deck(0);
 //	Dealer dealer(deck);
 //	auto N = 2u;
@@ -87,7 +87,7 @@ TEST_F(DealerTest, Play)
 //
 //TEST(Dealer, PutCardsBack)
 //{
-//	typedef std::unique_ptr<Card> pCard;
+//	using pCard = std::unique_ptr<Card>;
 //	Deck deck(0);
 //	Dealer dealer(deck);
 //	auto N = 52u;
@@ -108,7 +108,7 @@ TEST_F(DealerTest, Play)
 //}
 //TEST(Dealer, BlackJack)
 //{
-//	typedef std::unique_ptr<Card> pCard;
+//	using pCard = std::unique_ptr<Card>;
 //	Deck deck(0);
 //	Dealer dealer(deck);
 //	deck.AddCard(pCard(new Card("A","s")));
@@ -120,7 +120,7 @@ TEST_F(DealerTest, Play)
 //}
 //TEST(Dealer, IsBusted)
 //{
-//	typedef std::unique_ptr<Card> pCard;
+//	using pCard = std::unique_ptr<Card>;
 //	Deck deck(0);
 //	Dealer dealer(deck);
 //	deck.AddCard(pCard(new Card("K","s")));
@@ -133,7 +133,7 @@ TEST_F(DealerTest, Play)
 //}
 //TEST(Dealer, GetValue)
 //{
-//	typedef std::unique_ptr<Card> pCard;
+//	using pCard = std::unique_ptr<Card>;
 //	Deck deck(0);
 //	Dealer dealer(deck);
 //	deck.AddCard(pCard(new Card("A","s")));

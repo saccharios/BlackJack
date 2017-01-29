@@ -18,7 +18,7 @@
 // the value of the cards in the hole cards.
 
 class HoleCards {
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 public:
 	HoleCards();
 	// Not allowed to copy or assign, because it contains a card container (which has unique_ptrs)

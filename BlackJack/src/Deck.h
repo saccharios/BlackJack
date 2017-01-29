@@ -18,7 +18,7 @@
 
 class Deck
 {
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 public:
 	Deck() : _cardContainer(){}
 	Deck(unsigned int seed ) : _cardContainer(), _seed(seed){}

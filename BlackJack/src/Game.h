@@ -16,7 +16,7 @@
 // Class game is the glue code which binds all other classes together.
 // It guides the game.
 class Game {
-	typedef std::unique_ptr<Player> pPlayer;
+	using pPlayer = std::unique_ptr<Player>;
 public:
 
 	// Class Game is a Singleton

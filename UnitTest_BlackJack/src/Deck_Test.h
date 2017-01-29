@@ -15,7 +15,7 @@
 
 TEST(Deck, AddAndRemoveOneCard)
 {
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 	Deck deck;
 	deck.AddCard(pCard(new Card("A","s")));
 	EXPECT_EQ(1u, deck.Size());

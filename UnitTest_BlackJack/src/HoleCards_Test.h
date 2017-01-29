@@ -13,7 +13,7 @@
 
 TEST(HoleCards, AddAndRemoveOneCard)
 {
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 	HoleCards holeCards;
 	holeCards.AddCard(pCard(new Card("A","s")));
 	EXPECT_EQ(1u, holeCards.Size()) << "test";
@@ -23,7 +23,7 @@ TEST(HoleCards, AddAndRemoveOneCard)
 
 TEST(HoleCards, OneStartCard)
 {
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 	HoleCards holeCards;
 	// Add 1 Card and then invoke StartCard(Card), expect throw
 	holeCards.AddCard(pCard(new Card("A","s")));
@@ -37,7 +37,7 @@ TEST(HoleCards, OneStartCard)
 
 TEST(HoleCards, TwoStartCard)
 {
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 	HoleCards holeCards;
 	// Add 1 Card and then invoke StartCard(Card, Card), expect throw
 	holeCards.AddCard(pCard(new Card("A","s")));
@@ -51,7 +51,7 @@ TEST(HoleCards, TwoStartCard)
 
 TEST(HoleCards, GetValue)
 {
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 	HoleCards holeCards;
 	auto valueSum(0u);
 	// Test Value for all cards of spades, handle the ace special
@@ -73,14 +73,14 @@ TEST(HoleCards, GetValue)
 
 TEST(HoleCards, Pair)
 {
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 	HoleCards holeCards;
 	holeCards.StartCards(pCard(new Card("K","s")),pCard(new Card("K","d")));
 	EXPECT_TRUE(holeCards.ArePair());
 }
 TEST(HoleCards, PairAces)
 {
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 	HoleCards holeCards;
 	holeCards.StartCards(pCard(new Card("A","s")),pCard(new Card("A","d")));
 	EXPECT_TRUE(holeCards.ArePair());
@@ -91,7 +91,7 @@ TEST(HoleCards, PairAces)
 }
 TEST(HoleCards, BlackJack)
 {
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 	HoleCards holeCards;
 	holeCards.StartCards(pCard(new Card("A","s")),pCard(new Card("K","s")));
 	EXPECT_TRUE(holeCards.AreBlackJack());
@@ -102,7 +102,7 @@ TEST(HoleCards, BlackJack)
 
 TEST(HoleCards, SoftAces)
 {
-	typedef std::unique_ptr<Card> pCard;
+	using pCard = std::unique_ptr<Card>;
 	HoleCards holeCards;
 	// Add 21 Aces
 	for( auto i = 0u; i < 21u; ++i)
