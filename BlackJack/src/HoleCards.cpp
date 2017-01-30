@@ -6,9 +6,10 @@
  */
 #include <memory>
 #include <iostream>
-#include "HoleCards.h"
 #include <stdexcept>
 #include "assert.h"
+#include "HoleCards.h"
+#include "Card.h"
 
 HoleCards::HoleCards():
 _areBlackJack(false),

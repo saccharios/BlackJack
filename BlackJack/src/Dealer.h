@@ -10,7 +10,9 @@
 
 #include <memory>
 #include "HoleCards.h"
-#include "Deck.h"
+
+// Forward declaration to avoid #include
+class Deck;
 
 // The dealer is very different from a player, so they cannot have a common base class
 // The dealer only has two actions, and their strategy is given.

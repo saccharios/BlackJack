@@ -6,9 +6,12 @@
  */
 
 #include "Deck.h"
-#include "player.h"
+#include "Player.h"
 #include "Dealer.h"
+#include <memory>
 #include "GlobalDeclarations.h"
+
+// Forward declaration to avoid #include
 
 #ifndef GAME_H_
 #define GAME_H_

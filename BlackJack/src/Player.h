@@ -9,12 +9,14 @@
 #define PLAYER_H_
 #include <memory>
 #include <set>
-#include "HoleCards.h"
 #include "Card.h"
 #include "HandManager.h"
-#include "Deck.h"
+
+// Forward declaration to avoid #include
+class Deck;
+
 class Player {
-	using pCard = std::unique_ptr<Card>;
+//	using pCard = std::unique_ptr<Card>;
 	using pHandManager = std::unique_ptr<HandManager>;
 public:
 

@@ -12,9 +12,10 @@
 #include <memory>
 #include <vector>
 #include <chrono>
-#include "Card.h"
+//#include "Card.h"
 
-
+// Forward declaration to avoid #include
+class Card;
 
 class Deck
 {

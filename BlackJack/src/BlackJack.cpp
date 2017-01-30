@@ -16,6 +16,8 @@
 // TODO Find better way for cards characteristics instead of strings,  Change Face and Suit, as classes and check for types
 // TODO Add exception handling, use assert() where possible
 // TODO Change float to double
+// TODO Use make_unique_ptr instead of new
+
 int main(int argc, char ** argv)
 {
 

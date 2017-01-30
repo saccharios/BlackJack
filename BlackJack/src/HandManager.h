@@ -10,8 +10,10 @@
 
 #include <memory>
 #include "HoleCards.h"
-#include "Card.h"
-#include "Deck.h"
+
+// Forward declaration to avoid #include
+class Card;
+class Deck;
 
 // The HandManager is a wrapper class for the hole cards for a player.
 // Note that a dealer is not a player, as a player has more options available.

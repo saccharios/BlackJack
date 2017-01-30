@@ -9,12 +9,13 @@
 #include <sstream>
 #include <iostream>
 #include "Player.h"
-#include "HoleCards.h"
 #include "Card.h"
+#include "HoleCards.h"
 #include "HandManager.h"
 #include "Deck.h"
 #include "UserInput.h"
 #include "GlobalDeclarations.h"
+
 
 Player::Player(Deck & deck, std::string name, float balance) :
 _balance(balance),

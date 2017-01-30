@@ -10,7 +10,9 @@
 
 #include <memory>
 #include <vector>
-#include "Card.h"
+
+// Forward declaration to avoid #include
+class Card;
 
 // The difference between HoleCards and the deck is that they do not contain any cards
 // at startup. During one round of play, cards will be added to the hole cards and at the end

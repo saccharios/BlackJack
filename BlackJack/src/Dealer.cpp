@@ -6,10 +6,13 @@
  */
 
 
+#include <memory>
+#include <iostream>
 #include "Dealer.h"
 #include "Deck.h"
 #include "HoleCards.h"
-#include <memory>
+#include "Card.h"
+
 
 Dealer::Dealer(Deck & deck) :
 _deck(deck)
