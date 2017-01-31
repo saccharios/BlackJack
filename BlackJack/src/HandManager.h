@@ -22,6 +22,7 @@ class Deck;
 // and evaluates possible user actions.
 class HandManager {
 	using pCard = std::unique_ptr<Card>;
+	using pHandManager = std::unique_ptr<HandManager>;
 public:
 	HandManager (Deck & deck, float const & wager, std::size_t const & handNumber);
 
@@ -32,7 +33,7 @@ public:
 	void Start();
 	void Start( pCard card1 );
 	bool IsFirstAction() const { return (_holeCards.Size() == 2); }
-	pCard ActionSplit();
+	pHandManager ActionSplit();
 	void ActionDouble();
 	void ActionHit();
 	void ActionStand();

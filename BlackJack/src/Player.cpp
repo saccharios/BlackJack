@@ -75,18 +75,8 @@ void Player::Play()
 			{
 				std::cout << "Split Hand Nr "<< i << "."<<std::endl;
 				_balance -= _orignialWager;
-				// Save if starting hand is pair of aces, because if split Aces do not allow to continue playing.
-				bool wasAces = _handManager[i]->IsPairAces();
-				auto card = _handManager[i]->ActionSplit();
-				auto nextNr = _handManager[i]->GetHandNumber() + 1;
-				_handManager.push_back(std::move(pHandManager(new HandManager(_deck, _orignialWager,nextNr))));
-				_handManager.back()->PrintHandNumber();
-				_handManager.back()->Start(std::move(card));
-				if(wasAces)
-				{
-					_handManager[i]->ActionStand();
-					_handManager.back()->ActionStand();
-				}
+				auto hand = _handManager[i]->ActionSplit();
+				_handManager.push_back(std::move(hand));
 			}
 			else // Stand
 			{

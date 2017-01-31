@@ -70,15 +70,31 @@ void HandManager::Start( pCard card1 )
 
 // TODO Action Split should return one of the hole cards and add a new card to the current hand.
 
-HandManager::pCard HandManager::ActionSplit()
+HandManager::pHandManager HandManager::ActionSplit()
 {
+	// Save if pair is Aces
+	bool wasAces = IsPairAces();
 	// Remove the two cards from the current hand
 	auto card1 = RemoveLastCard();
-	auto card2 = RemoveLastCard();
+	auto cardForNewHand = RemoveLastCard();
 	PrintHandNumber();
 	// Restart the the current hand with one card
 	Start(std::move(card1));
-	return card2;
+	// Create new hand with incremented hand number
+	auto nextNr = GetHandNumber() + 1;
+	auto newHand = pHandManager(new HandManager(_deck, _wager,nextNr));
+
+	newHand->PrintHandNumber();
+	newHand->Start(std::move(cardForNewHand));
+	// Don't allow to play if Aces were split
+	if(wasAces)
+	{
+		_isPlayed = true;
+		newHand->ActionStand();
+		std::cout << "-------------------------------------ACES\n";
+	}
+
+	return newHand;
 }
 void HandManager::ActionDouble()
 {

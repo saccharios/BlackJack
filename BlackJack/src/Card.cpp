@@ -9,7 +9,6 @@
 #include <array>
 #include <string>
 #include <algorithm>
-#include <stdexcept>
 #include "Card.h"
 #include "GlobalDeclarations.h"
 #include "assert.h"
@@ -26,11 +25,6 @@ _suit(suit)
 
 	assert(faceExists);
 	assert(suitExists);
-
-	if(!faceExists || !suitExists)
-	{
-		throw std::invalid_argument( "Cannot create Card " + face + suit+ ".");
-	}
 
 	_value = FACE.at(face);
 }

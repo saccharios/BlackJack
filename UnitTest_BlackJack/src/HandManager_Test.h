@@ -40,6 +40,7 @@ public:
 	void Run_ActionHit();
 	void Run_ActionStand();
 	void Run_ActionSplit();
+	void Run_ActionSplit_Aces();
 	void Run_Wager();
 	void Run_Start();
 	void Run_IsBlackJack();
@@ -67,6 +68,10 @@ TEST_F(HandManagerTest, ActionStand)
 TEST_F(HandManagerTest, ActionSplit)
 {
 	Run_ActionSplit();
+}
+TEST_F(HandManagerTest, ActionSplitAces)
+{
+	Run_ActionSplit_Aces();
 }
 TEST_F(HandManagerTest, Wager)
 {

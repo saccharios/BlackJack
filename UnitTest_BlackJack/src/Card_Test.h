@@ -13,13 +13,14 @@
 #include <string>
 #include "../../BlackJack/src/GlobalDeclarations.h"
 
-TEST(Card, CreateCard)
-{
-	// Catch exceptions thrown by card ctor
-	EXPECT_NO_THROW(Card card("A","s")); // Valid face and suit
-	EXPECT_THROW(Card card("P","s"), std::invalid_argument); // False face
-	EXPECT_THROW(Card card("A","l"), std::invalid_argument); // False suit
-}
+//TEST(Card, CreateCard_Face_DEATH)
+//{
+//	EXPECT_DEATH(Card card("P","s"),""); // False face
+//}
+//TEST(Card, CreateCard_Suit_DEATH)
+//{
+//	EXPECT_DEATH(Card card("A","l"),""); // False suit
+//}
 
 TEST(Card, TestSuits)
 {

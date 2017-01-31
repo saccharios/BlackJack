@@ -25,8 +25,35 @@ void HandManagerTest::Run_ActionDouble()
 }
 void HandManagerTest::Run_ActionSplit()
 {
-	_handManager.ActionSplit();
+	// To test spliting it does not matter whether it is a pair or not, the mechanism is the same.
+	// Thus we can use the normal start method
+	_handManager.Start();
+	auto newHand = _handManager.ActionSplit();
+	EXPECT_EQ(2u, _handManager.GetHoleCards().Size());
 	EXPECT_FALSE(_handManager.IsPlayed());
+	EXPECT_EQ(2u, newHand->GetHoleCards().Size());
+	EXPECT_EQ(_wager, newHand->GetWager());
+	EXPECT_EQ(_handManager.GetHandNumber() + 1, newHand->GetHandNumber());
+	EXPECT_FALSE(newHand->IsPlayed());
+
+}
+
+void HandManagerTest::Run_ActionSplit_Aces()
+{
+	// This is a special case and can best be tested with a special deck.
+	// Thus the deck and handManager are not the member variables
+	Deck deck;
+	deck.AddCard(pCard(new Card("A","s")));
+	deck.AddCard(pCard(new Card("A","d")));
+
+	HandManager handManager(deck,_wager, 0);
+	handManager.Start();
+	// Add more cards to the deck, so spliting is ok
+	deck.AddCard(pCard(new Card("2","d")));
+	deck.AddCard(pCard(new Card("3","d")));
+	auto newHand = handManager.ActionSplit();
+	EXPECT_TRUE( handManager.IsPlayed());
+	EXPECT_TRUE(newHand->IsPlayed());
 
 }
 void HandManagerTest::Run_ActionHit()
