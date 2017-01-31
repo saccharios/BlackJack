@@ -36,28 +36,20 @@ void HoleCards::StartCards(pCard card)
 
 void HoleCards::StartCards(pCard card1, pCard card2)
 {
-
 	assert(IsEmpty());//, "Cannot start hand, hand is non-empty"));
-
-//	if(!IsEmpty())
-//	{
-//		throw std::invalid_argument( "Cannot start hand, hand is non-empty");
-//	}
-//	else{
-		Reset();
-		// Check for a pair at start:
-		if ( card1->GetFace() == card2->GetFace())
+	Reset();
+	// Check for a pair at start:
+	if ( card1->GetFace() == card2->GetFace())
+	{
+		_arePair = true;
+		if ( card1->IsAce())
 		{
-			_arePair = true;
-			if ( card1->IsAce())
-			{
-				_arePairAces = true;
-			}
+			_arePairAces = true;
 		}
+	}
 
-		AddCard(std::move(card1));
-		AddCard(std::move(card2));
-//	}
+	AddCard(std::move(card1));
+	AddCard(std::move(card2));
 }
 
 void HoleCards::AddCard(pCard card)

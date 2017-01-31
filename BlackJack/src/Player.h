@@ -16,7 +16,6 @@
 class Deck;
 
 class Player {
-//	using pCard = std::unique_ptr<Card>;
 	using pHandManager = std::unique_ptr<HandManager>;
 public:
 

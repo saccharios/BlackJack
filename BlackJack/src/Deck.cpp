@@ -58,7 +58,7 @@ Deck::pCard Deck::Draw()
 	// Transfers ownership of the drawn card to the caller
 	return Draw(random_integer);
 }
-
+// TODO Maybe add function DrawAce()?
 
 
 

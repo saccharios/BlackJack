@@ -10,7 +10,6 @@
 #include "Deck_Test.h"
 #include "Card_Test.h"
 #include "HoleCards_Test.h"
-#include "Player_Test.h"
 #include "UserInput_Test.h"
 // TODO Make always build upon click run, ctrl f11 and in console c/c++ unit run
 

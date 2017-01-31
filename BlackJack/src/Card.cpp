@@ -12,7 +12,7 @@
 #include <stdexcept>
 #include "Card.h"
 #include "GlobalDeclarations.h"
-
+#include "assert.h"
 
 
 
@@ -22,8 +22,11 @@ _suit(suit)
 {
 	// Can only add faces and suits that are in the set
 	bool faceExists = (FACE.count(face) != 0);
-
 	bool suitExists = std::any_of(std::begin(SUIT), std::end(SUIT), [&](std::string suit) { return suit == _suit; });
+
+	assert(faceExists);
+	assert(suitExists);
+
 	if(!faceExists || !suitExists)
 	{
 		throw std::invalid_argument( "Cannot create Card " + face + suit+ ".");

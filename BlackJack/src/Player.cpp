@@ -15,7 +15,7 @@
 #include "Deck.h"
 #include "UserInput.h"
 #include "GlobalDeclarations.h"
-
+#include "assert.h"
 
 Player::Player(Deck & deck, std::string name, float balance) :
 _balance(balance),
@@ -23,7 +23,10 @@ _orignialWager(0),
 _deck(deck),
 _handManager(),
 _name(name)
-{};
+{
+	assert(_balance >= MIN_INIT_BALANCE);
+	assert(_balance <= MAX_INIT_BALANCE);
+};
 
 void Player::Start()
 {
@@ -72,19 +75,14 @@ void Player::Play()
 			{
 				std::cout << "Split Hand Nr "<< i << "."<<std::endl;
 				_balance -= _orignialWager;
-				auto _wasAces = _handManager[i]->IsPairAces(); // Save if starting hand is pair of aces, because if split Aces do not allow to continue playing.
-				// Remove the two cards from the current hand
-				auto card1 = _handManager[i]->RemoveLastCard();
-				auto card2 = _handManager[i]->RemoveLastCard();
-				_handManager[i]->PrintHandNumber();
-				// Restart the the current hand with one card
-				_handManager[i]->Start(std::move(card1));
-				// Create a new hand with index i + 1,
+				// Save if starting hand is pair of aces, because if split Aces do not allow to continue playing.
+				bool wasAces = _handManager[i]->IsPairAces();
+				auto card = _handManager[i]->ActionSplit();
 				auto nextNr = _handManager[i]->GetHandNumber() + 1;
 				_handManager.push_back(std::move(pHandManager(new HandManager(_deck, _orignialWager,nextNr))));
 				_handManager.back()->PrintHandNumber();
-				_handManager.back()->Start(std::move(card2));
-				if( _wasAces )
+				_handManager.back()->Start(std::move(card));
+				if(wasAces)
 				{
 					_handManager[i]->ActionStand();
 					_handManager.back()->ActionStand();

@@ -32,7 +32,7 @@ public:
 	void Start();
 	void Start( pCard card1 );
 	bool IsFirstAction() const { return (_holeCards.Size() == 2); }
-	void ActionSplit();
+	pCard ActionSplit();
 	void ActionDouble();
 	void ActionHit();
 	void ActionStand();

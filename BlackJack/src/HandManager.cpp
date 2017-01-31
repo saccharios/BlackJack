@@ -41,6 +41,11 @@ void HandManager::Start()
 {
 	pCard card1 = _deck.Draw();
 	pCard card2 = _deck.Draw();
+	// TODO Debugging only
+//			pCard card1 = _deck.Draw(1); //Pair 3
+//			pCard card2 = _deck.Draw(13); //Pair 3
+//	pCard card1 = _deck.Draw(8); //Pair  A
+//	pCard card2 = _deck.Draw(20); //Pair  A
 
 	_holeCards.StartCards(std::move(card1), std::move(card2));
 	_isPlayed = false;
@@ -65,9 +70,15 @@ void HandManager::Start( pCard card1 )
 
 // TODO Action Split should return one of the hole cards and add a new card to the current hand.
 
-void HandManager::ActionSplit()
+HandManager::pCard HandManager::ActionSplit()
 {
-	_isPlayed = false;
+	// Remove the two cards from the current hand
+	auto card1 = RemoveLastCard();
+	auto card2 = RemoveLastCard();
+	PrintHandNumber();
+	// Restart the the current hand with one card
+	Start(std::move(card1));
+	return card2;
 }
 void HandManager::ActionDouble()
 {
