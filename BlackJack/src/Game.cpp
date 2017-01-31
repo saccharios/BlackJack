@@ -18,7 +18,7 @@ void Game::AddDecks()
 {
 	// Adds sets to the deck
 	std::cout << "With how many decks do you want to play?" << std::endl;
-	auto NSets = UserInput::ReadInNumber<std::size_t>(1, MAX_DECKS);
+	auto NSets = UserInput::ReadInNumber<std::size_t>(1, MAX_SETS);
 	_deck.AddSets(NSets);
 }
 

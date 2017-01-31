@@ -14,7 +14,16 @@
 
 void Deck::AddSets(std::size_t  N)
 {
-	// The calling function must make sure that N is not negative (which results in a high integer for size_t type)
+	// Can only have between 1 and MAX_DECKS sets.
+	if( N > MAX_SETS )
+	{
+		N = MAX_SETS;
+	}
+	else if ( N < 1 )
+	{
+		N = 1;
+	}
+
 	for(std::size_t i = 0; i < N; ++i)
 	{
 		AddCompleteSet();
@@ -28,7 +37,7 @@ void Deck::AddCompleteSet()
 	{
 		for(const auto & face : FACE)
 		{
-			_cardContainer.push_back(std::move(pCard(new Card(face.first, suit))));
+			_cardContainer.push_back(std::move(pCard( new Card(face.first, suit))));
 		}
 	}
 }

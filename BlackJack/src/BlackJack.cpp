@@ -13,9 +13,8 @@
 // TODO Write Unittest with gtest
 // TODO Check where "auto" can be used
 // TODO Check instantiation with auto, and () {}
-// TODO Find better way for cards characteristics instead of strings,  Change Face and Suit, as classes and check for types
 // TODO Add exception handling, use assert() where possible
-// TODO Use make_unique_ptr instead of new
+// TODO Use make_unique instead of new. Problem: Eclipse indexer does not recoginze make_unique<T>()
 
 int main(int argc, char ** argv)
 {

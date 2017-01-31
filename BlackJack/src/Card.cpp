@@ -19,7 +19,8 @@ Card::Card(std::string const & face, std::string const & suit):
 _face(face),
 _suit(suit)
 {
-	// Can only add faces and suits that are in the set
+	// Because the constructor takes any string, it must be made sure that
+	// only those strings contained in FACE and SUIT are valid for a card.
 	bool faceExists = (FACE.count(face) != 0);
 	bool suitExists = std::any_of(std::begin(SUIT), std::end(SUIT), [&](std::string suit) { return suit == _suit; });
 
