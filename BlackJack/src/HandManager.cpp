@@ -14,7 +14,7 @@
 #include "Deck.h"
 #include "GlobalDeclarations.h"
 
-HandManager::HandManager (Deck & deck, float const & wager, std::size_t const & handNumber):
+HandManager::HandManager (Deck & deck, double const & wager, std::size_t const & handNumber):
 _deck(deck),
 _handNumber(handNumber),
 _isPlayed(false)
@@ -67,8 +67,6 @@ void HandManager::Start( pCard card1 )
 	PrintCards();
 	_isPlayed = false;
 }
-
-// TODO Action Split should return one of the hole cards and add a new card to the current hand.
 
 HandManager::pHandManager HandManager::ActionSplit()
 {
@@ -125,23 +123,23 @@ bool const & HandManager::IsBlackJack()
 	return _holeCards.AreBlackJack();
 }
 
-float HandManager::PayoutPush ()
+double HandManager::PayoutPush ()
 {
 	std::cout << "is a push" << std::endl;
 	return GetWager();
 }
-float HandManager::PayoutLoose ()
+double HandManager::PayoutLoose ()
 {
 	std::cout << "looses" << std::endl;
 	return 0.0;
 
 }
-float HandManager::PayoutWin ()
+double HandManager::PayoutWin ()
 {
 	std::cout << "wins" << std::endl;
 	return 2.0*GetWager();
 }
-float HandManager::PayoutBlackJack ()
+double HandManager::PayoutBlackJack ()
 {
 	std::cout << "BlackJack pays 5 to 2" << std::endl;
 	return 2.5*GetWager();

@@ -85,7 +85,7 @@ void HandManagerTest::Run_Start()
 void HandManagerTest::Run_IsBlackJack()
 { // This test case is easier if the deck contains only {As, Ks}
 	Deck deck(0);
-	float wager = 10.0;
+	double wager = 10.0;
 	HandManager handManager (deck, wager, 0);
 	deck.AddCard(pCard(new Card("A","s")));
 	deck.AddCard(pCard(new Card("K","s")));

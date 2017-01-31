@@ -19,7 +19,7 @@ class Player {
 	using pHandManager = std::unique_ptr<HandManager>;
 public:
 
-	Player(Deck & deck, std::string name, float balance);
+	Player(Deck & deck, std::string name, double balance);
 	// Not allowed to copy or assign
 	Player (Player const & player) = delete;
 	Player & operator= (const Player & other) = delete;
@@ -33,14 +33,14 @@ public:
 	void PutCardsBack();
 	void SetWager ();
 	void PrintWager () const;
-	float const & GetBalance () const;
+	double const & GetBalance () const;
 	void PrintBalance () const;
 	std::string const & GetName() const;
 	void PrintName () const;
 
 private:
-	float _balance;
-	float _orignialWager;
+	double _balance;
+	double _orignialWager;
 	Deck & _deck;
 	std::vector<pHandManager> _handManager;
 	std::string _name;

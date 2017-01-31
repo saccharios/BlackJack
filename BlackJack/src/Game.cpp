@@ -33,7 +33,7 @@ void Game::AddPlayers()
 		auto name = UserInput::ReadInName(i);
 
 		std::cout << "Welcome " << name <<". Set your balance. "<< std::endl;
-		auto balance = UserInput::ReadInNumber<float>( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
+		auto balance = UserInput::ReadInNumber<double>( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
 
 		_players.push_back(std::move(pPlayer(new Player(_deck, name, balance))));
 	}

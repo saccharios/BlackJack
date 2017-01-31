@@ -16,7 +16,7 @@
 class HandManagerTest : public ::testing::Test
 {
 private:
-	const float _wager = 10.0;
+	const double _wager = 10.0;
 	const std::size_t _numDecks = 1;
 public:
 	using pCard = std::unique_ptr<Card>;

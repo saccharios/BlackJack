@@ -24,7 +24,7 @@ class HandManager {
 	using pCard = std::unique_ptr<Card>;
 	using pHandManager = std::unique_ptr<HandManager>;
 public:
-	HandManager (Deck & deck, float const & wager, std::size_t const & handNumber);
+	HandManager (Deck & deck, double const & wager, std::size_t const & handNumber);
 
 	// Not allowed to copy or assign, because it contains a card container (which has unique_ptrs)
 	HandManager (HandManager const & player) = delete;
@@ -37,7 +37,7 @@ public:
 	void ActionDouble();
 	void ActionHit();
 	void ActionStand();
-	float const & GetWager() const { return _wager; }
+	double const & GetWager() const { return _wager; }
 	void PrintCards() const { _holeCards.PrintCards(); }
 	unsigned int GetValue() const { return _holeCards.GetValue(); }
 	bool const & IsPair() const { return _holeCards.ArePair(); }
@@ -47,10 +47,10 @@ public:
 	bool IsEmpty() const { return _holeCards.IsEmpty(); }
 	pCard RemoveLastCard() { return _holeCards.RemoveLastCard(); }
 	void PrintNumCards() const { _holeCards.PrintNumCards(); }
-	float PayoutPush ();
-	float PayoutLoose ();
-	float PayoutWin ();
-	float PayoutBlackJack ();
+	double PayoutPush ();
+	double PayoutLoose ();
+	double PayoutWin ();
+	double PayoutBlackJack ();
 	std::size_t const & GetHandNumber() const { return _handNumber; }
 	void PrintHandNumber() const;
 	bool const & IsPlayed() const { return _isPlayed; }
@@ -59,7 +59,7 @@ public:
 private:
 	Deck & _deck;
 	HoleCards _holeCards;
-	float _wager;
+	double _wager;
 	const std::size_t _handNumber;
 	bool _isPlayed;
 

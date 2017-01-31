@@ -18,7 +18,7 @@
 class PlayerTest : public ::testing::Test
 {
 private:
-	const float _initBalance = 10.0;
+	const double _initBalance = 10.0;
 	const std::size_t _numDecks = 1;
 	const std::string _name = "Player_A";
 public:

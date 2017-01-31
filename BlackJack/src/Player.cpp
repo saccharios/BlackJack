@@ -17,7 +17,7 @@
 #include "GlobalDeclarations.h"
 #include "assert.h"
 
-Player::Player(Deck & deck, std::string name, float balance) :
+Player::Player(Deck & deck, std::string name, double balance) :
 _balance(balance),
 _orignialWager(0),
 _deck(deck),
@@ -205,7 +205,7 @@ void Player::PutCardsBack()
 void Player::SetWager ()
 {
 	std::cout << GetName()<< " set your Wager: " << std::endl;
-	_orignialWager = UserInput::ReadInNumber<float>( MIN_WAGER, _balance);
+	_orignialWager = UserInput::ReadInNumber<double>( MIN_WAGER, _balance);
 	_balance -= _orignialWager;
 	PrintWager();
 }
@@ -216,7 +216,7 @@ void Player::PrintWager () const
 	std::cout << GetName() <<"'s wager is: " << _orignialWager << std::endl;
 }
 
-float const & Player::GetBalance () const
+double const & Player::GetBalance () const
 {
 	return _balance;
 }
