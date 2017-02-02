@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include "gtest/gtest.h"
-#include "Deck_Test.h"
 #include "Card_Test.h"
 #include "HoleCards_Test.h"
 #include "UserInput_Test.h"

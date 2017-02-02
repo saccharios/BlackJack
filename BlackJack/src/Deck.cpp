@@ -11,6 +11,7 @@
 #include "Deck.h"
 #include "Card.h"
 #include "GlobalDeclarations.h"
+#include "assert.h"
 
 void Deck::AddSets(std::size_t  N)
 {
@@ -45,18 +46,11 @@ void Deck::AddCompleteSet()
 
 Deck::pCard Deck::Draw(std::size_t number)
 {
-	if( number >= Size() || _cardContainer.empty())
-	{
-		throw std::invalid_argument("ERROR - Card to draw exceeds index");
-		return nullptr;
-	}
-	else
-	{
-		Deck::pCard Card = nullptr;
-		Card =  std::move(_cardContainer.at(number));
-		_cardContainer.erase(_cardContainer.begin()+number);
-		return Card;
-	}
+	assert(number < Size());
+	assert(!_cardContainer.empty());
+	auto Card =  std::move(_cardContainer.at(number));
+	_cardContainer.erase(_cardContainer.begin()+number);
+	return Card;
 }
 
 Deck::pCard Deck::Draw()
