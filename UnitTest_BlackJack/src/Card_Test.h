@@ -13,34 +13,35 @@
 #include <string>
 #include "../../BlackJack/src/GlobalDeclarations.h"
 
-//TEST(Card, CreateCard_Face_DEATH)
+
+class CardTest : public ::testing::Test
+{
+public:
+	void Run_CreateCard_Face_DEATH();
+	void Run_CreateCard_Suit_DEATH();
+	void Run_TestSuits();
+	void Run_TestFaces();
+private:
+};
+
+
+//TEST_F(CardTest, CreateCard_Face_DEATH)
 //{
-//	EXPECT_DEATH(Card card("P","s"),""); // False face
+//	Run_CreateCard_Face_DEATH();
 //}
-//TEST(Card, CreateCard_Suit_DEATH)
+//TEST_F(CardTest, CreateCard_Suit_DEATH)
 //{
-//	EXPECT_DEATH(Card card("A","l"),""); // False suit
+//	Run_CreateCard_Suit_DEATH();
 //}
 
-TEST(Card, TestSuits)
+TEST_F(CardTest, TestSuits)
 {
-	// Check if all suits are assigned correctly
-	for( const auto & suit : SUIT)
-	{
-		Card card("A", suit);
-		EXPECT_EQ(suit, card.GetSuit()) << "Error assigning suit " << suit;
-	}
+	Run_TestSuits();
 }
 
-TEST(Card, TestFaces)
+TEST_F(CardTest, TestFaces)
 {
-	// Check if all faces and values are assigned correctly
-	for(const auto & face : FACE)
-	{
-		Card card(face.first, "s");
-		EXPECT_EQ(face.first, card.GetFace()) << "Error assigning face " << face.first;
-		EXPECT_EQ(face.second, card.GetValue()) << "Error assigning value " << face.second;
-	}
+	Run_TestFaces();
 }
 
 
