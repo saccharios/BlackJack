@@ -25,8 +25,8 @@ void DeckTest::Run_AddAndRemoveOneCard()
 
 void DeckTest::Run_RemoveOneCard_EmptyDesk_DEATH()
 {
-//	EXPECT_DEATH(_deck.Draw(), "");
-//	EXPECT_DEATH(_deck.Draw(1), "");
+	EXPECT_DEATH(_deck.Draw(), "");
+	EXPECT_DEATH(_deck.Draw(1), "");
 }
 
 void DeckTest::Run_AddEigthSets()

@@ -40,10 +40,10 @@ TEST_F(DeckTest, AddAndRemoveOneCard)
 {
 	Run_AddAndRemoveOneCard();
 }
-TEST_F(DeckTest, RemoveOneCard_EmptyDesk)
-{
-	Run_RemoveOneCard_EmptyDesk_DEATH();
-}
+//TEST_F(DeckTest, RemoveOneCard_EmptyDesk)
+//{
+//	Run_RemoveOneCard_EmptyDesk_DEATH();
+//}
 TEST_F(DeckTest, AddEigthSets)
 {
 	Run_AddEigthSets();

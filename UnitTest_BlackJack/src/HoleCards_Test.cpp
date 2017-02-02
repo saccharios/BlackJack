@@ -1,0 +1,103 @@
+/*
+ * _holeCards_Test.cpp
+ *
+ *  Created on: 02.02.2017
+ *      Author: Stefan
+ */
+
+#include "HoleCards_Test.h"
+#include "gtest/gtest.h"
+#include "../../BlackJack/src/Card.h"
+#include "../../BlackJack/src/GlobalDeclarations.h"
+void HoleCardsTest::Run_AddAndRemoveOneCard()
+{
+	_holeCards.AddCard(pCard(new Card("A","s")));
+	EXPECT_EQ(1u, _holeCards.Size());
+	_holeCards.RemoveLastCard();
+	EXPECT_EQ(0u, _holeCards.Size());
+}
+void HoleCardsTest::Run_RemoveCard_DEATH()
+{
+//	 Remove on card from empty hole cards
+	EXPECT_DEATH(_holeCards.RemoveLastCard(),"");
+}
+void HoleCardsTest::Run_OneStartCard()
+{
+	// Add 1 Card and then invoke StartCard(Card), expect throw
+	_holeCards.AddCard(pCard(new Card("A","s")));
+	EXPECT_THROW( _holeCards.StartCards(pCard(new Card("K","s"))), std::invalid_argument);
+	EXPECT_EQ(1u, _holeCards.Size());
+	// Remove Card and test StartCard(Card) with empty container.
+	_holeCards.RemoveLastCard();
+	EXPECT_NO_THROW( _holeCards.StartCards(pCard(new Card("A","s"))));
+	EXPECT_EQ(1u, _holeCards.Size());
+}
+void HoleCardsTest::Run_TwoStartCard_DEATH()
+{
+	// Add 1 Card and then invoke StartCard(Card, Card), expect throw
+	_holeCards.AddCard(pCard(new Card("A","s")));
+	EXPECT_DEATH( _holeCards.StartCards(pCard(new Card("K","s")),pCard(new Card("Q","s"))),"");
+}
+void HoleCardsTest::Run_TwoStartCard()
+{
+	EXPECT_NO_THROW( _holeCards.StartCards(pCard(new Card("K","s")),pCard(new Card("Q","s"))));
+	EXPECT_EQ(2u, _holeCards.Size());
+}
+void HoleCardsTest::Run_GetValue()
+{
+		auto valueSum(0u);
+		// Test Value for all cards of spades, handle the ace special
+		for(const auto & face : FACE)
+		{
+			_holeCards.AddCard(pCard(new Card(face.first,"s")));
+			valueSum += face.second;
+			if( face.first == "A" && valueSum > 21)
+			{
+				valueSum -= 10;
+			}
+			EXPECT_EQ(valueSum, _holeCards.GetValue());
+		}
+		// By now value is busted
+		EXPECT_TRUE(_holeCards.AreBusted());
+		_holeCards.Reset();
+		EXPECT_FALSE(_holeCards.AreBusted());
+}
+void HoleCardsTest::Run_Pair()
+{
+	_holeCards.StartCards(pCard(new Card("K","s")),pCard(new Card("K","d")));
+	EXPECT_TRUE(_holeCards.ArePair());
+}
+void HoleCardsTest::Run_PairAces()
+{
+	_holeCards.StartCards(pCard(new Card("A","s")),pCard(new Card("A","d")));
+	EXPECT_TRUE(_holeCards.ArePair());
+	EXPECT_TRUE(_holeCards.ArePairAces());
+	_holeCards.Reset();
+	EXPECT_FALSE(_holeCards.ArePair());
+	EXPECT_FALSE(_holeCards.ArePairAces());
+}
+void HoleCardsTest::Run_BlackJack()
+{
+	_holeCards.StartCards(pCard(new Card("A","s")),pCard(new Card("K","s")));
+	EXPECT_TRUE(_holeCards.AreBlackJack());
+	EXPECT_EQ(21u, _holeCards.GetValue());
+	_holeCards.Reset();
+	EXPECT_FALSE(_holeCards.AreBlackJack());
+}
+void HoleCardsTest::Run_SoftAces()
+{
+	// Add 21 Aces
+	for( auto i = 0u; i < 21u; ++i)
+	{
+		_holeCards.AddCard(pCard(new Card("A","s")));
+		if( i < 11 )
+		{
+			EXPECT_EQ(11u + i, _holeCards.GetValue()) <<" at " << i;
+		}
+		else
+		{
+			EXPECT_EQ(i+1, _holeCards.GetValue()) << " at " << i;
+		}
+	}
+}
+
