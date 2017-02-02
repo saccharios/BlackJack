@@ -20,12 +20,11 @@ TEST(HoleCards, AddAndRemoveOneCard)
 	holeCards.RemoveLastCard();
 	EXPECT_EQ(0u, holeCards.Size());
 }
-TEST(HoleCards, RemoveCard)
+TEST(HoleCards, RemoveCard_DEATH)
 {
 	HoleCards holeCards;
 	// Remove on card from empty hole cards
-	holeCards.RemoveLastCard();
-	EXPECT_EQ(0u, holeCards.Size());
+	EXPECT_DEATH(holeCards.RemoveLastCard(),"");
 }
 TEST(HoleCards, OneStartCard)
 {

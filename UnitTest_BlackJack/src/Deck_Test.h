@@ -12,7 +12,10 @@
 #include "../../BlackJack/src/Deck.h"
 #include "../../BlackJack/src/Card.h"
 #include "string"
+#include "../../BlackJack/src/GlobalDeclarations.h"
 
+// Deck tests are individual unit tests and not done with macro TEST_F and a dedicated class, because removing cards
+// from the deck is not allowed. All tests should start with an empty deck, thus need to declare it anyways.
 TEST(Deck, AddAndRemoveOneCard)
 {
 	using pCard = std::unique_ptr<Card>;
@@ -42,7 +45,24 @@ TEST(Deck, AddEigthSets)
 		deck.Draw();
 	}
 	EXPECT_EQ(0u, deck.Size());
-
 }
+TEST(Deck, AddMAX1Sets)
+{
+	Deck deck;
+	std::size_t NumDecks = MAX_SETS +1 ;
+	std::size_t NumCardsDeck = 52;
+	deck.AddSets(NumDecks);
+	EXPECT_EQ(MAX_SETS*NumCardsDeck, deck.Size());
+}
+TEST(Deck, AddZeroSets)
+{
+	Deck deck;
+	std::size_t NumDecks = 0;
+	std::size_t NumCardsDeck = 52;
+	deck.AddSets(NumDecks);
+	EXPECT_EQ(NumCardsDeck, deck.Size());
+}
+
+
 
 #endif

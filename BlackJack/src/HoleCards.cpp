@@ -136,17 +136,9 @@ void HoleCards::PrintNumCards() const
 
 HoleCards::pCard HoleCards::RemoveLastCard()
 {
-	pCard Card = nullptr;
-	if(!IsEmpty())
-	{
-		Card =  std::move(_cardContainer.back());
-		_cardContainer.pop_back();
-	}
-	else
-	{
-		// TODO Get better error handling
-		//std::cerr << "ERROR - Card container is empty!" << std::endl;
-	}
+	assert(!IsEmpty());
+	auto	Card =  std::move(_cardContainer.back());
+	_cardContainer.pop_back();
 
 	return Card;
 }
