@@ -10,8 +10,6 @@
 
 
 #include "gtest/gtest.h"
-#include "../../BlackJack/src/HoleCards.h"
-#include "../../BlackJack/src/Card.h"
 #include "../../BlackJack/src/Player.h"
 #include "../../BlackJack/src/Deck.h"
 

@@ -10,7 +10,7 @@
 #include "gtest/gtest.h"
 #include "../../BlackJack/src/HoleCards.h"
 //
-
+// Forward declarations
 class Card;
 
 class HoleCardsTest : public ::testing::Test

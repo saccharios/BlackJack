@@ -8,7 +8,7 @@
 #include "gtest/gtest.h"
 #include "HandManager_Test.h"
 #include "../../BlackJack/src/GlobalDeclarations.h"
-
+#include "../../BlackJack/src/Card.h"
 void HandManagerTest::Run_Payouts()
 {
 	EXPECT_EQ(_wager, _handManager.PayoutPush ());

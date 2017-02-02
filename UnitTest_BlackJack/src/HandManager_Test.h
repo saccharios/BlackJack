@@ -10,8 +10,10 @@
 
 #include "gtest/gtest.h"
 #include "../../BlackJack/src/Deck.h"
-#include "../../BlackJack/src/Card.h"
 #include "../../BlackJack/src/HandManager.h"
+
+// Forward declaration
+class Card;
 
 class HandManagerTest : public ::testing::Test
 {
