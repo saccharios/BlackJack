@@ -22,7 +22,7 @@ struct Status{
 	bool blackJack = false;
 	bool busted = false;
 	unsigned int value = 0;
-	void Reset() {blackJack = false; busted = false; value = 0;}
+	//void Reset() {blackJack = false; busted = false; value = 0;}
 };
 class HoleCards {
 	using pCard = std::unique_ptr<Card>;
@@ -38,10 +38,10 @@ public:
 	pCard RemoveLastCard();
 	void CalculateValue();
 	unsigned int GetValue() const;
-	bool const & AreBlackJack() const { return _areBlackJack; }
+	bool const & AreBlackJack() const { return _status.blackJack; }
 	bool const & ArePair() const { return _arePair; }
 	bool const & ArePairAces() const { return _arePairAces; }
-	bool const & AreBusted() const { return _areBusted; }
+	bool const & AreBusted() const { return _status.busted; }
 	void Reset();
 	void PrintCards() const;
 	void PrintNumCards() const;
@@ -49,9 +49,6 @@ public:
 	std::size_t Size() const { return _cardContainer.size(); }
 
 private:
-	bool _areBlackJack;
-	unsigned int _value;
-	bool _areBusted;
 	Status _status;
 	bool _arePair;
 	bool _arePairAces;
