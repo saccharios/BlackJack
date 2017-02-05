@@ -41,6 +41,7 @@ public:
 //		Test::TearDown();
 //	}
 	void Run_Create();
+	void Run_Start();
 	void Run_Hit();
 	void Run_Stand();
 	void Run_Split();
@@ -48,6 +49,7 @@ public:
 	void Run_SetWager();
 	void Run_AddToBalance();
 	void Run_SubractFromBalance();
+	void Run_PutCardsBack();
 private:
 	Deck _deck;
 	Player _player;
@@ -56,6 +58,10 @@ private:
 TEST_F(PlayerTest, Create)
 {
 	Run_Create();
+}
+TEST_F(PlayerTest, Start)
+{
+	Run_Start();
 }
 TEST_F(PlayerTest, Hit)
 {
@@ -84,6 +90,10 @@ TEST_F(PlayerTest, AddToBalance)
 TEST_F(PlayerTest, SubractFromBalance)
 {
 	Run_SubractFromBalance();
+}
+TEST_F(PlayerTest, PutCardsBack)
+{
+	Run_PutCardsBack();
 }
 
 

@@ -18,7 +18,12 @@ class Card;
 // at startup. During one round of play, cards will be added to the hole cards and at the end
 // of a round removed again. It provides also game related functionality, f.ex. counting
 // the value of the cards in the hole cards.
-
+struct Status{
+	bool blackJack = false;
+	bool busted = false;
+	unsigned int value = 0;
+	void Reset() {blackJack = false; busted = false; value = 0;}
+};
 class HoleCards {
 	using pCard = std::unique_ptr<Card>;
 public:
@@ -45,10 +50,11 @@ public:
 
 private:
 	bool _areBlackJack;
+	unsigned int _value;
+	bool _areBusted;
+	Status _status;
 	bool _arePair;
 	bool _arePairAces;
-	bool _areBusted;
-	unsigned int _value;
 	unsigned int _numSoftAces;
 	std::vector<pCard> _cardContainer;
 };

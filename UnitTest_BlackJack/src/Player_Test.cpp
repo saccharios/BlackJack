@@ -15,6 +15,13 @@ void PlayerTest::Run_Create()
 	EXPECT_EQ(_initBalance,_player.GetBalance());
 }
 
+void PlayerTest::Run_Start()
+{
+	EXPECT_EQ(0u,_player.GetNumHands());
+	_player.Start();
+	EXPECT_EQ(1u,_player.GetNumHands());
+}
+
 
 void PlayerTest::Run_Hit()
 {
@@ -62,4 +69,15 @@ void PlayerTest::Run_SubractFromBalance()
 
 }
 
-
+void PlayerTest::Run_PutCardsBack()
+{
+	_player.Start();
+	auto hand = pHandManager(new HandManager(_deck, _originalWager,1));
+	hand->Start();
+	_player.AddHand(std::move(hand));
+	EXPECT_EQ(2u, _player.GetNumHands());
+	EXPECT_EQ(_numDecks*52u - 4u, _deck.Size());
+	_player.PutCardsBack();
+	EXPECT_EQ(0u, _player.GetNumHands());
+	EXPECT_EQ(_numDecks*52u, _deck.Size());
+}

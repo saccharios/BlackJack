@@ -47,6 +47,7 @@ public:
 	void AddToBalance(double const & value);
 	void SubtractFromBalance(double const & value);
 	std::size_t GetNumHands() {return _handManager.size();}
+	void AddHand(pHandManager hand);
 
 private:
 	double _balance;

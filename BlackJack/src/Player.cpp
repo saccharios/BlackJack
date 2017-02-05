@@ -110,7 +110,12 @@ void Player::Split(pHandManager const & hand)
 	std::cout << "You choose to Split. "<<std::endl;
 	SubtractFromBalance(_orignialWager);
 	auto newHand = hand->ActionSplit();
-	_handManager.push_back(std::move(newHand));
+	AddHand(std::move(newHand));
+}
+
+void Player::AddHand(pHandManager hand)
+{
+	_handManager.push_back(std::move(hand));
 }
 
 std::string Player::PlayBasicStrategy()
