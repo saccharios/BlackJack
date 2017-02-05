@@ -49,7 +49,7 @@ public:
 	void Run_EvaluateValue();
 	void Run_EvaluateBlackJack();
 	void Run_EvaluateBusted();
-
+	void Run_PutCardsBack();
 
 private:
 	Deck _deck;
@@ -99,6 +99,10 @@ TEST_F(HandManagerTest, EvaluateBlackJack)
 TEST_F(HandManagerTest, EvaluateBusted)
 {
 	Run_EvaluateBusted();
+}
+TEST_F(HandManagerTest, PutCardsBack)
+{
+	Run_PutCardsBack();
 }
 
 

@@ -155,4 +155,16 @@ void HandManagerTest::Run_EvaluateValue()
 	payout = hand.Evaluate(false, false, 10); // Dealer has 10 points
 	EXPECT_EQ(2.0*wager, payout);
 }
+void HandManagerTest::Run_PutCardsBack()
+{
+	_handManager.Start();
+	_handManager.ActionHit();
+	_handManager.ActionHit();
+	_handManager.ActionHit();
+	EXPECT_EQ(5u, _handManager.GetHoleCards().Size());
+	EXPECT_EQ(_numDecks*52 - 5u, _deck.Size());
+	_handManager.PutCardsBack();
+	EXPECT_EQ(0u, _handManager.GetHoleCards().Size());
+	EXPECT_EQ(_numDecks*52, _deck.Size());
+}
 
