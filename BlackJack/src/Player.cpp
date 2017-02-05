@@ -162,45 +162,52 @@ void Player::Evaluate(	bool const & dealerHasBlackJack,
 {
 	for( auto const & currentHand : _handManager)
 	{
-		std::cout << GetName() <<"'s ";
-		currentHand->PrintHandNumber();
-		if( dealerHasBlackJack)
+		EvaluateOneHand(currentHand, dealerHasBlackJack, dealerIsBusted, dealerValue);
+	}
+}
+void Player::EvaluateOneHand(pHandManager const & hand,
+		bool const & dealerHasBlackJack,
+		bool const & dealerIsBusted,
+		unsigned int const & dealerValue)
+{
+	std::cout << GetName() <<"'s ";
+	hand->PrintHandNumber();
+	if( dealerHasBlackJack)
+	{
+		if(hand->IsBlackJack())
 		{
-			if(currentHand->IsBlackJack())
-			{
-				AddToBalance(currentHand->PayoutPush());
-			}
-			else
-			{
-				AddToBalance(currentHand->PayoutLoose());
-
-			}
-
-		}
-		else if ( currentHand->IsBlackJack() )
-		{
-			AddToBalance(currentHand->PayoutBlackJack());
-		}
-		else if ( currentHand->IsBusted())
-		{
-			AddToBalance(currentHand->PayoutLoose());
-		}
-		else if(dealerIsBusted)
-		{
-			AddToBalance(currentHand->PayoutWin());
-		}
-		else if(currentHand->GetValue() > dealerValue)
-		{
-			AddToBalance(currentHand->PayoutWin());
-		}
-		else if(currentHand->GetValue() < dealerValue)
-		{
-			AddToBalance(currentHand->PayoutLoose());
+			AddToBalance(hand->PayoutPush());
 		}
 		else
 		{
-			AddToBalance(currentHand->PayoutPush());
+			AddToBalance(hand->PayoutLoose());
+
 		}
+
+	}
+	else if ( hand->IsBlackJack() )
+	{
+		AddToBalance(hand->PayoutBlackJack());
+	}
+	else if ( hand->IsBusted())
+	{
+		AddToBalance(hand->PayoutLoose());
+	}
+	else if(dealerIsBusted)
+	{
+		AddToBalance(hand->PayoutWin());
+	}
+	else if(hand->GetValue() > dealerValue)
+	{
+		AddToBalance(hand->PayoutWin());
+	}
+	else if(hand->GetValue() < dealerValue)
+	{
+		AddToBalance(hand->PayoutLoose());
+	}
+	else
+	{
+		AddToBalance(hand->PayoutPush());
 	}
 }
 
