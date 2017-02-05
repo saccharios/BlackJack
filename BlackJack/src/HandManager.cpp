@@ -117,29 +117,63 @@ void HandManager::ActionStand()
 	_isPlayed = true;
 }
 
-bool const & HandManager::IsBlackJack()
+double HandManager::Evaluate(double const & dealerHasBlackJack,
+		unsigned int const & dealerValue) const
 {
-	_isPlayed = true;
-	return _holeCards.AreBlackJack();
+	PrintHandNumber();
+	if( dealerHasBlackJack)
+	{
+		if(IsBlackJack())
+		{
+			return PayoutPush();
+		}
+		else
+		{
+			return PayoutLoose();
+		}
+	}
+	else if ( IsBlackJack() )
+	{
+		return PayoutBlackJack();
+	}
+	else if ( IsBusted())
+	{
+		return PayoutLoose();
+	}
+	else if(dealerValue > 21) // dealer is busted
+	{
+		return PayoutWin();
+	}
+	else if(GetValue() > dealerValue)
+	{
+		return PayoutWin();
+	}
+	else if(GetValue() < dealerValue)
+	{
+		return PayoutLoose();
+	}
+	else
+	{
+		return PayoutPush();
+	}
 }
-
-double HandManager::PayoutPush ()
+double HandManager::PayoutPush () const
 {
 	std::cout << "is a push" << std::endl;
 	return GetWager();
 }
-double HandManager::PayoutLoose ()
+double HandManager::PayoutLoose () const
 {
 	std::cout << "looses" << std::endl;
 	return 0.0;
 
 }
-double HandManager::PayoutWin ()
+double HandManager::PayoutWin () const
 {
 	std::cout << "wins" << std::endl;
 	return 2.0*GetWager();
 }
-double HandManager::PayoutBlackJack ()
+double HandManager::PayoutBlackJack () const
 {
 	std::cout << "BlackJack pays 5 to 2" << std::endl;
 	return 2.5*GetWager();

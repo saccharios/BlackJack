@@ -50,10 +50,6 @@ public:
 	void AddHand(pHandManager hand);
 
 private:
-	void EvaluateOneHand(pHandManager const & hand,
-			bool const & dealerHasBlackJack,
-			bool const & dealerIsBusted,
-			unsigned int const & dealerValue);
 	double _balance;
 	double _orignialWager;
 	Deck & _deck;

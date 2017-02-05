@@ -43,14 +43,15 @@ public:
 	bool const & IsPair() const { return _holeCards.ArePair(); }
 	bool const & IsPairAces() const { return _holeCards.ArePairAces(); }
 	bool const & IsBusted() const { return _holeCards.AreBusted(); }
-	bool const & IsBlackJack();
+	bool const & IsBlackJack() const { return _holeCards.AreBlackJack(); }
 	bool IsEmpty() const { return _holeCards.IsEmpty(); }
 	pCard RemoveLastCard() { return _holeCards.RemoveLastCard(); }
 	void PrintNumCards() const { _holeCards.PrintNumCards(); }
-	double PayoutPush ();
-	double PayoutLoose ();
-	double PayoutWin ();
-	double PayoutBlackJack ();
+	double Evaluate(double const & dealerHasBlackJack, unsigned int const & dealerValue) const;
+	double PayoutPush () const;
+	double PayoutLoose () const;
+	double PayoutWin () const;
+	double PayoutBlackJack () const;
 	std::size_t const & GetHandNumber() const { return _handNumber; }
 	void PrintHandNumber() const;
 	bool const & IsPlayed() const { return _isPlayed; }
