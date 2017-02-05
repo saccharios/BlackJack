@@ -58,7 +58,7 @@ void Game::SetWagers()
 	std::cout << "-------Set Wagers------" << std::endl;
 	for(auto const & player : _players)
 	{
-		player->SetWager();
+		player->SetWagerUser();
 
 	}
 }

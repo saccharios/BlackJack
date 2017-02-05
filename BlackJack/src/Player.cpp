@@ -102,13 +102,13 @@ void Player::Stand(pHandManager const & hand)
 void Player::Double(pHandManager const & hand)
 {
 	std::cout << "You choose to Double. ";
-	_balance -= _orignialWager;
+	SubtractFromBalance(_orignialWager);
 	hand->ActionDouble();
 }
 void Player::Split(pHandManager const & hand)
 {
 	std::cout << "You choose to Split. "<<std::endl;
-	_balance -= _orignialWager;
+	SubtractFromBalance(_orignialWager);
 	auto newHand = hand->ActionSplit();
 	_handManager.push_back(std::move(newHand));
 }
@@ -133,7 +133,7 @@ std::string Player::PlayBasicStrategy()
 // Take the intersection of two sets maybe?
 std::set<std::string> Player::GetAvailableActionSet(pHandManager const & currentHand)
 {
-	if(currentHand->IsFirstAction() &&  _balance >= _orignialWager)
+	if(currentHand->IsFirstAction() &&  GetBalance() >= _orignialWager )
 	{
 		if(  currentHand->IsPair())
 		{
@@ -163,37 +163,38 @@ void Player::Evaluate(	bool const & dealerHasBlackJack,
 		{
 			if(currentHand->IsBlackJack())
 			{
-				_balance += currentHand->PayoutPush();
+				AddToBalance(currentHand->PayoutPush());
 			}
 			else
 			{
-				_balance += currentHand->PayoutLoose();
+				AddToBalance(currentHand->PayoutLoose());
+
 			}
 
 		}
 		else if ( currentHand->IsBlackJack() )
 		{
-			_balance += currentHand->PayoutBlackJack();
+			AddToBalance(currentHand->PayoutBlackJack());
 		}
 		else if ( currentHand->IsBusted())
 		{
-			_balance += currentHand->PayoutLoose();
+			AddToBalance(currentHand->PayoutLoose());
 		}
 		else if(dealerIsBusted)
 		{
-			_balance += currentHand->PayoutWin();
+			AddToBalance(currentHand->PayoutWin());
 		}
 		else if(currentHand->GetValue() > dealerValue)
 		{
-			_balance += currentHand->PayoutWin();
+			AddToBalance(currentHand->PayoutWin());
 		}
 		else if(currentHand->GetValue() < dealerValue)
 		{
-			_balance += currentHand->PayoutLoose();
+			AddToBalance(currentHand->PayoutLoose());
 		}
 		else
 		{
-			_balance += currentHand->PayoutPush();
+			AddToBalance(currentHand->PayoutPush());
 		}
 	}
 }
@@ -225,12 +226,19 @@ void Player::PutCardsBack()
 	_handManager.clear();
 
 }
-void Player::SetWager ()
+void Player::SetWagerUser ()
 {
 	std::cout << GetName()<< " set your Wager: " << std::endl;
-	_orignialWager = UserInput::ReadInNumber<double>( MIN_WAGER, _balance);
-	_balance -= _orignialWager;
+	auto wager = UserInput::ReadInNumber<double>( MIN_WAGER, _balance);
+	SetWager(wager);
 	PrintWager();
+}
+void Player::SetWager (double const & wager)
+{
+	assert(wager >= MIN_WAGER);
+	assert(wager <= MAX_WAGER);
+	_orignialWager = wager;
+	SubtractFromBalance(_orignialWager);
 }
 
 
@@ -263,4 +271,11 @@ void Player::PrintName () const
 	std::cout << GetName() << std::endl;
 }
 
-
+void Player::AddToBalance(double const & value)
+{
+	_balance += value;
+}
+void Player::SubtractFromBalance(double const & value)
+{
+	_balance -= value;
+}

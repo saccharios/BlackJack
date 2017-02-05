@@ -33,7 +33,8 @@ public:
 	void Evaluate(	bool const & dealerHasBlackJack, bool const & dealerIsBusted, unsigned int const & dealerValue);
 	void PrintCards() const;
 	void PutCardsBack();
-	void SetWager ();
+	void SetWagerUser ();
+	void SetWager (double const & wager);
 	void PrintWager () const;
 	double const & GetBalance () const;
 	void PrintBalance () const;
@@ -43,6 +44,9 @@ public:
 	void Split(pHandManager const & hand);
 	void Double(pHandManager const & hand);
 	void Stand(pHandManager const & hand);
+	void AddToBalance(double const & value);
+	void SubtractFromBalance(double const & value);
+	std::size_t GetNumHands() {return _handManager.size();}
 
 private:
 	double _balance;

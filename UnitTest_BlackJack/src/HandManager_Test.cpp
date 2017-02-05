@@ -26,7 +26,7 @@ void HandManagerTest::Run_ActionDouble()
 void HandManagerTest::Run_ActionSplit()
 {
 	// To test spliting it does not matter whether it is a pair or not, the mechanism is the same.
-	// Thus we can use the normal start method
+	// Thus we can use the normal start method.
 	_handManager.Start();
 	auto newHand = _handManager.ActionSplit();
 	EXPECT_EQ(2u, _handManager.GetHoleCards().Size());
@@ -58,8 +58,19 @@ void HandManagerTest::Run_ActionSplit_Aces()
 }
 void HandManagerTest::Run_ActionHit()
 {
-	_handManager.ActionHit();
-	EXPECT_EQ(1u, _handManager.GetHoleCards().Size());
+	for(std::size_t i = 0; i < 10; ++i)
+	{
+		_handManager.ActionHit();
+		EXPECT_EQ(i+1u, _handManager.GetHoleCards().Size());
+		if(_handManager.GetValue() > 20)
+		{
+			EXPECT_TRUE(_handManager.IsPlayed());
+		}
+		else
+		{
+			EXPECT_FALSE(_handManager.IsPlayed());
+		}
+	}
 }
 void HandManagerTest::Run_ActionStand()
 {
