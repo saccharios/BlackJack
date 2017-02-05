@@ -71,10 +71,10 @@ void HandManager::Start( pCard card1 )
 HandManager::pHandManager HandManager::ActionSplit()
 {
 	// Save if pair is Aces
-	bool wasAces = IsPairAces();
+	bool wasAces = _holeCards.ArePairAces();
 	// Remove the two cards from the current hand
-	auto card1 = RemoveLastCard();
-	auto cardForNewHand = RemoveLastCard();
+	auto card1 = _holeCards.RemoveLastCard();
+	auto cardForNewHand = _holeCards.RemoveLastCard();
 	PrintHandNumber();
 	// Restart the the current hand with one card
 	Start(std::move(card1));
@@ -137,7 +137,7 @@ double HandManager::Evaluate(double const & dealerHasBlackJack,
 	{
 		return PayoutBlackJack();
 	}
-	else if ( IsBusted())
+	else if ( _holeCards.AreBusted())
 	{
 		return PayoutLoose();
 	}
@@ -190,8 +190,24 @@ void HandManager::PutCardsBack()
 {
 	while(!IsEmpty())
 	{
-		_deck.AddCard(std::move(RemoveLastCard()));
+		_deck.AddCard(std::move(_holeCards.RemoveLastCard()));
 	}
+}
+std::set<std::string>  HandManager::GetAvailableActionSet() const
+{
+
+	if(IsFirstAction() )
+	{
+		if( IsPair())
+		{
+			return ACTION_SPLIT_DOUBLE;
+		}
+		else
+		{
+			return ACTION_DOUBLE;
+		}
+	}
+	return ACTION_STANDARD;
 }
 
 

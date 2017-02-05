@@ -118,7 +118,7 @@ void Player::AddHand(pHandManager hand)
 	_handManager.push_back(std::move(hand));
 }
 
-std::string Player::PlayBasicStrategy()
+std::string Player::PlayBasicStrategy() const
 {
 	if( _handManager.at(0)->GetValue() < 17 )
 	{
@@ -136,24 +136,19 @@ std::string Player::PlayBasicStrategy()
 // 2) State of the hand
 // TODO Can those two be separated in a better way?
 // Take the intersection of two sets maybe?
-std::set<std::string> Player::GetAvailableActionSet(pHandManager const & currentHand)
+std::set<std::string> Player::GetAvailableActionSet(pHandManager const & currentHand) const
 {
-	if(currentHand->IsFirstAction() &&  GetBalance() >= _orignialWager )
-	{
-		if(  currentHand->IsPair())
-		{
-			return ACTION_SPLIT_DOUBLE;
-		}
-		else
-		{
-			return ACTION_DOUBLE;
-		}
-	}
-	else if(currentHand->IsFirstAction() && currentHand->IsPair() &&  _balance < _orignialWager)
+	auto actionSet = currentHand->GetAvailableActionSet();
+
+	if(_balance < _orignialWager && actionSet != ACTION_STANDARD)
 	{
 		std::cout << "Your balance is too low to Split or Double." << std::endl;
+		return ACTION_STANDARD;
 	}
-	return ACTION_STANDARD;
+	else
+	{
+		return actionSet;
+	}
 }
 
 void Player::Evaluate(	bool const & dealerHasBlackJack,

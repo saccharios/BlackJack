@@ -28,8 +28,8 @@ public:
 	void Play();
 	void PlayOneHand(pHandManager const & hand);
 	void PlayAction(std::string action, pHandManager const & hand);
-	std::string PlayBasicStrategy();
-	std::set<std::string> GetAvailableActionSet(pHandManager const & currentHand);
+	std::string PlayBasicStrategy() const;
+	std::set<std::string> GetAvailableActionSet(pHandManager const & currentHand) const;
 	void Evaluate(	bool const & dealerHasBlackJack, bool const & dealerIsBusted, unsigned int const & dealerValue);
 	void PrintCards() const;
 	void PutCardsBack();
@@ -55,12 +55,6 @@ private:
 	Deck & _deck;
 	std::vector<pHandManager> _handManager;
 	std::string _name;
-
-	// The actions of a player are identified by a string
-	const std::set<std::string> ACTION_SPLIT_DOUBLE{"h","s","d","p"};
-	const std::set<std::string> ACTION_DOUBLE{"h","s","d"};
-	const std::set<std::string> ACTION_STANDARD{"h","s"};
-
 };
 
 

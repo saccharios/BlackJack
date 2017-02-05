@@ -10,7 +10,7 @@
 
 #include <memory>
 #include "HoleCards.h"
-
+#include <set>
 // Forward declaration to avoid #include
 class Card;
 class Deck;
@@ -41,11 +41,8 @@ public:
 	void PrintCards() const { _holeCards.PrintCards(); }
 	unsigned int GetValue() const { return _holeCards.GetValue(); }
 	bool const & IsPair() const { return _holeCards.ArePair(); }
-	bool const & IsPairAces() const { return _holeCards.ArePairAces(); }
-	bool const & IsBusted() const { return _holeCards.AreBusted(); }
 	bool const & IsBlackJack() const { return _holeCards.AreBlackJack(); }
 	bool IsEmpty() const { return _holeCards.IsEmpty(); }
-	pCard RemoveLastCard() { return _holeCards.RemoveLastCard(); }
 	void PrintNumCards() const { _holeCards.PrintNumCards(); }
 	double Evaluate(double const & dealerHasBlackJack, bool const & dealerIsBusted, unsigned int const & dealerValue) const;
 	double PayoutPush () const;
@@ -57,6 +54,7 @@ public:
 	bool const & IsPlayed() const { return _isPlayed; }
 	HoleCards const & GetHoleCards() const { return _holeCards;}
 	void PutCardsBack();
+	std::set<std::string> GetAvailableActionSet() const;
 
 private:
 	Deck & _deck;
