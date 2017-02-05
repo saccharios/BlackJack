@@ -61,7 +61,6 @@ void HoleCards::AddCard(pCard card)
 	if( _cardContainer.size() == 2 && value ==  21)
 	{
 		_areBlackJack = true;
-		_status.
 		std::cout << "BLACK JACK!" << std::endl;
 	}
 	else if ( value > 21)
