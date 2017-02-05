@@ -103,3 +103,56 @@ void HandManagerTest::Run_IsBlackJack()
 	handManager.Start();
 	EXPECT_TRUE(handManager.IsBlackJack());
 }
+
+void HandManagerTest::Run_EvaluateBlackJack()
+{// This test case is easier if the deck contains only certain cards
+	Deck deck(0);
+	double wager = 10.0;
+	HandManager hand (deck, wager, 0);
+	deck.AddCard(pCard(new Card("A","s")));
+	deck.AddCard(pCard(new Card("K","s")));
+	hand.Start(); // handManager now holds BlackJack
+	auto payout = hand.Evaluate(true, false, 21); // Dealer also has Black Jack
+	EXPECT_EQ(wager, payout);
+	payout = hand.Evaluate(false, true, 22); // Dealer is busted
+	EXPECT_EQ(2.5*wager, payout);
+	payout = hand.Evaluate(false, false, 18); // Dealer has 18 points
+	EXPECT_EQ(2.5*wager, payout);
+}
+void HandManagerTest::Run_EvaluateBusted()
+{// This test case is easier if the deck contains only certain cards
+	Deck deck(0);
+	double wager = 10.0;
+	HandManager hand (deck, wager, 0);
+	deck.AddCard(pCard(new Card("K","s")));
+	deck.AddCard(pCard(new Card("K","s")));
+	deck.AddCard(pCard(new Card("6","s")));
+	hand.Start(); // hand is busted
+	hand.ActionHit();
+	auto payout = hand.Evaluate(true, false, 21); // Dealer has Black Jack
+	EXPECT_EQ(0.0, payout);
+	payout = hand.Evaluate(false, true, 22); // Dealer is busted
+	EXPECT_EQ(0.0, payout);
+	payout = hand.Evaluate(false, false, 18); // Dealer has 18 points
+	EXPECT_EQ(0.0, payout);
+}
+void HandManagerTest::Run_EvaluateValue()
+{// This test case is easier if the deck contains only certain cards
+	Deck deck(0);
+	double wager = 10.0;
+	HandManager hand (deck, wager, 0);
+	deck.AddCard(pCard(new Card("6","s")));
+	deck.AddCard(pCard(new Card("6","s")));
+	hand.Start(); // hand has 12 points
+	auto payout = hand.Evaluate(true, false, 21); // Dealer has Black Jack
+	EXPECT_EQ(0.0, payout);
+	payout = hand.Evaluate(false, true, 22); // Dealer is busted
+	EXPECT_EQ(2.0*wager, payout);
+	payout = hand.Evaluate(false, false, 18); // Dealer has 18 points
+	EXPECT_EQ(0.0, payout);
+	payout = hand.Evaluate(false, false, 12); // Dealer has 12 points
+	EXPECT_EQ(1.0*wager, payout);
+	payout = hand.Evaluate(false, false, 10); // Dealer has 10 points
+	EXPECT_EQ(2.0*wager, payout);
+}
+

@@ -46,6 +46,10 @@ public:
 	void Run_Wager();
 	void Run_Start();
 	void Run_IsBlackJack();
+	void Run_EvaluateValue();
+	void Run_EvaluateBlackJack();
+	void Run_EvaluateBusted();
+
 
 private:
 	Deck _deck;
@@ -83,6 +87,18 @@ TEST_F(HandManagerTest, Wager)
 TEST_F(HandManagerTest, Start)
 {
 	Run_Start();
+}
+TEST_F(HandManagerTest, EvaluateValue)
+{
+	Run_EvaluateValue();
+}
+TEST_F(HandManagerTest, EvaluateBlackJack)
+{
+	Run_EvaluateBlackJack();
+}
+TEST_F(HandManagerTest, EvaluateBusted)
+{
+	Run_EvaluateBusted();
 }
 
 

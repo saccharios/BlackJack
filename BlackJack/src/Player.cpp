@@ -163,7 +163,7 @@ void Player::Evaluate(	bool const & dealerHasBlackJack,
 	for( auto const & currentHand : _handManager)
 	{
 		std::cout << GetName() <<"'s ";
-		auto payout = currentHand->Evaluate(dealerHasBlackJack, dealerValue);
+		auto payout = currentHand->Evaluate(dealerHasBlackJack,dealerIsBusted, dealerValue);
 		AddToBalance(payout);
 	}
 }
@@ -186,10 +186,7 @@ void Player::PutCardsBack()
 	// Put all cards of each hand back to the deck
 	for( auto const & currentHand : _handManager)
 	{
-		while(!currentHand->IsEmpty())
-		{
-			_deck.AddCard(std::move(currentHand->RemoveLastCard()));
-		}
+		currentHand->PutCardsBack();
 	}
 	// Clear all ptrs that now point to empty hole cards
 	_handManager.clear();

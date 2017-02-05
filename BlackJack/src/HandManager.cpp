@@ -118,6 +118,7 @@ void HandManager::ActionStand()
 }
 
 double HandManager::Evaluate(double const & dealerHasBlackJack,
+		bool const & dealerIsBusted,
 		unsigned int const & dealerValue) const
 {
 	PrintHandNumber();
@@ -140,7 +141,7 @@ double HandManager::Evaluate(double const & dealerHasBlackJack,
 	{
 		return PayoutLoose();
 	}
-	else if(dealerValue > 21) // dealer is busted
+	else if(dealerIsBusted)
 	{
 		return PayoutWin();
 	}
@@ -185,6 +186,12 @@ void HandManager::PrintHandNumber() const
 	std::cout << "Hand " << GetHandNumber() << ": ";
 }
 
-
+void HandManager::PutCardsBack()
+{
+	while(!IsEmpty())
+	{
+		_deck.AddCard(std::move(RemoveLastCard()));
+	}
+}
 
 

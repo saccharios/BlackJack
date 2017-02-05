@@ -47,7 +47,7 @@ public:
 	bool IsEmpty() const { return _holeCards.IsEmpty(); }
 	pCard RemoveLastCard() { return _holeCards.RemoveLastCard(); }
 	void PrintNumCards() const { _holeCards.PrintNumCards(); }
-	double Evaluate(double const & dealerHasBlackJack, unsigned int const & dealerValue) const;
+	double Evaluate(double const & dealerHasBlackJack, bool const & dealerIsBusted, unsigned int const & dealerValue) const;
 	double PayoutPush () const;
 	double PayoutLoose () const;
 	double PayoutWin () const;
@@ -56,6 +56,7 @@ public:
 	void PrintHandNumber() const;
 	bool const & IsPlayed() const { return _isPlayed; }
 	HoleCards const & GetHoleCards() const { return _holeCards;}
+	void PutCardsBack();
 
 private:
 	Deck & _deck;
