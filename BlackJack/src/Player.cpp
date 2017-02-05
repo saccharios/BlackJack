@@ -37,57 +37,80 @@ void Player::Start()
 void Player::Play()
 {
 	std::cout << "-------" << GetName() <<  "'s turn-------" << std::endl;
-	std::vector<HandManager>::size_type i = 0;
-	while(i < _handManager.size()) // Spliting cards creates more hands
+	std::size_t  handNr = 0;
+	while(handNr < _handManager.size()) // Spliting cards creates more hands
 	{
-		while( !_handManager[i]->IsPlayed() ) // Play current hand as long as you are allowed to
+		while( !_handManager[handNr]->IsPlayed() ) // Play current hand as long as you are allowed to
 		{
-			std::cout<< GetName() << " Playing Hand ";
-			_handManager[i]->PrintHandNumber();
-			_handManager[i]->PrintCards();
-
-			// Can't keep playing if you have BlackJack
-			if(_handManager[i]->IsBlackJack())
-			{
-				break;
-			}
-
-			// Get action from user
-			auto availableactions = GetAvailableActionSet(_handManager[i]);
-			std::cout << "Enter action: ";
-			auto action = UserInput::ReadInAction(availableactions);
-//			auto action = PlayBasicStrategy(); // AutoPlayer
-			std::cout << "You choose to ";
-
-			// Evaluate action
-			if(action == "h") // Hit
-			{
-				std::cout << "Hit. ";
-				_handManager[i]->ActionHit();
-			}
-			else if(action == "d") // Double
-			{
-				std::cout << "Double. ";
-				_balance -= _orignialWager;
-				_handManager[i]->ActionDouble();
-			}
-			else if(action == "p") // Split
-			{
-				std::cout << "Split Hand Nr "<< i << "."<<std::endl;
-				_balance -= _orignialWager;
-				auto hand = _handManager[i]->ActionSplit();
-				_handManager.push_back(std::move(hand));
-			}
-			else // Stand
-			{
-				std::cout << "Stand." << std::endl;
-				_handManager[i]->ActionStand();
-			}
+			PlayOneHand(_handManager[handNr]);
 		}
-		++i; // Increment players hand counter
+		++handNr; // Increment players hand counter
 	}
+}
 
+void Player::PlayOneHand(pHandManager const & hand)
+{
+	std::cout<< GetName() << " Playing Hand ";
+	hand->PrintHandNumber();
+	hand->PrintCards();
 
+	// Can't keep playing if you have BlackJack
+	if(hand->IsBlackJack())
+	{
+		hand->ActionStand();
+	}
+	else
+	{
+		// Get action from user
+		auto availableactions = GetAvailableActionSet(hand);
+		std::cout << "Enter action: ";
+		auto action = UserInput::ReadInAction(availableactions);
+		//			auto action = PlayBasicStrategy(); // AutoPlayer
+
+		PlayAction(action, hand);
+	}
+}
+void Player::PlayAction(std::string action, pHandManager const & hand)
+{
+	if(action == "h") // Hit
+	{
+		Hit(hand);
+	}
+	else if(action == "d") // Double
+	{
+		Double(hand);
+	}
+	else if(action == "p") // Split
+	{
+		Split(hand);
+	}
+	else // Stand
+	{
+		Stand(hand);
+	}
+}
+void Player::Hit(pHandManager const & hand)
+{
+	std::cout << "You choose to Hit. ";
+	hand->ActionHit();
+}
+void Player::Stand(pHandManager const & hand)
+{
+	std::cout << "You choose to Stand." << std::endl;
+	hand->ActionStand();
+}
+void Player::Double(pHandManager const & hand)
+{
+	std::cout << "You choose to Double. ";
+	_balance -= _orignialWager;
+	hand->ActionDouble();
+}
+void Player::Split(pHandManager const & hand)
+{
+	std::cout << "You choose to Split. "<<std::endl;
+	_balance -= _orignialWager;
+	auto newHand = hand->ActionSplit();
+	_handManager.push_back(std::move(newHand));
 }
 
 std::string Player::PlayBasicStrategy()

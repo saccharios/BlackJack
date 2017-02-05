@@ -26,6 +26,8 @@ public:
 
 	void Start();
 	void Play();
+	void PlayOneHand(pHandManager const & hand);
+	void PlayAction(std::string action, pHandManager const & hand);
 	std::string PlayBasicStrategy();
 	std::set<std::string> GetAvailableActionSet(pHandManager const & currentHand);
 	void Evaluate(	bool const & dealerHasBlackJack, bool const & dealerIsBusted, unsigned int const & dealerValue);
@@ -37,6 +39,10 @@ public:
 	void PrintBalance () const;
 	std::string const & GetName() const;
 	void PrintName () const;
+	void Hit(pHandManager const & hand);
+	void Split(pHandManager const & hand);
+	void Double(pHandManager const & hand);
+	void Stand(pHandManager const & hand);
 
 private:
 	double _balance;
