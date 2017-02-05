@@ -17,7 +17,9 @@ _arePairAces(false),
 _numSoftAces(0),
 _status(),
 _cardContainer()
-{}
+{
+//	_status.Reset();
+}
 
 void HoleCards::StartCards(pCard card)
 {
