@@ -183,7 +183,6 @@ void Player::EvaluateOneHand(pHandManager const & hand,
 			AddToBalance(hand->PayoutLoose());
 
 		}
-
 	}
 	else if ( hand->IsBlackJack() )
 	{

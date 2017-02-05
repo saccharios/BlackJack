@@ -8,6 +8,7 @@
 
 #include "Player_Test.h"
 #include "../../BlackJack/src/HandManager.h"
+#include "../../BlackJack/src/GlobalDeclarations.h"
 
 void PlayerTest::Run_Create()
 {
@@ -55,6 +56,17 @@ void PlayerTest::Run_SetWager()
 	_player.SetWager(_originalWager);
 	EXPECT_EQ(_initBalance - _originalWager, _player.GetBalance());
 }
+
+
+void PlayerTest::Run_SetWagerMin_DEATH()
+{
+	EXPECT_DEATH(_player.SetWager(MIN_WAGER-1),"");
+}
+void PlayerTest::Run_SetWagerMax_DEATH()
+{
+	EXPECT_DEATH(_player.SetWager(MAX_WAGER+1),"");
+}
+
 void PlayerTest::Run_AddToBalance()
 {
 	double value = 1.0;

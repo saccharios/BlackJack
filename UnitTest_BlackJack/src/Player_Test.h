@@ -47,6 +47,8 @@ public:
 	void Run_Split();
 	void Run_Double();
 	void Run_SetWager();
+	void Run_SetWagerMin_DEATH();
+	void Run_SetWagerMax_DEATH();
 	void Run_AddToBalance();
 	void Run_SubractFromBalance();
 	void Run_PutCardsBack();
@@ -83,6 +85,14 @@ TEST_F(PlayerTest, SetWager)
 {
 	Run_SetWager();
 }
+//TEST_F(PlayerTest, SetWagerMin_DEATH)
+//{
+//	Run_SetWagerMin_DEATH();
+//}
+//TEST_F(PlayerTest, SetWagerMax_DEATH)
+//{
+//	Run_SetWagerMax_DEATH();
+//}
 TEST_F(PlayerTest, AddToBalance)
 {
 	Run_AddToBalance();
