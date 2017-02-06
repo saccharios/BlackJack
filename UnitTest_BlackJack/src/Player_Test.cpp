@@ -93,3 +93,20 @@ void PlayerTest::Run_PutCardsBack()
 	EXPECT_EQ(0u, _player.GetNumHands());
 	EXPECT_EQ(_numDecks*52u, _deck.Size());
 }
+void PlayerTest::Run_GetAvailableActionSet()
+{
+	_player.SetWager(_player.GetBalance()/2.0 + 1.0); // wager is more than half the balance
+	_player.Start();
+	EXPECT_EQ(ACTION_STANDARD, _player.GetAvailableActionSet(ACTION_DOUBLE));
+	EXPECT_EQ(ACTION_STANDARD, _player.GetAvailableActionSet(ACTION_SPLIT_DOUBLE));
+	EXPECT_EQ(ACTION_STANDARD, _player.GetAvailableActionSet(ACTION_STANDARD));
+
+	_player.PrintBalance();
+	_player.PutCardsBack();
+	_player.SetWager(_player.GetBalance()/2.0 - 1.0); // wager is less than half the balance
+	_player.Start();
+	EXPECT_EQ(ACTION_DOUBLE, _player.GetAvailableActionSet(ACTION_DOUBLE));
+	EXPECT_EQ(ACTION_SPLIT_DOUBLE, _player.GetAvailableActionSet(ACTION_SPLIT_DOUBLE));
+	EXPECT_EQ(ACTION_STANDARD, _player.GetAvailableActionSet(ACTION_STANDARD));
+
+}

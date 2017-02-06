@@ -50,6 +50,7 @@ public:
 	void Run_EvaluateBlackJack();
 	void Run_EvaluateBusted();
 	void Run_PutCardsBack();
+	void Run_GetAvailableActionSet();
 
 private:
 	Deck _deck;
@@ -103,6 +104,10 @@ TEST_F(HandManagerTest, EvaluateBusted)
 TEST_F(HandManagerTest, PutCardsBack)
 {
 	Run_PutCardsBack();
+}
+TEST_F(HandManagerTest, Run_GetAvailableActionSet)
+{
+	Run_GetAvailableActionSet();
 }
 
 

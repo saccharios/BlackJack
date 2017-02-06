@@ -52,6 +52,7 @@ public:
 	void Run_AddToBalance();
 	void Run_SubractFromBalance();
 	void Run_PutCardsBack();
+	void Run_GetAvailableActionSet();
 private:
 	Deck _deck;
 	Player _player;
@@ -104,6 +105,10 @@ TEST_F(PlayerTest, SubractFromBalance)
 TEST_F(PlayerTest, PutCardsBack)
 {
 	Run_PutCardsBack();
+}
+TEST_F(PlayerTest, GetAvailableActionSet)
+{
+	Run_GetAvailableActionSet();
 }
 
 

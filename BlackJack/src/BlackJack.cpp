@@ -10,7 +10,7 @@
 #include "GlobalDeclarations.h"
 #include "HoleCards.h"
 
-// TODO Write Unittest with gtest
+// TODO Write Unittest with gtest (Player, Game)
 // TODO Check where "auto" can be used
 // TODO Check instantiation with auto, and () {}
 // TODO Add exception handling, use assert() where possible

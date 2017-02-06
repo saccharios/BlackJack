@@ -168,3 +168,21 @@ void HandManagerTest::Run_PutCardsBack()
 	EXPECT_EQ(_numDecks*52, _deck.Size());
 }
 
+void HandManagerTest::Run_GetAvailableActionSet()
+{// This test case is easier if the deck contains only certain cards
+	Deck deck(0);
+	double wager = 10.0;
+	HandManager hand (deck, wager, 0);
+	deck.AddCard(pCard(new Card("6","s")));
+	deck.AddCard(pCard(new Card("6","s")));
+	hand.Start(); // hand has a pair
+	EXPECT_EQ(ACTION_SPLIT_DOUBLE, hand.GetAvailableActionSet());
+	deck.AddCard(pCard(new Card("3","s")));
+	hand.ActionHit(); // hand has a pair
+	EXPECT_EQ(ACTION_STANDARD, hand.GetAvailableActionSet());
+	deck.AddCard(pCard(new Card("K","s")));
+	deck.AddCard(pCard(new Card("6","s")));
+	hand.PutCardsBack();
+	hand.Start(); // hand hols Ks6s
+	EXPECT_EQ(ACTION_DOUBLE, hand.GetAvailableActionSet());
+}

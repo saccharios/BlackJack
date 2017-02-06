@@ -62,9 +62,10 @@ void Player::PlayOneHand(pHandManager const & hand)
 	else
 	{
 		// Get action from user
-		auto availableactions = GetAvailableActionSet(hand);
+		auto actionSetCards = hand->GetAvailableActionSet();
+		auto actionSetPlayer = GetAvailableActionSet(actionSetCards);
 		std::cout << "Enter action: ";
-		auto action = UserInput::ReadInAction(availableactions);
+		auto action = UserInput::ReadInAction(actionSetPlayer);
 		//			auto action = PlayBasicStrategy(); // AutoPlayer
 
 		PlayAction(action, hand);
@@ -72,6 +73,10 @@ void Player::PlayOneHand(pHandManager const & hand)
 }
 void Player::PlayAction(std::string action, pHandManager const & hand)
 {
+	// Actions are identified by a string. Using polymorphism to deal with actions would require
+	// to introduce an interface action class and four derivatives. However, one still would
+	// not get rid of a switch or if/else statements like those below, because the input
+	// from the user is a string. This string needs to be mapped to a derived class anyways.
 	if(action == "h") // Hit
 	{
 		Hit(hand);
@@ -136,14 +141,18 @@ std::string Player::PlayBasicStrategy() const
 // 2) State of the hand
 // TODO Can those two be separated in a better way?
 // Take the intersection of two sets maybe?
-std::set<std::string> Player::GetAvailableActionSet(pHandManager const & currentHand) const
+std::set<std::string> Player::GetAvailableActionSet(std::set<std::string> const & actionSet) const
 {
-	auto actionSet = currentHand->GetAvailableActionSet();
-
-	if(_balance < _orignialWager && actionSet != ACTION_STANDARD)
+	if(_balance < _orignialWager && actionSet == ACTION_SPLIT_DOUBLE)
 	{
 		std::cout << "Your balance is too low to Split or Double." << std::endl;
 		return ACTION_STANDARD;
+	}
+	else if(_balance < _orignialWager && actionSet == ACTION_DOUBLE)
+	{
+		std::cout << "Your balance is too low to Double." << std::endl;
+		return ACTION_STANDARD;
+
 	}
 	else
 	{
