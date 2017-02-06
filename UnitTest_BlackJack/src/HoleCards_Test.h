@@ -28,6 +28,7 @@ public:
 //	}
 	void Run_AddAndRemoveOneCard();
 	void Run_RemoveCard_DEATH();
+	void Run_OneStartCard_DEATH();
 	void Run_OneStartCard();
 	void Run_TwoStartCard_DEATH();
 	void Run_TwoStartCard();
@@ -52,6 +53,11 @@ TEST_F(HoleCardsTest, AddAndRemoveOneCard)
 //TEST_F(HoleCardsTest, RemoveCard_DEATH)
 //{
 //	Run_RemoveCard_DEATH();
+//}
+
+//TEST_F(HoleCardsTest, Run_OneStartCard_DEATH)
+//{
+//	Run_OneStartCard_DEATH();
 //}
 TEST_F(HoleCardsTest, OneStartCard)
 {

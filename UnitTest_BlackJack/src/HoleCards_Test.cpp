@@ -21,15 +21,17 @@ void HoleCardsTest::Run_RemoveCard_DEATH()
 //	 Remove on card from empty hole cards
 	EXPECT_DEATH(_holeCards.RemoveLastCard(),"");
 }
+
+
+void HoleCardsTest::Run_OneStartCard_DEATH()
+{
+	_holeCards.AddCard(pCard(new Card("A","s")));
+	EXPECT_DEATH( _holeCards.StartCards(pCard(new Card("K","s"))), "");
+}
+
 void HoleCardsTest::Run_OneStartCard()
 {
-	// Add 1 Card and then invoke StartCard(Card), expect throw
-	_holeCards.AddCard(pCard(new Card("A","s")));
-	EXPECT_THROW( _holeCards.StartCards(pCard(new Card("K","s"))), std::invalid_argument);
-	EXPECT_EQ(1u, _holeCards.Size());
-	// Remove Card and test StartCard(Card) with empty container.
-	_holeCards.RemoveLastCard();
-	EXPECT_NO_THROW( _holeCards.StartCards(pCard(new Card("A","s"))));
+	 _holeCards.StartCards(pCard(new Card("A","s")));
 	EXPECT_EQ(1u, _holeCards.Size());
 }
 void HoleCardsTest::Run_TwoStartCard_DEATH()

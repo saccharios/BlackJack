@@ -23,20 +23,17 @@ _cardContainer()
 
 void HoleCards::StartCards(pCard card)
 {
-	if(!IsEmpty())
-	{
-		throw std::invalid_argument( "Cannot start hand, hand is non-empty");
-	}
-	else{
-
-		Reset();
-		AddCard(std::move(card));
-	}
+	// Start method for the dealer. Can only start if it is empty.
+	assert(IsEmpty());
+	Reset();
+	AddCard(std::move(card));
 }
 
 void HoleCards::StartCards(pCard card1, pCard card2)
 {
-	assert(IsEmpty());//, "Cannot start hand, hand is non-empty"));
+// Start method for the player. Can only start a hand if it is empty.
+// Save if the two start hands are paired or even paired aces
+	assert(IsEmpty());
 	Reset();
 	// Check for a pair at start:
 	if ( card1->GetFace() == card2->GetFace())
@@ -54,16 +51,16 @@ void HoleCards::StartCards(pCard card1, pCard card2)
 
 void HoleCards::AddCard(pCard card)
 {
-	// Transfer ownership to cardContainer
-	 _cardContainer.push_back(std::move(card));
+// Adds card to the container and evaluates if it is blackjack or busted
+	_cardContainer.push_back(std::move(card));
 	CalculateValue();
 	auto value = GetValue();
-	if( _cardContainer.size() == 2 && value ==  21)
+	if( _cardContainer.size() == 2u && value ==  21u)
 	{
 		_areBlackJack = true;
 		std::cout << "BLACK JACK!" << std::endl;
 	}
-	else if ( value > 21)
+	else if ( value > 21u)
 	{
 		_areBusted = true;
 	}
@@ -72,6 +69,8 @@ void HoleCards::AddCard(pCard card)
 
 void HoleCards::CalculateValue()
 {
+// Calculates the value of the cards in the container.
+// Stores the number of soft aces.
 	_value = 0u;
 	_numSoftAces = 0u;
 	for( const auto & card : _cardContainer)
@@ -79,9 +78,11 @@ void HoleCards::CalculateValue()
 		_value += card->GetValue();
 		if(card->IsAce())
 		{
-			++_numSoftAces;
+			++_numSoftAces; // All aces are counted as soft
 		}
 	}
+	// If the values is above 21 and there are soft aces,
+	// transform as many soft aces into hard aces.
 	while( _value > 21u && _numSoftAces > 0u)
 	{
 		_value -= 10;
