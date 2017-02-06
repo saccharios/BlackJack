@@ -30,12 +30,14 @@ _name(name)
 
 void Player::Start()
 {
+	// Initial start routine for the player
 	_handManager.push_back(std::move(pHandManager(new HandManager(_deck, _orignialWager, 0))));
 	_handManager.at(0)->Start();
 	PrintCards();
 }
 void Player::Play()
 {
+	// Player plays his hands. Number of hands can increase due to spliting
 	std::cout << "-------" << GetName() <<  "'s turn-------" << std::endl;
 	std::size_t  handNr = 0;
 	while(handNr < _handManager.size()) // Spliting cards creates more hands
@@ -50,6 +52,7 @@ void Player::Play()
 
 void Player::PlayOneHand(pHandManager const & hand)
 {
+	// Plays one hand of a player, function may create more hands that the player can play.
 	std::cout<< GetName() << " Playing Hand ";
 	hand->PrintHandNumber();
 	hand->PrintCards();
@@ -66,7 +69,7 @@ void Player::PlayOneHand(pHandManager const & hand)
 		auto actionSetPlayer = GetAvailableActionSet(actionSetCards);
 		std::cout << "Enter action: ";
 		auto action = UserInput::ReadInAction(actionSetPlayer);
-		//			auto action = PlayBasicStrategy(); // AutoPlayer
+		// TODO			auto action = PlayBasicStrategy(); // AutoPlayer
 
 		PlayAction(action, hand);
 	}
@@ -120,6 +123,7 @@ void Player::Split(pHandManager const & hand)
 
 void Player::AddHand(pHandManager hand)
 {
+	// Routine is used for testing PutCardsBack()
 	_handManager.push_back(std::move(hand));
 }
 
@@ -136,13 +140,9 @@ std::string Player::PlayBasicStrategy() const
 
 }
 
-// Available actions depend on two things:
-// 1) The wager and balance of a player
-// 2) State of the hand
-// TODO Can those two be separated in a better way?
-// Take the intersection of two sets maybe?
 std::set<std::string> Player::GetAvailableActionSet(std::set<std::string> const & actionSet) const
 {
+	// Depending on the balance of the player and the input, return the available actionSet
 	if(_balance < _orignialWager && actionSet == ACTION_SPLIT_DOUBLE)
 	{
 		std::cout << "Your balance is too low to Split or Double." << std::endl;
@@ -187,17 +187,18 @@ void Player::PrintCards() const
 
 void Player::PutCardsBack()
 {
-	// Put all cards of each hand back to the deck
+	// Put all cards of each hand back to the deck.
 	for( auto const & currentHand : _handManager)
 	{
 		currentHand->PutCardsBack();
 	}
-	// Clear all ptrs that now point to empty hole cards
+	// Clear all ptrs that now point to empty hole cards.
 	_handManager.clear();
 
 }
 void Player::SetWagerUser ()
 {
+	// Reads in the wager from the user / console.
 	std::cout << GetName()<< " set your Wager: " << std::endl;
 	auto wager = UserInput::ReadInNumber<double>( MIN_WAGER, _balance);
 	SetWager(wager);
@@ -205,6 +206,7 @@ void Player::SetWagerUser ()
 }
 void Player::SetWager (double const & wager)
 {
+	// Wager must be within bounds.
 	assert(wager >= MIN_WAGER);
 	assert(wager <= MAX_WAGER);
 	_orignialWager = wager;

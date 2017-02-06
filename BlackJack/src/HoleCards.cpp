@@ -23,7 +23,7 @@ _cardContainer()
 
 void HoleCards::StartCards(pCard card)
 {
-	// Start method for the dealer. Can only start if it is empty.
+	// Start method for the dealer. Can only start the hand is empty.
 	assert(IsEmpty());
 	Reset();
 	AddCard(std::move(card));
@@ -31,8 +31,8 @@ void HoleCards::StartCards(pCard card)
 
 void HoleCards::StartCards(pCard card1, pCard card2)
 {
-// Start method for the player. Can only start a hand if it is empty.
-// Save if the two start hands are paired or even paired aces
+	// Start method for the player. Can only start if the hand if it is empty.
+	// Save if the two start hands are paired or even paired aces
 	assert(IsEmpty());
 	Reset();
 	// Check for a pair at start:
@@ -51,7 +51,7 @@ void HoleCards::StartCards(pCard card1, pCard card2)
 
 void HoleCards::AddCard(pCard card)
 {
-// Adds card to the container and evaluates if it is blackjack or busted
+	// Adds card to the container and evaluates if it is blackjack or busted
 	_cardContainer.push_back(std::move(card));
 	CalculateValue();
 	auto value = GetValue();
@@ -69,8 +69,8 @@ void HoleCards::AddCard(pCard card)
 
 void HoleCards::CalculateValue()
 {
-// Calculates the value of the cards in the container.
-// Stores the number of soft aces.
+	// Calculates the value of the cards in the container.
+	// Stores the number of soft aces.
 	_value = 0u;
 	_numSoftAces = 0u;
 	for( const auto & card : _cardContainer)

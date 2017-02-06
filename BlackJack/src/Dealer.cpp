@@ -26,19 +26,18 @@ void Dealer::Start()
 
 void Dealer::Play()
 {
+// Dealer has to hit until their value is above 17
 	std::cout << "-------Dealer-------" << std::endl;
 	while(_holeCards.GetValue() < 17) // Basic Strategy
 	{
 		ActionHit();
 	}
-
 }
 
 void Dealer::ActionHit()
 {
 	std::cout << "Draw a card.... The card drawn is the ";
 	pCard card = _deck.Draw();
-
 	card->Print();
 	std::cout << std::endl;
 	_holeCards.AddCard(std::move(card));

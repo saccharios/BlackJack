@@ -59,7 +59,6 @@ void Game::SetWagers()
 	for(auto const & player : _players)
 	{
 		player->SetWagerUser();
-
 	}
 }
 
@@ -75,7 +74,7 @@ void Game::GetStartCards()
 }
 void Game::PlayCards()
 {
-	//	Let all player play, then the dealer
+//	Let all players play, then the dealer
 	std::cout << "-------Players are playing------" << std::endl;
 	for(auto const & player : _players)
 	{
@@ -86,7 +85,7 @@ void Game::PlayCards()
 }
 void Game::Evaluate()
 {
-	// Evaluate payout for each player
+// Evaluate payout for each player
 	std::cout <<"------Payout Time------" << std::endl;
 	for(auto const & player : _players)
 	{
@@ -94,15 +93,14 @@ void Game::Evaluate()
 				_dealer.IsBusted(),
 				_dealer.GetValue());
 		player->PrintBalance();
-
 	}
 }
 
 
 void Game::PutCardsBack()
 {
-	// As you would in the real card game, at the end of a round all players and the dealer
-	// put their cards back to the deck
+// As you would in the real card game, at the end of a round all players and the dealer
+// put their cards back to the deck
 	for(auto const & player : _players)
 	{
 		player->PutCardsBack();
@@ -112,13 +110,14 @@ void Game::PutCardsBack()
 
 void Game::RemoveBrokePlayers()
 {
-	// If a player has less than the minimum wager, they are removed
-	for( std::vector<pPlayer>::size_type i = 0; i <_players.size(); ++i)
+// If a player has less than the minimum wager, they are removed.
+	// Conventional for loop because it beed access to the index to remove it
+	for( std::size_t i = 0; i <_players.size(); ++i)
 	{
 		if(_players[i]->GetBalance() < MIN_WAGER)
 		{
 			_players.erase(_players.begin()+i);
-			--i; // Dont forget to decrement the counter as you just have removed player nr i
+			--i; // Don't forget to decrement the counter as you just have removed player nr i
 		}
 	}
 }
@@ -126,6 +125,7 @@ void Game::RemoveBrokePlayers()
 
 void Game::PrintRules()
 {
+// Introduction text
 	std::cout<< "-------------WELCOME TO BLACKJACK--------------" << std::endl;
 	std::cout<< "                                              	" << std::endl;
 	std::cout<< "   The goal is:                               	" << std::endl;
@@ -191,7 +191,7 @@ void Game::PrintNumPlayers () const
 bool Game::PlayAnotherRound () const
 {
 	// Ask the user if they want to play another round if there are still players with enough money
-	if ( _players.size() < 1)
+	if ( _players.size() < 1u)
 	{
 		std::cout << "There are no more players left!" << std::endl;
 		std::cout << "--------------------BYE BYE--------------------" << std::endl;

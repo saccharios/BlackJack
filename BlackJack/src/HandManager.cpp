@@ -39,6 +39,7 @@ _isPlayed(false)
 
 void HandManager::Start()
 {
+	// Normal start function for the player
 	pCard card1 = _deck.Draw();
 	pCard card2 = _deck.Draw();
 	// TODO Debugging only
@@ -53,12 +54,7 @@ void HandManager::Start()
 
 void HandManager::Start( pCard card1 )
 {
-	if(!_holeCards.IsEmpty())
-	{
-		std::cout << "ERROR, cannot start. HoleCards are not empty" << std::endl;
-		return;
-	}
-
+	// Start function only used when one card is known, so during splitting
 	std::cout <<"Draw second card: " ;
 	pCard card2 = _deck.Draw();
 	card2 ->Print();
@@ -70,8 +66,8 @@ void HandManager::Start( pCard card1 )
 
 HandManager::pHandManager HandManager::ActionSplit()
 {
-	// Save if pair is Aces
-	bool wasAces = _holeCards.ArePairAces();
+	// Save if pair is Aces for later
+	auto wasAces = _holeCards.ArePairAces();
 	// Remove the two cards from the current hand
 	auto card1 = _holeCards.RemoveLastCard();
 	auto cardForNewHand = _holeCards.RemoveLastCard();
@@ -110,17 +106,18 @@ void HandManager::ActionHit()
 	_holeCards.AddCard(std::move(card));
 	PrintHandNumber();
 	PrintCards();
-	_isPlayed = GetValue() > 20;
+	_isPlayed = GetValue() > 20; // No need to keep playing if you have 21 points
 }
 void HandManager::ActionStand()
 {
-	_isPlayed = true;
+	_isPlayed = true; // Stops the actions
 }
 
 double HandManager::Evaluate(double const & dealerHasBlackJack,
 		bool const & dealerIsBusted,
 		unsigned int const & dealerValue) const
 {
+	// Returns winnings of the hand. Needs dealer status as input.
 	PrintHandNumber();
 	if( dealerHasBlackJack)
 	{
@@ -195,7 +192,7 @@ void HandManager::PutCardsBack()
 }
 std::set<std::string>  HandManager::GetAvailableActionSet() const
 {
-
+	// Depending only on status of the hand, returns available actions
 	if(IsFirstAction() )
 	{
 		if( IsPair())
