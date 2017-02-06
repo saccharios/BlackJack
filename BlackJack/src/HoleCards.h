@@ -18,14 +18,6 @@ class Card;
 // at startup. During one round of play, cards will be added to the hole cards and at the end
 // of a round removed again. It provides also game related functionality, f.ex. counting
 // the value of the cards in the hole cards.
-
-struct Status{
-	bool blackJack = false;
-	bool busted = false;
-	unsigned int value = 0;
-	void Reset() {blackJack = false; busted = false; value = 0;}
-};
-
 class HoleCards {
 	using pCard = std::unique_ptr<Card>;
 public:
@@ -40,10 +32,10 @@ public:
 	pCard RemoveLastCard();
 	void CalculateValue();
 	unsigned int GetValue() const;
-	bool const & AreBlackJack() const { return _status.blackJack; }
+	bool const & AreBlackJack() const { return _areBlackJack; }
 	bool const & ArePair() const { return _arePair; }
 	bool const & ArePairAces() const { return _arePairAces; }
-	bool const & AreBusted() const { return _status.busted; }
+	bool const & AreBusted() const { return _areBusted; }
 	void Reset();
 	void PrintCards() const;
 	void PrintNumCards() const;
@@ -51,10 +43,12 @@ public:
 	std::size_t Size() const { return _cardContainer.size(); }
 
 private:
+	bool _areBlackJack;
 	bool _arePair;
 	bool _arePairAces;
+	bool _areBusted;
+	unsigned int _value;
 	unsigned int _numSoftAces;
-	Status _status;
 	std::vector<pCard> _cardContainer;
 };
 

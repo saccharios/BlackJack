@@ -12,14 +12,14 @@
 #include "Card.h"
 
 HoleCards::HoleCards():
+_areBlackJack(false),
 _arePair(false),
 _arePairAces(false),
+_areBusted(false),
+_value(0),
 _numSoftAces(0),
-_status(),
 _cardContainer()
-{
-//	_status.Reset();
-}
+{}
 
 void HoleCards::StartCards(pCard card)
 {
@@ -60,45 +60,47 @@ void HoleCards::AddCard(pCard card)
 	auto value = GetValue();
 	if( _cardContainer.size() == 2 && value ==  21)
 	{
-		_status.blackJack = true;
+		_areBlackJack = true;
 		std::cout << "BLACK JACK!" << std::endl;
 	}
 	else if ( value > 21)
 	{
-		_status.busted = true;
+		_areBusted = true;
 	}
 
 }
 
 void HoleCards::CalculateValue()
 {
-	_status.value = 0u;
+	_value = 0u;
 	_numSoftAces = 0u;
 	for( const auto & card : _cardContainer)
 	{
-		_status.value += card->GetValue();
+		_value += card->GetValue();
 		if(card->IsAce())
 		{
 			++_numSoftAces;
 		}
 	}
-	while( _status.value > 21u && _numSoftAces > 0u)
+	while( _value > 21u && _numSoftAces > 0u)
 	{
-		_status.value -= 10;
+		_value -= 10;
 		--_numSoftAces;
 	}
 }
 unsigned int HoleCards::GetValue() const
 {
-	return _status.value;
+	return _value;
 }
 
 void HoleCards::Reset()
 {
+	_areBlackJack = false;
 	_arePair = false;
 	_arePairAces = false;
+	_areBusted = false;
+	_value = 0;
 	_numSoftAces = 0;
-	_status.Reset();
 }
 
 void HoleCards::PrintCards() const
