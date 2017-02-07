@@ -11,7 +11,9 @@
 #include <memory>
 #include "GlobalDeclarations.h"
 
+
 // Forward declaration to avoid #include
+class UserInput;
 
 #ifndef GAME_H_
 #define GAME_H_
@@ -21,13 +23,9 @@
 class Game {
 	using pPlayer = std::unique_ptr<Player>;
 public:
+	Game (UserInput & usrin) : _console(usrin), _deck(), _dealer(_deck), _players() {}
 
-	// Class Game is a Singleton
-	static Game & getInstance()
-	{
-		static Game instance;
-		return instance;
-	}
+	// Not allowed to copy or assign game
 	Game(Game const &) = delete ;
 	void operator=(Game const&) = delete;
 
@@ -40,13 +38,13 @@ public:
 	void Evaluate();
 	void PutCardsBack();
 	void RemoveBrokePlayers();
-	static void PrintRules();
+	void PrintRules();
 	void PrintNumPlayers () const;
 	bool PlayAnotherRound () const;
 
 private:
-	Game();
 
+	UserInput & _console;
 	Deck _deck;
 	Dealer _dealer;
 	// Players are pointers to avoid issues with card pointers

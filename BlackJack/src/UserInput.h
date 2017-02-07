@@ -10,9 +10,11 @@
 #include <set>
 #include <string>
 #include <iostream>
+#include <sstream>
 
 class UserInput {
 public:
+	UserInput (std::ostream & ostrm, std::istream & istrm) : _ostream(ostrm), _istream(istrm) {}
 	static void PrintStringSet (std::set<std::string> const & stringSet);
 	static std::string ReadInAction(std::set<std::string> const & stringSet);
 	static std::string ReadInName(std::size_t const & i);
@@ -31,6 +33,14 @@ public:
 		std::cout << "You have entered " << value << "."<<std::endl;
 		return value;
 	}
+	void write( std::stringstream & strm )
+	{
+		_ostream << strm.str();
+	}
+
+private:
+	std::ostream & _ostream;
+	std::istream & _istream;
 
 };
 
