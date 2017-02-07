@@ -183,7 +183,7 @@ void Game::PrintRules()
 	<< "   											\n"
 	<< "-------------------GOOD LUCK-------------------\n"
 	;
-	_console.write(strm);
+	console.write(strm);
 }
 
 void Game::PrintNumPlayers () const

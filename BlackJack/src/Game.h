@@ -11,10 +11,6 @@
 #include <memory>
 #include "GlobalDeclarations.h"
 
-
-// Forward declaration to avoid #include
-class UserInput;
-
 #ifndef GAME_H_
 #define GAME_H_
 
@@ -23,7 +19,7 @@ class UserInput;
 class Game {
 	using pPlayer = std::unique_ptr<Player>;
 public:
-	Game (UserInput & usrin) : _console(usrin), _deck(), _dealer(_deck), _players() {}
+	Game () : _deck(), _dealer(_deck), _players() {}
 
 	// Not allowed to copy or assign game
 	Game(Game const &) = delete ;
@@ -44,7 +40,6 @@ public:
 
 private:
 
-	UserInput & _console;
 	Deck _deck;
 	Dealer _dealer;
 	// Players are pointers to avoid issues with card pointers

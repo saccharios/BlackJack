@@ -9,7 +9,7 @@
 #define GLOBALDECLARATIONS_H_
 #include <map>
 #include <set>
-
+#include "UserInput.h"
 // constexpr because all values are known at compile time
 constexpr auto MIN_WAGER = 1.0;
 constexpr auto MAX_WAGER = 500.0;
@@ -27,5 +27,8 @@ const std::map<std::string, unsigned int> FACE = {{"2", 2}, {"3", 3}, {"4", 4}, 
 const std::set<std::string> ACTION_SPLIT_DOUBLE{"h","s","d","p"};
 const std::set<std::string> ACTION_DOUBLE{"h","s","d"};
 const std::set<std::string> ACTION_STANDARD{"h","s"};
+
+
+static UserInput console(std::cout, std::cin);
 
 #endif
