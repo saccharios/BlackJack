@@ -26,8 +26,8 @@ public:
 	void Run_AddAndRemoveOneCard();
 	void Run_RemoveOneCard_EmptyDesk_DEATH();
 	void Run_AddEigthSets();
-	void Run_AddMAX1Sets();
-	void Run_AddZeroSets();
+	void Run_AddMAX1Sets_DEATH();
+	void Run_AddZeroSets_DEATH();
 
 
 private:
@@ -40,7 +40,7 @@ TEST_F(DeckTest, AddAndRemoveOneCard)
 {
 	Run_AddAndRemoveOneCard();
 }
-//TEST_F(DeckTest, RemoveOneCard_EmptyDesk)
+//TEST_F(DeckTest, RemoveOneCard_EmptyDesk_DEATH)
 //{
 //	Run_RemoveOneCard_EmptyDesk_DEATH();
 //}
@@ -48,14 +48,14 @@ TEST_F(DeckTest, AddEigthSets)
 {
 	Run_AddEigthSets();
 }
-TEST_F(DeckTest, AddMAX1Sets)
-{
-	Run_AddMAX1Sets();
-}
-TEST_F(DeckTest, AddZeroSets)
-{
-	Run_AddZeroSets();
-}
+//TEST_F(DeckTest, AddMAX1Sets_DEATH)
+//{
+//	Run_AddMAX1Sets_DEATH();
+//}
+//TEST_F(DeckTest, AddZeroSets_DEATH)
+//{
+//	Run_AddZeroSets_DEATH();
+//}
 
 
 

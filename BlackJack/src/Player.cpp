@@ -176,7 +176,7 @@ void Player::Evaluate(	bool const & dealerHasBlackJack,
 void Player::PrintCards() const
 {
 	std::cout << GetName() << "'s Cards are: ";
-	std::vector<HandManager>::size_type i = 0;
+	auto i = 0u;
 	for( auto const & currentHand : _handManager)
 	{
 		std::cout << "Hand Nr " << i << " ";

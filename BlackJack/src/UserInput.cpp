@@ -24,13 +24,13 @@ void UserInput::PrintStringSet (std::set<std::string> const & stringSet)
 std::string UserInput::ReadInAction(std::set<std::string> const & stringSet)
 {
 	// Read in an action from user that is in stringSet
-	std::string readIn;
-	int i = 0;
+	std::string readIn("");
+	auto i = 0u;
 	do
 	{
 		if(++i > 1)
 		{
-		std::cout << "Enter";
+			std::cout << "Enter";
 		}
 		PrintStringSet(stringSet);
 		std::getline (std::cin, readIn);
@@ -42,8 +42,8 @@ std::string UserInput::ReadInAction(std::set<std::string> const & stringSet)
 std::string UserInput::ReadInName(std::size_t const & numPlayer)
 {
 	// Read in user input name for current player with number numPlayer
-	std::string name;
-	std::string readIn;
+	std::string name("");
+	std::string readIn("");
 	std::cout << "Enter name of player " << numPlayer <<": " << std::endl;
 	std::getline (std::cin, readIn);
 	std::stringstream(readIn) >> name;

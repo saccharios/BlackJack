@@ -15,15 +15,9 @@
 
 void Deck::AddSets(std::size_t  N)
 {
-// Can only have between 1 and MAX_SETS sets.
-	if( N > MAX_SETS )
-	{
-		N = MAX_SETS;
-	}
-	else if ( N < 1 )
-	{
-		N = 1;
-	}
+	// Can only have between 1 and MAX_SETS sets.
+	assert(N <= MAX_SETS);
+	assert(N > 0);
 
 	for(std::size_t i = 0; i < N; ++i)
 	{
@@ -33,7 +27,7 @@ void Deck::AddSets(std::size_t  N)
 
 void Deck::AddCompleteSet()
 {
-// Adds single cards to the deck. The cards are owned by the desk unless it is drawn.
+	// Adds single cards to the deck. The cards are owned by the desk unless it is drawn.
 	for( const auto & suit : SUIT)
 	{
 		for(const auto & face : FACE)
@@ -46,7 +40,7 @@ void Deck::AddCompleteSet()
 
 Deck::pCard Deck::Draw(std::size_t number)
 {
-// Draw card at position number if it is within bounds and return it to the caller.
+	// Draw card at position number if it is within bounds and return it to the caller.
 	assert(number < Size());
 	assert(!_cardContainer.empty());
 	auto Card =  std::move(_cardContainer.at(number));
@@ -56,7 +50,7 @@ Deck::pCard Deck::Draw(std::size_t number)
 
 Deck::pCard Deck::Draw()
 {
-// Draw random card from the deck
+	// Draw random card from the deck
 	std::default_random_engine rng(_seed);
 	std::uniform_int_distribution<int> uniformDist(0, _cardContainer.size()-1);
 	auto random_integer = uniformDist(rng);

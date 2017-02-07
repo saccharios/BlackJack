@@ -74,7 +74,7 @@ void Game::GetStartCards()
 }
 void Game::PlayCards()
 {
-//	Let all players play, then the dealer
+	//	Let all players play, then the dealer
 	std::cout << "-------Players are playing------" << std::endl;
 	for(auto const & player : _players)
 	{
@@ -85,7 +85,7 @@ void Game::PlayCards()
 }
 void Game::Evaluate()
 {
-// Evaluate payout for each player
+	// Evaluate payout for each player
 	std::cout <<"------Payout Time------" << std::endl;
 	for(auto const & player : _players)
 	{
@@ -99,8 +99,8 @@ void Game::Evaluate()
 
 void Game::PutCardsBack()
 {
-// As you would in the real card game, at the end of a round all players and the dealer
-// put their cards back to the deck
+	// As you would in the real card game, at the end of a round all players and the dealer
+	// put their cards back to the deck
 	for(auto const & player : _players)
 	{
 		player->PutCardsBack();
@@ -110,7 +110,7 @@ void Game::PutCardsBack()
 
 void Game::RemoveBrokePlayers()
 {
-// If a player has less than the minimum wager, they are removed.
+	// If a player has less than the minimum wager, they are removed.
 	// Conventional for loop because it beed access to the index to remove it
 	for( std::size_t i = 0; i <_players.size(); ++i)
 	{
@@ -125,7 +125,7 @@ void Game::RemoveBrokePlayers()
 
 void Game::PrintRules()
 {
-// Introduction text
+	// Introduction text
 	std::cout<< "-------------WELCOME TO BLACKJACK--------------" << std::endl;
 	std::cout<< "                                              	" << std::endl;
 	std::cout<< "   The goal is:                               	" << std::endl;
@@ -218,8 +218,8 @@ bool Game::PlayAnotherRound () const
 
 // Private constructor
 Game::Game() :	_deck(),
-				_dealer (_deck),
-				_players()
+		_dealer (_deck),
+		_players()
 {}
 
 

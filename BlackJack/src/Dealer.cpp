@@ -19,8 +19,8 @@ _deck(deck)
 {}
 void Dealer::Start()
 {
-	pCard card1 = _deck.Draw();
-	_holeCards.StartCards(std::move(card1));
+	auto card = _deck.Draw();
+	_holeCards.StartCards(std::move(card));
 	PrintCards();
 }
 
@@ -37,7 +37,7 @@ void Dealer::Play()
 void Dealer::ActionHit()
 {
 	std::cout << "Draw a card.... The card drawn is the ";
-	pCard card = _deck.Draw();
+	auto card = _deck.Draw();
 	card->Print();
 	std::cout << std::endl;
 	_holeCards.AddCard(std::move(card));

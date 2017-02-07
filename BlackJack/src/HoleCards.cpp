@@ -73,7 +73,7 @@ void HoleCards::CalculateValue()
 	// Stores the number of soft aces.
 	_value = 0u;
 	_numSoftAces = 0u;
-	for( const auto & card : _cardContainer)
+	for( auto const & card : _cardContainer)
 	{
 		_value += card->GetValue();
 		if(card->IsAce())
@@ -106,7 +106,7 @@ void HoleCards::Reset()
 
 void HoleCards::PrintCards() const
 {
-	for(pCard const & card : _cardContainer)
+	for(auto const & card : _cardContainer)
 	{
 		card->Print();
 	}
@@ -138,7 +138,7 @@ void HoleCards::PrintNumCards() const
 HoleCards::pCard HoleCards::RemoveLastCard()
 {
 	assert(!IsEmpty());
-	auto	Card =  std::move(_cardContainer.back());
+	auto Card =  std::move(_cardContainer.back());
 	_cardContainer.pop_back();
 
 	return Card;

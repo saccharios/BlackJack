@@ -41,17 +41,13 @@ void DeckTest::Run_AddEigthSets()
 	}
 	EXPECT_EQ(0u, _deck.Size());
 }
-void DeckTest::Run_AddMAX1Sets()
+void DeckTest::Run_AddMAX1Sets_DEATH()
 {
 	std::size_t NumDecks = MAX_SETS +1 ;
-	std::size_t NumCardsDeck = 52;
-	_deck.AddSets(NumDecks);
-	EXPECT_EQ(MAX_SETS*NumCardsDeck, _deck.Size());
+	EXPECT_DEATH(_deck.AddSets(NumDecks),"");
 }
-void DeckTest::Run_AddZeroSets()
+void DeckTest::Run_AddZeroSets_DEATH()
 {
 	std::size_t NumDecks = 0;
-	std::size_t NumCardsDeck = 52;
-	_deck.AddSets(NumDecks);
-	EXPECT_EQ(NumCardsDeck, _deck.Size());
+	EXPECT_DEATH(_deck.AddSets(NumDecks),"");
 }

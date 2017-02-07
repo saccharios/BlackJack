@@ -40,8 +40,8 @@ _isPlayed(false)
 void HandManager::Start()
 {
 	// Normal start function for the player
-	pCard card1 = _deck.Draw();
-	pCard card2 = _deck.Draw();
+	auto card1 = _deck.Draw();
+	auto card2 = _deck.Draw();
 	// TODO Debugging only
 //			pCard card1 = _deck.Draw(1); //Pair 3
 //			pCard card2 = _deck.Draw(13); //Pair 3
@@ -56,7 +56,7 @@ void HandManager::Start( pCard card1 )
 {
 	// Start function only used when one card is known, so during splitting
 	std::cout <<"Draw second card: " ;
-	pCard card2 = _deck.Draw();
+	auto card2 = _deck.Draw();
 	card2 ->Print();
 	std::cout << " ";
 	_holeCards.StartCards(std::move(card1), std::move(card2));
@@ -99,7 +99,7 @@ void HandManager::ActionDouble()
 void HandManager::ActionHit()
 {
 	std::cout << "Draw a card...."<<std::endl;
-	pCard card = _deck.Draw();
+	auto card = _deck.Draw();
 	std::cout <<"The card drawn is the ";
 	card->Print();
 	std::cout << ". ";
