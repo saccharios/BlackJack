@@ -5,7 +5,6 @@
  *      Author: Stefan
  */
 #include <memory>
-#include <iostream>
 #include <stdexcept>
 #include "assert.h"
 #include "HoleCards.h"

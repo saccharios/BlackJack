@@ -9,7 +9,6 @@
 #define CARD_H_
 
 #include <string>
-#include <iostream>
 
 class Card {
 public:

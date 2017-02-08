@@ -12,9 +12,9 @@
 #include "HoleCards.h"
 #include "HandManager.h"
 #include "Deck.h"
-#include "UserInput.h"
 #include "GlobalDeclarations.h"
 #include "assert.h"
+#include "Console.h"
 
 Player::Player(Deck & deck, std::string name, double balance) :
 _balance(balance),

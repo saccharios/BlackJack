@@ -11,8 +11,9 @@
 #include "Deck.h"
 #include "Player.h"
 #include "Dealer.h"
-#include "UserInput.h"
 #include <sstream>
+
+#include "Console.h"
 #include "GlobalDeclarations.h"
 
 void Game::AddDecks()

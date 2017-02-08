@@ -9,7 +9,8 @@
 #define GLOBALDECLARATIONS_H_
 #include <map>
 #include <set>
-#include "UserInput.h"
+
+#include "Console.h"
 // constexpr because all values are known at compile time
 constexpr auto MIN_WAGER = 1.0;
 constexpr auto MAX_WAGER = 500.0;
@@ -29,6 +30,6 @@ const std::set<std::string> ACTION_DOUBLE{"h","s","d"};
 const std::set<std::string> ACTION_STANDARD{"h","s"};
 
 
-static UserInput console(std::cout, std::cin);
+static Console console(std::cout, std::cin);
 
 #endif

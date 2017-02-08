@@ -5,7 +5,6 @@
  *      Author: Stefan
  */
 
-#include <iostream>
 #include "gtest/gtest.h"
 #include "UserInput_Test.h"
 // TODO Make always build upon click run, ctrl f11 and in console c/c++ unit run

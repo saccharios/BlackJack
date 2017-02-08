@@ -7,7 +7,6 @@
 
 
 #include <memory>
-#include <iostream>
 #include "Dealer.h"
 #include "Deck.h"
 #include "HoleCards.h"

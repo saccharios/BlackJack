@@ -5,7 +5,6 @@
  *      Author: Stefan
  */
 
-#include <iostream>
 #include <array>
 #include <string>
 #include <algorithm>

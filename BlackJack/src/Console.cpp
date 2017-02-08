@@ -1,28 +1,29 @@
 /*
- * UserInput.cpp
+ * Console.cpp
  *
  *  Created on: 19.01.2017
  *      Author: Stefan
  */
 
+#include "Console.h"
+
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "UserInput.h"
 #include "GlobalDeclarations.h"
 
 
-void UserInput::write( std::stringstream & strm )
+void Console::write( std::stringstream & strm )
 {
 	_ostream << strm.str();
 }
-void UserInput::writeString( std::string const & str )
+void Console::writeString( std::string const & str )
 {
 	_ostream << str;
 }
 
 
-void UserInput::PrintStringSet (std::set<std::string> const & stringSet)
+void Console::PrintStringSet (std::set<std::string> const & stringSet)
 {
 	// Print possible user input strings defined in stringSet
 	_ostream << " ";
@@ -32,7 +33,7 @@ void UserInput::PrintStringSet (std::set<std::string> const & stringSet)
 	}
 	_ostream<< std::endl;
 }
-std::string UserInput::ReadInAction(std::set<std::string> const & stringSet)
+std::string Console::ReadInAction(std::set<std::string> const & stringSet)
 {
 	// Read in an action from user that is in stringSet
 	std::string readIn("");
@@ -50,7 +51,7 @@ std::string UserInput::ReadInAction(std::set<std::string> const & stringSet)
 }
 
 
-std::string UserInput::ReadInName(std::size_t const & numPlayer)
+std::string Console::ReadInName(std::size_t const & numPlayer)
 {
 	// Read in user input name for current player with number numPlayer
 	std::string name("");

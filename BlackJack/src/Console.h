@@ -1,20 +1,20 @@
 /*
- * UserInput.h
+ * Console.h
  *
  *  Created on: 19.01.2017
  *      Author: Stefan
  */
 
-#ifndef USERINPUT_H_
-#define USERINPUT_H_
+#ifndef CONSOLE_H_
+#define CONSOLE_H_
 #include <set>
 #include <string>
 #include <iostream>
 #include <sstream>
 
-class UserInput {
+class Console{
 public:
-	UserInput (std::ostream & ostrm, std::istream & istrm) : _ostream(ostrm), _istream(istrm) {}
+	Console (std::ostream & ostrm, std::istream & istrm) : _ostream(ostrm), _istream(istrm) {}
 	void PrintStringSet (std::set<std::string> const & stringSet);
 	std::string ReadInAction(std::set<std::string> const & stringSet);
 	std::string ReadInName(std::size_t const & i);
@@ -41,4 +41,4 @@ private:
 
 };
 
-#endif /* USERINPUT_H_ */
+#endif /* CONSOLE_H_ */

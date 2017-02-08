@@ -53,7 +53,7 @@
 									<listOptionValue builtIn="false" value="&quot;E:\Code\GTest\gtestbuild-1.7.0&quot;"/>
 								</option>
 								<option id="gnu.cpp.link.option.userobjs.1389705018" name="Other objects" superClass="gnu.cpp.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
-									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\UserInput.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\Console.o&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\Dealer.o&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\Deck.o&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\Game.o&quot;"/>
