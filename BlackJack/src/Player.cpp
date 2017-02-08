@@ -68,7 +68,7 @@ void Player::PlayOneHand(pHandManager const & hand)
 		auto actionSetCards = hand->GetAvailableActionSet();
 		auto actionSetPlayer = GetAvailableActionSet(actionSetCards);
 		std::cout << "Enter action: ";
-		auto action = UserInput::ReadInAction(actionSetPlayer);
+		auto action = console.ReadInAction(actionSetPlayer);
 		// TODO			auto action = PlayBasicStrategy(); // AutoPlayer
 
 		PlayAction(action, hand);
@@ -200,7 +200,7 @@ void Player::SetWagerUser ()
 {
 	// Reads in the wager from the user / console.
 	std::cout << GetName()<< " set your Wager: " << std::endl;
-	auto wager = UserInput::ReadInNumber<double>( MIN_WAGER, _balance);
+	auto wager = console.ReadInNumber( MIN_WAGER, _balance);
 	SetWager(wager);
 	PrintWager();
 }

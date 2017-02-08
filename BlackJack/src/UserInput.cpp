@@ -11,15 +11,22 @@
 #include "UserInput.h"
 #include "GlobalDeclarations.h"
 
+
+void UserInput::write( std::stringstream & strm )
+{
+	_ostream << strm.str();
+}
+
+
 void UserInput::PrintStringSet (std::set<std::string> const & stringSet)
 {
 	// Print possible user input strings defined in stringSet
-	std::cout << " ";
+	_ostream << " ";
 	for(auto const & str : stringSet)
 	{
-		std::cout << "("<< str << ") ";
+		_ostream << "("<< str << ") ";
 	}
-	std::cout << std::endl;
+	_ostream<< std::endl;
 }
 std::string UserInput::ReadInAction(std::set<std::string> const & stringSet)
 {
@@ -30,10 +37,10 @@ std::string UserInput::ReadInAction(std::set<std::string> const & stringSet)
 	{
 		if(++i > 1)
 		{
-			std::cout << "Enter";
+			_ostream << "Enter";
 		}
 		PrintStringSet(stringSet);
-		std::getline (std::cin, readIn);
+		std::getline (_istream, readIn);
 	}while(stringSet.find(readIn) == stringSet.end());
 	return readIn;
 }
@@ -44,13 +51,13 @@ std::string UserInput::ReadInName(std::size_t const & numPlayer)
 	// Read in user input name for current player with number numPlayer
 	std::string name("");
 	std::string readIn("");
-	std::cout << "Enter name of player " << numPlayer <<": " << std::endl;
-	std::getline (std::cin, readIn);
+	_ostream << "Enter name of player " << numPlayer <<": " << std::endl;
+	std::getline (_istream, readIn);
 	std::stringstream(readIn) >> name;
 
 	if( name.size() > maxChars )
 	{
-		std::cout << "Your name is too long, truncating after " << maxChars << " characters." << std::endl;
+		_ostream << "Your name is too long, truncating after " << maxChars << " characters." << std::endl;
 		name = name.substr( 0, maxChars ) ;
 	}
 	return name;

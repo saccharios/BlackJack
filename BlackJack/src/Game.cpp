@@ -18,7 +18,7 @@ void Game::AddDecks()
 {
 	// Adds sets to the deck
 	std::cout << "With how many decks do you want to play?" << std::endl;
-	auto NSets = UserInput::ReadInNumber<std::size_t>(1, MAX_SETS);
+	auto NSets = console.ReadInNumber(1u, MAX_SETS);
 	_deck.AddSets(NSets);
 }
 
@@ -26,14 +26,14 @@ void Game::AddPlayers()
 {
 	// Player creator function. Needs user input.
 	std::cout <<"How many players want to play?" << std::endl;
-	auto NPlayers = UserInput::ReadInNumber<std::size_t>(1, MAX_PLAYERS);
+	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS);
 	std::cout << "Enter names and balances for each player:" << std::endl;
 	for( std::size_t i = 0; i < NPlayers; ++i )
 	{
-		auto name = UserInput::ReadInName(i);
+		auto name = console.ReadInName(i);
 
 		std::cout << "Welcome " << name <<". Set your balance. "<< std::endl;
-		auto balance = UserInput::ReadInNumber<double>( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
+		auto balance = console.ReadInNumber( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
 
 		_players.push_back(std::move(pPlayer(new Player(_deck, name, balance))));
 	}
@@ -201,7 +201,7 @@ bool Game::PlayAnotherRound () const
 		return false;
 	}
 	std::cout << "Do you want to play another round?";
-	auto yesOrNo = UserInput::ReadInAction({"y","n"});
+	auto yesOrNo = console.ReadInAction({"y","n"});
 	if( yesOrNo == "y" )
 	{
 		return true;

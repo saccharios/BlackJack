@@ -15,28 +15,25 @@
 class UserInput {
 public:
 	UserInput (std::ostream & ostrm, std::istream & istrm) : _ostream(ostrm), _istream(istrm) {}
-	static void PrintStringSet (std::set<std::string> const & stringSet);
-	static std::string ReadInAction(std::set<std::string> const & stringSet);
-	static std::string ReadInName(std::size_t const & i);
+	void PrintStringSet (std::set<std::string> const & stringSet);
+	std::string ReadInAction(std::set<std::string> const & stringSet);
+	std::string ReadInName(std::size_t const & i);
 	// Templated functions cannot be implemented in the .cpp file
 	template<typename T>
-	static T ReadInNumber( T const & min, T const & max)
+	T ReadInNumber( T const & min, T const & max)
 	{
 		std::string readIn;
 		T value;
 		do
 		{
-			std::cout << "Enter a number between " << min << " and " << max <<"."<<std::endl;
-			std::getline (std::cin, readIn);
+			_ostream << "Enter a number between " << min << " and " << max <<"."<<std::endl;
+			std::getline (_istream, readIn);
 			std::stringstream(readIn) >> value;
 		}while(value < min || value > max);
-		std::cout << "You have entered " << value << "."<<std::endl;
+		_ostream << "You have entered " << value << "."<<std::endl;
 		return value;
 	}
-	void write( std::stringstream & strm )
-	{
-		_ostream << strm.str();
-	}
+	void write( std::stringstream & strm );
 
 private:
 	std::ostream & _ostream;
