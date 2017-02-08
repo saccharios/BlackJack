@@ -7,7 +7,6 @@
 
 #include <memory>
 #include <sstream>
-#include <iostream>
 #include "Player.h"
 #include "Card.h"
 #include "HoleCards.h"
@@ -37,8 +36,10 @@ void Player::Start()
 }
 void Player::Play()
 {
+	std::stringstream strm;
 	// Player plays his hands. Number of hands can increase due to spliting
-	std::cout << "-------" << GetName() <<  "'s turn-------" << std::endl;
+	strm << "-------" << GetName() <<  "'s turn-------\n";
+	console.write(strm);
 	std::size_t  handNr = 0;
 	while(handNr < _handManager.size()) // Spliting cards creates more hands
 	{
@@ -52,8 +53,11 @@ void Player::Play()
 
 void Player::PlayOneHand(pHandManager const & hand)
 {
+
+	std::stringstream strm;
 	// Plays one hand of a player, function may create more hands that the player can play.
-	std::cout<< GetName() << " Playing Hand ";
+	strm << GetName() << " Playing Hand ";
+	console.write(strm);
 	hand->PrintHandNumber();
 	hand->PrintCards();
 
@@ -67,7 +71,7 @@ void Player::PlayOneHand(pHandManager const & hand)
 		// Get action from user
 		auto actionSetCards = hand->GetAvailableActionSet();
 		auto actionSetPlayer = GetAvailableActionSet(actionSetCards);
-		std::cout << "Enter action: ";
+		console.writeString("Enter action: ");
 		auto action = console.ReadInAction(actionSetPlayer);
 		// TODO			auto action = PlayBasicStrategy(); // AutoPlayer
 
@@ -99,23 +103,23 @@ void Player::PlayAction(std::string action, pHandManager const & hand)
 }
 void Player::Hit(pHandManager const & hand)
 {
-	std::cout << "You choose to Hit. ";
+	console.writeString("You choose to Hit.");
 	hand->ActionHit();
 }
 void Player::Stand(pHandManager const & hand)
 {
-	std::cout << "You choose to Stand." << std::endl;
+	console.writeString("You choose to Stand.\n");
 	hand->ActionStand();
 }
 void Player::Double(pHandManager const & hand)
 {
-	std::cout << "You choose to Double. ";
+	console.writeString("You choose to Double.");
 	SubtractFromBalance(_orignialWager);
 	hand->ActionDouble();
 }
 void Player::Split(pHandManager const & hand)
 {
-	std::cout << "You choose to Split. "<<std::endl;
+	console.writeString("You choose to Split.");
 	SubtractFromBalance(_orignialWager);
 	auto newHand = hand->ActionSplit();
 	AddHand(std::move(newHand));
@@ -145,14 +149,13 @@ std::set<std::string> Player::GetAvailableActionSet(std::set<std::string> const 
 	// Depending on the balance of the player and the input, return the available actionSet
 	if(_balance < _orignialWager && actionSet == ACTION_SPLIT_DOUBLE)
 	{
-		std::cout << "Your balance is too low to Split or Double." << std::endl;
+		console.writeString("Your balance is too low to Split or Double.");
 		return ACTION_STANDARD;
 	}
 	else if(_balance < _orignialWager && actionSet == ACTION_DOUBLE)
 	{
-		std::cout << "Your balance is too low to Double." << std::endl;
+		console.writeString("Your balance is too low to Double.");
 		return ACTION_STANDARD;
-
 	}
 	else
 	{
@@ -164,9 +167,11 @@ void Player::Evaluate(	bool const & dealerHasBlackJack,
 		bool const & dealerIsBusted,
 		unsigned int const & dealerValue)
 {
+	std::stringstream strm;
 	for( auto const & currentHand : _handManager)
 	{
-		std::cout << GetName() <<"'s ";
+		strm << GetName() <<"'s ";
+		console.write(strm);
 		auto payout = currentHand->Evaluate(dealerHasBlackJack,dealerIsBusted, dealerValue);
 		AddToBalance(payout);
 	}
@@ -175,11 +180,14 @@ void Player::Evaluate(	bool const & dealerHasBlackJack,
 
 void Player::PrintCards() const
 {
-	std::cout << GetName() << "'s Cards are: ";
+	std::stringstream strm;
+	strm << GetName() << "'s Cards are: ";
+	console.write(strm);
 	auto i = 0u;
 	for( auto const & currentHand : _handManager)
 	{
-		std::cout << "Hand Nr " << i << " ";
+		strm << "Hand Nr " << i << " ";
+		console.write(strm);
 		currentHand->PrintCards();
 		++i;
 	}
@@ -199,7 +207,9 @@ void Player::PutCardsBack()
 void Player::SetWagerUser ()
 {
 	// Reads in the wager from the user / console.
-	std::cout << GetName()<< " set your Wager: " << std::endl;
+	std::stringstream strm;
+	strm << GetName()<< " set your Wager: \n";
+	console.write(strm);
 	auto wager = console.ReadInNumber( MIN_WAGER, _balance);
 	SetWager(wager);
 	PrintWager();
@@ -216,7 +226,9 @@ void Player::SetWager (double const & wager)
 
 void Player::PrintWager () const
 {
-	std::cout << GetName() <<"'s wager is: " << _orignialWager << std::endl;
+	std::stringstream strm;
+	strm << GetName() <<"'s wager is: " << _orignialWager << std::endl;
+	console.write(strm);
 }
 
 double const & Player::GetBalance () const
@@ -226,11 +238,13 @@ double const & Player::GetBalance () const
 
 void Player::PrintBalance () const
 {
-	std::cout << GetName()<< "'s new balance is " << GetBalance() << "." << std::endl;
+	std::stringstream strm;
+	strm  << GetName()<< "'s new balance is " << GetBalance() << ".\n";
 	if( GetBalance() < MIN_WAGER)
 	{
-		std::cout << GetName() << " is broke! You will be removed from the game." << std::endl;
+		strm << GetName() << " is broke! You will be removed from the game.\n";
 	}
+	console.write(strm);
 }
 
 std::string const & Player::GetName() const
@@ -240,7 +254,9 @@ std::string const & Player::GetName() const
 
 void Player::PrintName () const
 {
-	std::cout << GetName() << std::endl;
+	std::stringstream strm;
+	strm << GetName() << std::endl;
+	console.write(strm);
 }
 
 void Player::AddToBalance(double const & value)

@@ -17,7 +17,7 @@ public:
 	std::string const & GetFace() const { return _face; }
 	std::string const & GetSuit() const { return _suit; }
 	unsigned int const & GetValue() const {	return _value; }
-	void Print() const { std::cout << _face << _suit; }
+	void Print() const;
 	bool IsAce() const {return (_face == "A");}
 private:
 	std::string _face;

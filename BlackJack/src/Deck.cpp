@@ -12,6 +12,7 @@
 #include "Card.h"
 #include "GlobalDeclarations.h"
 #include "assert.h"
+#include <sstream>
 
 void Deck::AddSets(std::size_t  N)
 {
@@ -60,7 +61,9 @@ Deck::pCard Deck::Draw()
 
 void Deck::PrintNumCards() const
 {
-	std::cout << "Cards in Deck = " << Size() << std::endl;
+	std::stringstream strm;
+	strm << "Cards in Deck = " << Size() << std::endl;
+	console.write(strm);
 }
 
 

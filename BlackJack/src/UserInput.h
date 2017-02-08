@@ -34,7 +34,7 @@ public:
 		return value;
 	}
 	void write( std::stringstream & strm );
-
+	void writeString( std::string const & str );
 private:
 	std::ostream & _ostream;
 	std::istream & _istream;

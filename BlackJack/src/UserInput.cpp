@@ -16,6 +16,10 @@ void UserInput::write( std::stringstream & strm )
 {
 	_ostream << strm.str();
 }
+void UserInput::writeString( std::string const & str )
+{
+	_ostream << str;
+}
 
 
 void UserInput::PrintStringSet (std::set<std::string> const & stringSet)

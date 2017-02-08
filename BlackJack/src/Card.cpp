@@ -12,7 +12,7 @@
 #include "Card.h"
 #include "GlobalDeclarations.h"
 #include "assert.h"
-
+#include <sstream>
 
 
 Card::Card(std::string const & face, std::string const & suit):
@@ -30,5 +30,11 @@ _suit(suit)
 	_value = FACE.at(face);
 }
 
+void Card::Print() const
+{
+	std::stringstream strm;
+	strm << _face << _suit;
+	console.write(strm);
+}
 
 

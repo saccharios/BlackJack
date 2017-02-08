@@ -7,7 +7,6 @@
 
 
 #include <memory>
-#include <iostream>
 #include "HandManager.h"
 #include "HoleCards.h"
 #include "Card.h"
@@ -19,15 +18,18 @@ _deck(deck),
 _handNumber(handNumber),
 _isPlayed(false)
 {
+	std::stringstream strm;
 	// Make sure that the wager at the creation is within bounds. Hard force it.
 	if( wager < MIN_WAGER)
 	{
 		_wager = MIN_WAGER;
-		std::cout << "Your wager is too low, setting to minimum wager (1.0)" << std::endl;
+		strm  << "Your wager is too low, setting to minimum wager (" << MIN_WAGER << ")\n";
+
 	}
 	else if (wager > MAX_WAGER)
 	{
-		std::cout << "Your wager is too high, setting to maximum wager (500.0)" << std::endl;
+		strm << "Your wager is too high, setting to maximum wager (" << MAX_WAGER << ")\n";
+		console.write(strm);
 		_wager = MAX_WAGER;
 	}
 	else
@@ -55,10 +57,10 @@ void HandManager::Start()
 void HandManager::Start( pCard card1 )
 {
 	// Start function only used when one card is known, so during splitting
-	std::cout <<"Draw second card: " ;
+	console.writeString("Draw second card: ");
 	auto card2 = _deck.Draw();
 	card2 ->Print();
-	std::cout << " ";
+	console.writeString(" ");
 	_holeCards.StartCards(std::move(card1), std::move(card2));
 	PrintCards();
 	_isPlayed = false;
@@ -85,7 +87,6 @@ HandManager::pHandManager HandManager::ActionSplit()
 	{
 		_isPlayed = true;
 		newHand->ActionStand();
-		std::cout << "-------------------------------------ACES\n";
 	}
 
 	return newHand;
@@ -98,11 +99,11 @@ void HandManager::ActionDouble()
 }
 void HandManager::ActionHit()
 {
-	std::cout << "Draw a card...."<<std::endl;
+	console.writeString("Draw a card....\n");
 	auto card = _deck.Draw();
-	std::cout <<"The card drawn is the ";
+	console.writeString("The card drawn is the ");
 	card->Print();
-	std::cout << ". ";
+	console.writeString(". ");
 	_holeCards.AddCard(std::move(card));
 	PrintHandNumber();
 	PrintCards();
@@ -157,30 +158,32 @@ double HandManager::Evaluate(double const & dealerHasBlackJack,
 }
 double HandManager::PayoutPush () const
 {
-	std::cout << "is a push" << std::endl;
+	console.writeString("Push.\n");
 	return GetWager();
 }
 double HandManager::PayoutLoose () const
 {
-	std::cout << "looses" << std::endl;
+	console.writeString("Loose.\n");
 	return 0.0;
 
 }
 double HandManager::PayoutWin () const
 {
-	std::cout << "wins" << std::endl;
+	console.writeString("Win.\n");
 	return 2.0*GetWager();
 }
 double HandManager::PayoutBlackJack () const
 {
-	std::cout << "BlackJack pays 5 to 2" << std::endl;
+	console.writeString("BlackJack pays 5 to 2\n");
 	return 2.5*GetWager();
 }
 
 
 void HandManager::PrintHandNumber() const
 {
-	std::cout << "Hand " << GetHandNumber() << ": ";
+	std::stringstream strm;
+	strm << "Hand " << GetHandNumber() << ": ";
+	console.write(strm);
 }
 
 void HandManager::PutCardsBack()

@@ -12,7 +12,8 @@
 #include "Deck.h"
 #include "HoleCards.h"
 #include "Card.h"
-
+#include <sstream>
+#include "GlobalDeclarations.h"
 
 Dealer::Dealer(Deck & deck) :
 _deck(deck)
@@ -26,8 +27,9 @@ void Dealer::Start()
 
 void Dealer::Play()
 {
-// Dealer has to hit until their value is above 17
-	std::cout << "-------Dealer-------" << std::endl;
+	// Dealer has to hit until their value is above 17
+	console.writeString("-------Dealer-------\n");
+
 	while(_holeCards.GetValue() < 17) // Basic Strategy
 	{
 		ActionHit();
@@ -36,10 +38,12 @@ void Dealer::Play()
 
 void Dealer::ActionHit()
 {
-	std::cout << "Draw a card.... The card drawn is the ";
+	console.writeString("Draw a card.... The card drawn is the ");
+
 	auto card = _deck.Draw();
 	card->Print();
-	std::cout << std::endl;
+
+	console.writeString("\n");
 	_holeCards.AddCard(std::move(card));
 	PrintCards();
 }
@@ -55,7 +59,9 @@ void Dealer::PutCardsBack()
 
 void Dealer::PrintCards() const
 {
-	std::cout << "Dealer's Cards are: ";
+	std::stringstream strm;
+	strm << "Dealer's Cards are: ";
+	console.write(strm);
 	_holeCards.PrintCards();
 }
 

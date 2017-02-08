@@ -10,6 +10,9 @@
 #include "assert.h"
 #include "HoleCards.h"
 #include "Card.h"
+#include "GlobalDeclarations.h"
+#include <sstream>
+
 
 HoleCards::HoleCards():
 _areBlackJack(false),
@@ -58,7 +61,7 @@ void HoleCards::AddCard(pCard card)
 	if( _cardContainer.size() == 2u && value ==  21u)
 	{
 		_areBlackJack = true;
-		std::cout << "BLACK JACK!" << std::endl;
+		console.writeString("BLACK JACK!\n");
 	}
 	else if ( value > 21u)
 	{
@@ -106,6 +109,7 @@ void HoleCards::Reset()
 
 void HoleCards::PrintCards() const
 {
+	std::stringstream strm;
 	for(auto const & card : _cardContainer)
 	{
 		card->Print();
@@ -113,26 +117,30 @@ void HoleCards::PrintCards() const
 
 	if( AreBlackJack() )
 	{
-		std::cout << ", you have BLACKJACK."<<std::endl;;
+		console.writeString(", you have BLACKJACK.\n");
 	}
 	else if (AreBusted())
 	{
-		std::cout <<" you are BUSTED (" << GetValue() <<")."<<std::endl;;
+		strm <<" you are BUSTED (" << GetValue() <<").\n";
+		console.write(strm);
 	}
 	else
 	{
-		std::cout << ", value is ";
+		strm << ", value is ";
 		if( _numSoftAces > 0)
 		{
-			std::cout << "soft ";
+			strm << "soft ";
 		}
-		std::cout << GetValue() << "."<<std::endl;
+		strm << GetValue() << ".\n";
+		console.write(strm);
 	}
 }
 
 void HoleCards::PrintNumCards() const
 {
-	std::cout << "You have = " << _cardContainer.size() <<" Cards" << std::endl;
+	std::stringstream strm;
+	strm << "You have = " << _cardContainer.size() <<" Cards\n";
+	console.write(strm);
 }
 
 HoleCards::pCard HoleCards::RemoveLastCard()

@@ -5,7 +5,6 @@
  *      Author: Stefan
  */
 
-#include <iostream>
 #include <string>
 #include <sstream>
 #include "Game.h"
@@ -14,10 +13,12 @@
 #include "Dealer.h"
 #include "UserInput.h"
 #include <sstream>
+#include "GlobalDeclarations.h"
+
 void Game::AddDecks()
 {
 	// Adds sets to the deck
-	std::cout << "With how many decks do you want to play?" << std::endl;
+	console.writeString("With how many decks do you want to play?\n");
 	auto NSets = console.ReadInNumber(1u, MAX_SETS);
 	_deck.AddSets(NSets);
 }
@@ -25,14 +26,15 @@ void Game::AddDecks()
 void Game::AddPlayers()
 {
 	// Player creator function. Needs user input.
-	std::cout <<"How many players want to play?" << std::endl;
+	console.writeString("How many players want to play?\n");
 	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS);
-	std::cout << "Enter names and balances for each player:" << std::endl;
+	console.writeString("Enter names and balances for each player:\n" );
+	std::stringstream strm;
 	for( std::size_t i = 0; i < NPlayers; ++i )
 	{
 		auto name = console.ReadInName(i);
-
-		std::cout << "Welcome " << name <<". Set your balance. "<< std::endl;
+		strm << "Welcome " << name <<". Set your balance. "<< std::endl;
+		console.write(strm);
 		auto balance = console.ReadInNumber( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
 
 		_players.push_back(std::move(pPlayer(new Player(_deck, name, balance))));
@@ -43,7 +45,7 @@ void Game::AddPlayers()
 void Game::PlayRound()
 {
 	// Play one round.
-	std::cout << "-------New Round------" << std::endl;
+	console.writeString("-------New Round------\n");
 	SetWagers();
 	GetStartCards();
 	PlayCards();
@@ -55,7 +57,7 @@ void Game::PlayRound()
 void Game::SetWagers()
 {
 	// Set wager for each player
-	std::cout << "-------Set Wagers------" << std::endl;
+	console.writeString("-------Set Wagers------\n");
 	for(auto const & player : _players)
 	{
 		player->SetWagerUser();
@@ -64,8 +66,8 @@ void Game::SetWagers()
 
 void Game::GetStartCards()
 {
-	std::cout << "-------Dealing Start Cards------" << std::endl;
 	// Deal start cards to each player and the dealer
+	console.writeString("-------Dealing Start Cards------\n");
 	for(auto const & player : _players)
 	{
 		player->Start();
@@ -75,7 +77,7 @@ void Game::GetStartCards()
 void Game::PlayCards()
 {
 	//	Let all players play, then the dealer
-	std::cout << "-------Players are playing------" << std::endl;
+	console.writeString("-------Players are playing------\n");
 	for(auto const & player : _players)
 	{
 		player->Play();
@@ -86,7 +88,7 @@ void Game::PlayCards()
 void Game::Evaluate()
 {
 	// Evaluate payout for each player
-	std::cout <<"------Payout Time------" << std::endl;
+	console.writeString("------Payout Time------\n");
 	for(auto const & player : _players)
 	{
 		player->Evaluate(_dealer.HasBlackJack(),
@@ -188,7 +190,9 @@ void Game::PrintRules()
 
 void Game::PrintNumPlayers () const
 {
-	std::cout << "There are " << _players.size() << " players in the game." << std::endl;
+	std::stringstream strm;
+	strm << "There are " << _players.size() << " players in the game." << std::endl;
+	console.write(strm);
 }
 
 bool Game::PlayAnotherRound () const
@@ -196,11 +200,11 @@ bool Game::PlayAnotherRound () const
 	// Ask the user if they want to play another round if there are still players with enough money
 	if ( _players.size() < 1u)
 	{
-		std::cout << "There are no more players left!" << std::endl;
-		std::cout << "--------------------BYE BYE--------------------" << std::endl;
+		console.writeString("There are no more players left!\n");
+		console.writeString("--------------------BYE BYE--------------------\n");
 		return false;
 	}
-	std::cout << "Do you want to play another round?";
+	console.writeString("Do you want to play another round?");
 	auto yesOrNo = console.ReadInAction({"y","n"});
 	if( yesOrNo == "y" )
 	{
@@ -208,12 +212,12 @@ bool Game::PlayAnotherRound () const
 	}
 	else if( yesOrNo == "n" )
 	{
-		std::cout << "--------------------BYE BYE--------------------" << std::endl;
+		console.writeString("--------------------BYE BYE--------------------\n");
 		return false;
 	}
 	else
 	{
-		std::cout << "ERROR! User Input failed!" << std::endl;
+		console.writeString("ERROR! User Input failed!\n");
 		return false;
 	}
 
