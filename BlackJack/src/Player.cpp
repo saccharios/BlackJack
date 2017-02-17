@@ -39,7 +39,7 @@ void Player::Play()
 	std::stringstream strm;
 	// Player plays his hands. Number of hands can increase due to spliting
 	strm << "-------" << GetName() <<  "'s turn-------\n";
-	console.write(strm);
+	console.Write(strm);
 	std::size_t  handNr = 0;
 	while(handNr < _handManager.size()) // Spliting cards creates more hands
 	{
@@ -57,7 +57,7 @@ void Player::PlayOneHand(pHandManager const & hand)
 	std::stringstream strm;
 	// Plays one hand of a player, function may create more hands that the player can play.
 	strm << GetName() << " Playing Hand ";
-	console.write(strm);
+	console.Write(strm);
 	hand->PrintHandNumber();
 	hand->PrintCards();
 
@@ -71,7 +71,7 @@ void Player::PlayOneHand(pHandManager const & hand)
 		// Get action from user
 		auto actionSetCards = hand->GetAvailableActionSet();
 		auto actionSetPlayer = GetAvailableActionSet(actionSetCards);
-		console.writeString("Enter action: ");
+		console.WriteString("Enter action: ");
 		auto action = console.ReadInAction(actionSetPlayer);
 		// TODO			auto action = PlayBasicStrategy(); // AutoPlayer
 
@@ -103,23 +103,23 @@ void Player::PlayAction(std::string action, pHandManager const & hand)
 }
 void Player::Hit(pHandManager const & hand)
 {
-	console.writeString("You choose to Hit.");
+	console.WriteString("You choose to Hit.");
 	hand->ActionHit();
 }
 void Player::Stand(pHandManager const & hand)
 {
-	console.writeString("You choose to Stand.\n");
+	console.WriteString("You choose to Stand.\n");
 	hand->ActionStand();
 }
 void Player::Double(pHandManager const & hand)
 {
-	console.writeString("You choose to Double.");
+	console.WriteString("You choose to Double.");
 	SubtractFromBalance(_orignialWager);
 	hand->ActionDouble();
 }
 void Player::Split(pHandManager const & hand)
 {
-	console.writeString("You choose to Split.");
+	console.WriteString("You choose to Split.");
 	SubtractFromBalance(_orignialWager);
 	auto newHand = hand->ActionSplit();
 	AddHand(std::move(newHand));
@@ -149,12 +149,12 @@ std::set<std::string> Player::GetAvailableActionSet(std::set<std::string> const 
 	// Depending on the balance of the player and the input, return the available actionSet
 	if(_balance < _orignialWager && actionSet == ACTION_SPLIT_DOUBLE)
 	{
-		console.writeString("Your balance is too low to Split or Double.");
+		console.WriteString("Your balance is too low to Split or Double.");
 		return ACTION_STANDARD;
 	}
 	else if(_balance < _orignialWager && actionSet == ACTION_DOUBLE)
 	{
-		console.writeString("Your balance is too low to Double.");
+		console.WriteString("Your balance is too low to Double.");
 		return ACTION_STANDARD;
 	}
 	else
@@ -171,7 +171,7 @@ void Player::Evaluate(	bool const & dealerHasBlackJack,
 	for( auto const & currentHand : _handManager)
 	{
 		strm << GetName() <<"'s ";
-		console.write(strm);
+		console.Write(strm);
 		auto payout = currentHand->Evaluate(dealerHasBlackJack,dealerIsBusted, dealerValue);
 		AddToBalance(payout);
 	}
@@ -182,12 +182,12 @@ void Player::PrintCards() const
 {
 	std::stringstream strm;
 	strm << GetName() << "'s Cards are: ";
-	console.write(strm);
+	console.Write(strm);
 	auto i = 0u;
 	for( auto const & currentHand : _handManager)
 	{
 		strm << "Hand Nr " << i << " ";
-		console.write(strm);
+		console.Write(strm);
 		currentHand->PrintCards();
 		++i;
 	}
@@ -209,7 +209,7 @@ void Player::SetWagerUser ()
 	// Reads in the wager from the user / console.
 	std::stringstream strm;
 	strm << GetName()<< " set your Wager: \n";
-	console.write(strm);
+	console.Write(strm);
 	auto wager = console.ReadInNumber( MIN_WAGER, _balance);
 	SetWager(wager);
 	PrintWager();
@@ -228,7 +228,7 @@ void Player::PrintWager () const
 {
 	std::stringstream strm;
 	strm << GetName() <<"'s wager is: " << _orignialWager << std::endl;
-	console.write(strm);
+	console.Write(strm);
 }
 
 double const & Player::GetBalance () const
@@ -244,7 +244,7 @@ void Player::PrintBalance () const
 	{
 		strm << GetName() << " is broke! You will be removed from the game.\n";
 	}
-	console.write(strm);
+	console.Write(strm);
 }
 
 std::string const & Player::GetName() const
@@ -256,7 +256,7 @@ void Player::PrintName () const
 {
 	std::stringstream strm;
 	strm << GetName() << std::endl;
-	console.write(strm);
+	console.Write(strm);
 }
 
 void Player::AddToBalance(double const & value)

@@ -60,7 +60,7 @@ void HoleCards::AddCard(pCard card)
 	if( _cardContainer.size() == 2u && value ==  21u)
 	{
 		_areBlackJack = true;
-		console.writeString("BLACK JACK!\n");
+		console.WriteString("BLACK JACK!\n");
 	}
 	else if ( value > 21u)
 	{
@@ -116,12 +116,12 @@ void HoleCards::PrintCards() const
 
 	if( AreBlackJack() )
 	{
-		console.writeString(", you have BLACKJACK.\n");
+		console.WriteString(", you have BLACKJACK.\n");
 	}
 	else if (AreBusted())
 	{
 		strm <<" you are BUSTED (" << GetValue() <<").\n";
-		console.write(strm);
+		console.Write(strm);
 	}
 	else
 	{
@@ -131,7 +131,7 @@ void HoleCards::PrintCards() const
 			strm << "soft ";
 		}
 		strm << GetValue() << ".\n";
-		console.write(strm);
+		console.Write(strm);
 	}
 }
 
@@ -139,7 +139,7 @@ void HoleCards::PrintNumCards() const
 {
 	std::stringstream strm;
 	strm << "You have = " << _cardContainer.size() <<" Cards\n";
-	console.write(strm);
+	console.Write(strm);
 }
 
 HoleCards::pCard HoleCards::RemoveLastCard()

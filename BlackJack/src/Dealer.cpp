@@ -27,7 +27,7 @@ void Dealer::Start()
 void Dealer::Play()
 {
 	// Dealer has to hit until their value is above 17
-	console.writeString("-------Dealer-------\n");
+	console.WriteString("-------Dealer-------\n");
 
 	while(_holeCards.GetValue() < 17) // Basic Strategy
 	{
@@ -37,12 +37,12 @@ void Dealer::Play()
 
 void Dealer::ActionHit()
 {
-	console.writeString("Draw a card.... The card drawn is the ");
+	console.WriteString("Draw a card.... The card drawn is the ");
 
 	auto card = _deck.Draw();
 	card->Print();
 
-	console.writeString("\n");
+	console.WriteString("\n");
 	_holeCards.AddCard(std::move(card));
 	PrintCards();
 }
@@ -60,7 +60,7 @@ void Dealer::PrintCards() const
 {
 	std::stringstream strm;
 	strm << "Dealer's Cards are: ";
-	console.write(strm);
+	console.Write(strm);
 	_holeCards.PrintCards();
 }
 

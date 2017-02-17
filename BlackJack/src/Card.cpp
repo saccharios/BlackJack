@@ -33,7 +33,7 @@ void Card::Print() const
 {
 	std::stringstream strm;
 	strm << _face << _suit;
-	console.write(strm);
+	console.Write(strm);
 }
 
 

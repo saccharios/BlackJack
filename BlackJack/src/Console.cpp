@@ -13,11 +13,11 @@
 #include "GlobalDeclarations.h"
 
 
-void Console::write( std::stringstream & strm )
+void Console::Write( std::stringstream & strm )
 {
 	_ostream << strm.str();
 }
-void Console::writeString( std::string const & str )
+void Console::WriteString( std::string const & str )
 {
 	_ostream << str;
 }

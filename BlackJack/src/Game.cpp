@@ -19,7 +19,7 @@
 void Game::AddDecks()
 {
 	// Adds sets to the deck
-	console.writeString("With how many decks do you want to play?\n");
+	console.WriteString("With how many decks do you want to play?\n");
 	auto NSets = console.ReadInNumber(1u, MAX_SETS);
 	_deck.AddSets(NSets);
 }
@@ -27,15 +27,15 @@ void Game::AddDecks()
 void Game::AddPlayers()
 {
 	// Player creator function. Needs user input.
-	console.writeString("How many players want to play?\n");
+	console.WriteString("How many players want to play?\n");
 	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS);
-	console.writeString("Enter names and balances for each player:\n" );
+	console.WriteString("Enter names and balances for each player:\n" );
 	std::stringstream strm;
 	for( std::size_t i = 0; i < NPlayers; ++i )
 	{
 		auto name = console.ReadInName(i);
 		strm << "Welcome " << name <<". Set your balance. "<< std::endl;
-		console.write(strm);
+		console.Write(strm);
 		auto balance = console.ReadInNumber( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
 
 		_players.push_back(std::move(pPlayer(new Player(_deck, name, balance))));
@@ -46,7 +46,7 @@ void Game::AddPlayers()
 void Game::PlayRound()
 {
 	// Play one round.
-	console.writeString("-------New Round------\n");
+	console.WriteString("-------New Round------\n");
 	SetWagers();
 	GetStartCards();
 	PlayCards();
@@ -58,7 +58,7 @@ void Game::PlayRound()
 void Game::SetWagers()
 {
 	// Set wager for each player
-	console.writeString("-------Set Wagers------\n");
+	console.WriteString("-------Set Wagers------\n");
 	for(auto const & player : _players)
 	{
 		player->SetWagerUser();
@@ -68,7 +68,7 @@ void Game::SetWagers()
 void Game::GetStartCards()
 {
 	// Deal start cards to each player and the dealer
-	console.writeString("-------Dealing Start Cards------\n");
+	console.WriteString("-------Dealing Start Cards------\n");
 	for(auto const & player : _players)
 	{
 		player->Start();
@@ -78,7 +78,7 @@ void Game::GetStartCards()
 void Game::PlayCards()
 {
 	//	Let all players play, then the dealer
-	console.writeString("-------Players are playing------\n");
+	console.WriteString("-------Players are playing------\n");
 	for(auto const & player : _players)
 	{
 		player->Play();
@@ -89,7 +89,7 @@ void Game::PlayCards()
 void Game::Evaluate()
 {
 	// Evaluate payout for each player
-	console.writeString("------Payout Time------\n");
+	console.WriteString("------Payout Time------\n");
 	for(auto const & player : _players)
 	{
 		player->Evaluate(_dealer.HasBlackJack(),
@@ -186,14 +186,14 @@ void Game::PrintRules()
 	<< "   											\n"
 	<< "-------------------GOOD LUCK-------------------\n"
 	;
-	console.write(strm);
+	console.Write(strm);
 }
 
 void Game::PrintNumPlayers () const
 {
 	std::stringstream strm;
 	strm << "There are " << _players.size() << " players in the game." << std::endl;
-	console.write(strm);
+	console.Write(strm);
 }
 
 bool Game::PlayAnotherRound () const
@@ -201,11 +201,11 @@ bool Game::PlayAnotherRound () const
 	// Ask the user if they want to play another round if there are still players with enough money
 	if ( _players.size() < 1u)
 	{
-		console.writeString("There are no more players left!\n");
-		console.writeString("--------------------BYE BYE--------------------\n");
+		console.WriteString("There are no more players left!\n");
+		console.WriteString("--------------------BYE BYE--------------------\n");
 		return false;
 	}
-	console.writeString("Do you want to play another round?");
+	console.WriteString("Do you want to play another round?");
 	auto yesOrNo = console.ReadInAction({"y","n"});
 	if( yesOrNo == "y" )
 	{
@@ -213,12 +213,12 @@ bool Game::PlayAnotherRound () const
 	}
 	else if( yesOrNo == "n" )
 	{
-		console.writeString("--------------------BYE BYE--------------------\n");
+		console.WriteString("--------------------BYE BYE--------------------\n");
 		return false;
 	}
 	else
 	{
-		console.writeString("ERROR! User Input failed!\n");
+		console.WriteString("ERROR! User Input failed!\n");
 		return false;
 	}
 

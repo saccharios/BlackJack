@@ -63,7 +63,7 @@ void Deck::PrintNumCards() const
 {
 	std::stringstream strm;
 	strm << "Cards in Deck = " << Size() << std::endl;
-	console.write(strm);
+	console.Write(strm);
 }
 
 

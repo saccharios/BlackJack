@@ -29,7 +29,7 @@ _isPlayed(false)
 	else if (wager > MAX_WAGER)
 	{
 		strm << "Your wager is too high, setting to maximum wager (" << MAX_WAGER << ")\n";
-		console.write(strm);
+		console.Write(strm);
 		_wager = MAX_WAGER;
 	}
 	else
@@ -57,10 +57,10 @@ void HandManager::Start()
 void HandManager::Start( pCard card1 )
 {
 	// Start function only used when one card is known, so during splitting
-	console.writeString("Draw second card: ");
+	console.WriteString("Draw second card: ");
 	auto card2 = _deck.Draw();
 	card2 ->Print();
-	console.writeString(" ");
+	console.WriteString(" ");
 	_holeCards.StartCards(std::move(card1), std::move(card2));
 	PrintCards();
 	_isPlayed = false;
@@ -99,11 +99,11 @@ void HandManager::ActionDouble()
 }
 void HandManager::ActionHit()
 {
-	console.writeString("Draw a card....\n");
+	console.WriteString("Draw a card....\n");
 	auto card = _deck.Draw();
-	console.writeString("The card drawn is the ");
+	console.WriteString("The card drawn is the ");
 	card->Print();
-	console.writeString(". ");
+	console.WriteString(". ");
 	_holeCards.AddCard(std::move(card));
 	PrintHandNumber();
 	PrintCards();
@@ -158,23 +158,23 @@ double HandManager::Evaluate(double const & dealerHasBlackJack,
 }
 double HandManager::PayoutPush () const
 {
-	console.writeString("Push.\n");
+	console.WriteString("Push.\n");
 	return GetWager();
 }
 double HandManager::PayoutLoose () const
 {
-	console.writeString("Loose.\n");
+	console.WriteString("Loose.\n");
 	return 0.0;
 
 }
 double HandManager::PayoutWin () const
 {
-	console.writeString("Win.\n");
+	console.WriteString("Win.\n");
 	return 2.0*GetWager();
 }
 double HandManager::PayoutBlackJack () const
 {
-	console.writeString("BlackJack pays 5 to 2\n");
+	console.WriteString("BlackJack pays 5 to 2\n");
 	return 2.5*GetWager();
 }
 
@@ -183,7 +183,7 @@ void HandManager::PrintHandNumber() const
 {
 	std::stringstream strm;
 	strm << "Hand " << GetHandNumber() << ": ";
-	console.write(strm);
+	console.Write(strm);
 }
 
 void HandManager::PutCardsBack()

@@ -18,7 +18,7 @@
 class Console_Test : public ::testing::Test
 {
 	public:
-	Console_Test() : _console(_ostream, _istream)
+	Console_Test() : _console(_out_stream, _in_stream)
 	{
 	}
 //	void SetUpTestCase()
@@ -44,8 +44,8 @@ class Console_Test : public ::testing::Test
 	void Run_ReadInAction();
 	void Run_ReadInName();
 	private:
-	std::ostream & _ostream = std::cout;
-	std::istream & _istream = std::cin;
+	std::ofstream _out_stream;
+	std::ifstream _in_stream;
 	Console _console;
 
 	std::basic_streambuf<char,std::char_traits<char>> * _cinbuf = nullptr;
