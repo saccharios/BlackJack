@@ -31,7 +31,7 @@ void Console::PrintStringSet (std::set<std::string> const & stringSet)
 	{
 		_ostream << "("<< str << ") ";
 	}
-	_ostream<< std::endl;
+	_ostream<< "\n";
 }
 std::string Console::ReadInAction(std::set<std::string> const & stringSet)
 {
@@ -51,14 +51,23 @@ std::string Console::ReadInAction(std::set<std::string> const & stringSet)
 }
 
 
-std::string Console::ReadInName(std::size_t const & numPlayer)
+std::string Console::ReadInName(std::size_t const & numPlayer, std::size_t const & maxChars)
 {
 	// Read in user input name for current player with number numPlayer
 	std::string name("");
 	std::string readIn("");
 	_ostream << "Enter name of player " << numPlayer <<": " << std::endl;
-	std::getline (_istream, readIn);
-	std::stringstream(readIn) >> name;
+
+	auto i = 0u;
+	do
+	{
+		if(++i > 1)
+		{
+			_ostream << "Do not enter an empty name.";
+		}
+		std::getline (_istream, readIn);
+		std::stringstream(readIn) >> name;
+	}while(name.empty());
 
 	if( name.size() > maxChars )
 	{

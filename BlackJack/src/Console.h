@@ -17,7 +17,7 @@ public:
 	Console (std::ostream & ostrm, std::istream & istrm) : _ostream(ostrm), _istream(istrm) {}
 	void PrintStringSet (std::set<std::string> const & stringSet);
 	std::string ReadInAction(std::set<std::string> const & stringSet);
-	std::string ReadInName(std::size_t const & i);
+	std::string ReadInName(std::size_t const & numPlayer, std::size_t const & maxChars);
 	// Templated functions cannot be implemented in the .cpp file
 	template<typename T>
 	T ReadInNumber( T const & min, T const & max)

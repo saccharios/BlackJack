@@ -18,7 +18,7 @@ constexpr std::size_t MAX_SETS = 8;
 constexpr std::size_t MAX_PLAYERS = 8;
 constexpr auto MIN_INIT_BALANCE = 1.0;
 constexpr auto MAX_INIT_BALANCE = 100000.0;
-constexpr std::string::size_type maxChars = 20 ;
+constexpr std::string::size_type MAX_CHARS = 20 ;
 
 const std::set<std::string> SUIT{"h","d","c","s"};
 // Face is a map, to make assigning the value to a card easy.

@@ -47,6 +47,8 @@ class Console_Test : public ::testing::Test
 	std::ofstream _out_stream;
 	std::ifstream _in_stream;
 	Console _console;
+	std::string in = "_in.txt";
+	std::string out = "_out.txt";
 
 	std::basic_streambuf<char,std::char_traits<char>> * _cinbuf = nullptr;
 	std::basic_streambuf<char,std::char_traits<char>> * _coutbuf = nullptr;

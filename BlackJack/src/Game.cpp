@@ -33,7 +33,7 @@ void Game::AddPlayers()
 	std::stringstream strm;
 	for( std::size_t i = 0; i < NPlayers; ++i )
 	{
-		auto name = console.ReadInName(i);
+		auto name = console.ReadInName(i, MAX_CHARS);
 		strm << "Welcome " << name <<". Set your balance. "<< std::endl;
 		console.Write(strm);
 		auto balance = console.ReadInNumber( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
