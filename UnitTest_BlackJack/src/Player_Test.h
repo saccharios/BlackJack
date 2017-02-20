@@ -21,6 +21,7 @@ private:
 	const std::size_t _numDecks = 1;
 	const std::string _name = "Player_A";
 	const double _originalWager = 1.0;
+	const std::size_t handNr = 0;
 public:
 	using pHandManager = std::unique_ptr<HandManager>;
 	using pCard = std::unique_ptr<Card>;
@@ -29,7 +30,7 @@ public:
 	// The card drawn depends only on their order in the deck.
 	{
 		_deck.AddSets(_numDecks);
-		_hand = pHandManager(new HandManager(_deck, _originalWager,0));
+		_hand = pHandManager(new HandManager(_deck, _originalWager, handNr));
 	}
 //	void SetUp()
 //	{
@@ -53,6 +54,7 @@ public:
 	void Run_SubractFromBalance();
 	void Run_PutCardsBack();
 	void Run_GetAvailableActionSet();
+	void Run_Play();
 private:
 	Deck _deck;
 	Player _player;
@@ -111,6 +113,10 @@ TEST_F(PlayerTest, GetAvailableActionSet)
 	Run_GetAvailableActionSet();
 }
 
+TEST_F(PlayerTest, Play)
+{
+	Run_Play();
+}
 
 
 

@@ -42,7 +42,8 @@ std::string Console::ReadInAction(std::set<std::string> const & stringSet)
 	{
 		if(++i > 1)
 		{
-			_ostream << "Enter";
+
+			_ostream << "You have entered "<< readIn << ". Enter";
 		}
 		PrintStringSet(stringSet);
 		std::getline (_istream, readIn);

@@ -56,7 +56,7 @@ void Player::PlayOneHand(pHandManager const & hand)
 
 	std::stringstream strm;
 	// Plays one hand of a player, function may create more hands that the player can play.
-	strm << GetName() << " Playing Hand ";
+	strm << GetName() << " playing ";
 	console.Write(strm);
 	hand->PrintHandNumber();
 	hand->PrintCards();
@@ -103,7 +103,7 @@ void Player::PlayAction(std::string action, pHandManager const & hand)
 }
 void Player::Hit(pHandManager const & hand)
 {
-	console.WriteString("You choose to Hit.");
+	console.WriteString("You choose to Hit. ");
 	hand->ActionHit();
 }
 void Player::Stand(pHandManager const & hand)
@@ -113,7 +113,7 @@ void Player::Stand(pHandManager const & hand)
 }
 void Player::Double(pHandManager const & hand)
 {
-	console.WriteString("You choose to Double.");
+	console.WriteString("You choose to Double. ");
 	SubtractFromBalance(_orignialWager);
 	hand->ActionDouble();
 }
@@ -163,7 +163,8 @@ std::set<std::string> Player::GetAvailableActionSet(std::set<std::string> const 
 	}
 }
 
-void Player::Evaluate(	bool const & dealerHasBlackJack,
+void Player::Evaluate (
+		bool const & dealerHasBlackJack,
 		bool const & dealerIsBusted,
 		unsigned int const & dealerValue)
 {

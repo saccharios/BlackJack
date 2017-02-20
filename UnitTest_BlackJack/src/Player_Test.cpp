@@ -9,6 +9,8 @@
 #include "Player_Test.h"
 #include "../../BlackJack/src/HandManager.h"
 #include "../../BlackJack/src/GlobalDeclarations.h"
+#include <iostream>
+#include <fstream>
 
 void PlayerTest::Run_Create()
 {
@@ -78,7 +80,6 @@ void PlayerTest::Run_SubractFromBalance()
 	double value = 1.0;
 	_player.SubtractFromBalance(value);
 	EXPECT_EQ(_initBalance - value, _player.GetBalance());
-
 }
 
 void PlayerTest::Run_PutCardsBack()
@@ -108,5 +109,46 @@ void PlayerTest::Run_GetAvailableActionSet()
 	EXPECT_EQ(ACTION_DOUBLE, _player.GetAvailableActionSet(ACTION_DOUBLE));
 	EXPECT_EQ(ACTION_SPLIT_DOUBLE, _player.GetAvailableActionSet(ACTION_SPLIT_DOUBLE));
 	EXPECT_EQ(ACTION_STANDARD, _player.GetAvailableActionSet(ACTION_STANDARD));
+}
 
+void PlayerTest::Run_Play()
+{
+
+	std::string file_name = "file_Player";
+	std::ifstream in_stream_cin(file_name + "_in.txt");
+	auto cinbuf = std::cin.rdbuf(in_stream_cin.rdbuf()); //save and redirect
+	std::ofstream out_stream_cout(file_name + "_out.txt");
+	auto coutbuf = std::cout.rdbuf(out_stream_cout.rdbuf()); //save and redirect
+
+	// First test, play one hand
+	std::ofstream out_stream;
+	out_stream.open(file_name + "_in.txt");
+	out_stream << "h\n" << "h\n" << "h\n" << "s\n" << std::endl;
+	out_stream << "d\n" << "h\n" << "h\n" << "s\n" << std::endl;
+	out_stream.close();
+	_player.SetWager(1.0);
+	_player.Start();
+	_player.Play();
+	_player.Evaluate(false, false, 17);
+	_player.PrintBalance();
+	// The cards drawn (and hence their value) depend on the seed of the deck.
+	EXPECT_EQ( _initBalance + _originalWager, _player.GetBalance());
+	_player.PutCardsBack();
+	auto balance = _player.GetBalance();
+	// Second test with double as action and two hands
+	_player.SetWager(1.0);
+	_player.Start();
+	// Emulate splitting (cant set balance though)
+	auto newHand = std::unique_ptr<HandManager>(new HandManager(_deck, _originalWager, handNr + 1 ));
+	newHand->Start();
+	_player.AddHand(std::move(newHand));
+	_player.Play();
+	_player.Evaluate(false, false, 17);
+	_player.PrintBalance();
+	EXPECT_EQ( balance - 2.0*_originalWager, _player.GetBalance());
+	_player.PutCardsBack();
+
+
+    std::cin.rdbuf(cinbuf);   //reset to standard input again
+    std::cout.rdbuf(coutbuf); //reset to standard output again
 }
