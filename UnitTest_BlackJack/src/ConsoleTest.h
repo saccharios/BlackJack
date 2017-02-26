@@ -44,8 +44,8 @@ class Console_Test : public ::testing::Test
 	void Run_ReadInAction();
 	void Run_ReadInName();
 	private:
-	std::ofstream _out_stream;
-	std::ifstream _in_stream;
+	std::stringstream _out_stream;
+	std::stringstream _in_stream;
 	Console _console;
 	std::string in = "_in.txt";
 	std::string out = "_out.txt";
