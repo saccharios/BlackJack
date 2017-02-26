@@ -41,7 +41,7 @@ void HandManagerTest::Run_ActionSplit()
 void HandManagerTest::Run_ActionSplit_Aces()
 {
 	// This is a special case and can best be tested with a special deck.
-	// Thus the deck and handManager are not the member variables
+	// Thus the deck and handManager are not the member variables.
 	Deck deck;
 	deck.AddCard(pCard(new Card("A","s")));
 	deck.AddCard(pCard(new Card("A","d")));

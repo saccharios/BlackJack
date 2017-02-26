@@ -16,8 +16,8 @@ void DealerTest::Run_Play()
 {
 	_dealer.Play();
 	// Depends on the order of the cards in the deck.
-	EXPECT_EQ(20u, _dealer.GetValue());
-	EXPECT_EQ(5u, _dealer.GetHoleCards().Size());
+	EXPECT_EQ(23u, _dealer.GetValue());
+	EXPECT_EQ(4u, _dealer.GetHoleCards().Size());
 	_dealer.PrintCards();
 }
 void DealerTest::Run_ActionHit()
@@ -59,23 +59,18 @@ void DealerTest::Run_IsBusted()
 void DealerTest::Run_GetValue()
 {
 	auto sum = 0u;
-	// Draw cards from 2 to K an check value
-	for(auto i = 0u; i < 13u; ++i)
-	{
-		if( i < 8)
-		{
-			sum += i+2;
-		}
-		else if( i == 8 )
-		{
-			sum += 1u;
-		}
-		else
-		{
-			sum += 10u;
-		}
-		_dealer.ActionHit();
-		EXPECT_EQ(sum,_dealer.GetValue()) << "i = " << i;
-	}
+	// Draw some cards
+	_dealer.ActionHit();
+	sum += 2;
+	EXPECT_EQ(sum,_dealer.GetValue());
+	_dealer.ActionHit();
+	sum += 9;
+	EXPECT_EQ(sum,_dealer.GetValue());
+	sum += 2;
+	_dealer.ActionHit();
+	EXPECT_EQ(sum,_dealer.GetValue());
+	sum += 10;
+	_dealer.ActionHit();
+	EXPECT_EQ(sum,_dealer.GetValue());
 
 }

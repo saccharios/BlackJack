@@ -125,9 +125,8 @@ void PlayerTest::Run_Play()
 	_player.Start();
 	_player.Play();
 	_player.Evaluate(false, false, 17);
-	_player.PrintBalance();
 	// The cards drawn (and hence their value) depend on the seed of the deck.
-	EXPECT_EQ( _initBalance + _originalWager, _player.GetBalance());
+	EXPECT_EQ( _initBalance - _originalWager, _player.GetBalance());
 	_player.PutCardsBack();
 	auto balance = _player.GetBalance();
 	// Second test with double as action and two hands
@@ -139,8 +138,7 @@ void PlayerTest::Run_Play()
 	_player.AddHand(std::move(newHand));
 	_player.Play();
 	_player.Evaluate(false, false, 17);
-	_player.PrintBalance();
-	EXPECT_EQ( balance - 2.0*_originalWager, _player.GetBalance());
+	EXPECT_EQ( balance + 4.0*_originalWager, _player.GetBalance());
 	_player.PutCardsBack();
 
 

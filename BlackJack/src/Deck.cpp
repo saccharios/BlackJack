@@ -39,22 +39,22 @@ void Deck::AddCompleteSet()
 }
 
 
-Deck::pCard Deck::Draw(std::size_t number)
+Deck::pCard Deck::Draw(std::size_t rnd_number)
 {
 	// Draw card at position number if it is within bounds and return it to the caller.
-	assert(number < Size());
+	assert(rnd_number < Size());
 	assert(!_cardContainer.empty());
-	auto Card =  std::move(_cardContainer.at(number));
-	_cardContainer.erase(_cardContainer.begin()+number);
+
+	auto Card =  std::move(_cardContainer.at(rnd_number));
+	_cardContainer.erase(_cardContainer.begin()+rnd_number);
 	return Card;
 }
 
 Deck::pCard Deck::Draw()
 {
 	// Draw random card from the deck
-	std::default_random_engine rng(_seed);
 	std::uniform_int_distribution<int> uniformDist(0, _cardContainer.size()-1);
-	auto random_integer = uniformDist(rng);
+	auto random_integer = uniformDist(_rng);
 	// Transfers ownership of the drawn card to the caller
 	return Draw(random_integer);
 }
