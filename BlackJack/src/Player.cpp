@@ -32,13 +32,18 @@ void Player::Start()
 	// Initial start routine for the player
 	_handManager.push_back(std::move(pHandManager(new HandManager(_deck, _orignialWager, 0))));
 	_handManager.at(0)->Start();
-	PrintCards();
+
+	std::stringstream strm;
+	strm << GetName() << "'s Cards are: ";
+	console.Write(strm);
+	_handManager.at(0)->PrintCards();
+
 }
 void Player::Play()
 {
 	std::stringstream strm;
 	// Player plays his hands. Number of hands can increase due to spliting
-	strm << "-------" << GetName() <<  "'s turn-------\n";
+	strm << "-------" << GetName() <<  "'s turn-------" << std::endl;
 	console.Write(strm);
 	std::size_t  handNr = 0;
 	while(handNr < _handManager.size()) // Spliting cards creates more hands
@@ -178,21 +183,6 @@ void Player::Evaluate (
 	}
 }
 
-
-void Player::PrintCards() const
-{
-	std::stringstream strm;
-	strm << GetName() << "'s Cards are: ";
-	console.Write(strm);
-	auto i = 0u;
-	for( auto const & currentHand : _handManager)
-	{
-		strm << "Hand Nr " << i << " ";
-		console.Write(strm);
-		currentHand->PrintCards();
-		++i;
-	}
-}
 
 void Player::PutCardsBack()
 {

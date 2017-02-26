@@ -13,7 +13,7 @@
 #include "GlobalDeclarations.h"
 
 
-void Console::Write( std::stringstream & strm )
+void Console::Write( std::stringstream const & strm )
 {
 	_ostream << strm.str();
 }

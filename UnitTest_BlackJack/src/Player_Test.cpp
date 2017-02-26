@@ -113,19 +113,14 @@ void PlayerTest::Run_GetAvailableActionSet()
 
 void PlayerTest::Run_Play()
 {
-
-	std::string file_name = "file_Player";
-	std::ifstream in_stream_cin(file_name + "_in.txt");
-	auto cinbuf = std::cin.rdbuf(in_stream_cin.rdbuf()); //save and redirect
-	std::ofstream out_stream_cout(file_name + "_out.txt");
-	auto coutbuf = std::cout.rdbuf(out_stream_cout.rdbuf()); //save and redirect
+	std::stringstream in_stream;
+//	std::stringstream out_stream;
+	auto cinbuf = std::cin.rdbuf(in_stream.rdbuf()); //save and redirect
+//	auto coutbuf = std::cout.rdbuf(out_stream.rdbuf()); //save and redirect
 
 	// First test, play one hand
-	std::ofstream out_stream;
-	out_stream.open(file_name + "_in.txt");
-	out_stream << "h\n" << "h\n" << "h\n" << "s" << std::endl;
-	out_stream << "d\n" << "h\n" << "h\n" << "s\n" << std::endl;
-	out_stream.close();
+	in_stream << "h\n" << "h\n" << "h\n" << "s" << std::endl;
+	in_stream << "d\n" << "h\n" << "h\n" << "s\n" << std::endl;
 	_player.SetWager(1.0);
 	_player.Start();
 	_player.Play();
@@ -150,5 +145,5 @@ void PlayerTest::Run_Play()
 
 
     std::cin.rdbuf(cinbuf);   //reset to standard input again
-    std::cout.rdbuf(coutbuf); //reset to standard output again
+//    std::cout.rdbuf(coutbuf); //reset to standard output again
 }

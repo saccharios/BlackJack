@@ -31,7 +31,6 @@ public:
 	std::string PlayBasicStrategy() const;
 	std::set<std::string> GetAvailableActionSet(std::set<std::string> const & actionSet) const;
 	void Evaluate(	bool const & dealerHasBlackJack, bool const & dealerIsBusted, unsigned int const & dealerValue);
-	void PrintCards() const;
 	void PutCardsBack();
 	void SetWagerUser ();
 	void SetWager (double const & wager);

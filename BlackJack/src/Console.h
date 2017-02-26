@@ -33,7 +33,7 @@ public:
 		_ostream << "You have entered " << value << "."<<std::endl;
 		return value;
 	}
-	void Write( std::stringstream & strm );
+	void Write( std::stringstream const & strm );
 	void WriteString( std::string const & str );
 private:
 	std::ostream & _ostream;
