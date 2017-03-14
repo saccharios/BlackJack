@@ -7,7 +7,8 @@
 
 
 #include "Player_Test.h"
-#include "../../BlackJack/src/HandManager.h"
+
+#include <PlayerHand.h>
 #include "../../BlackJack/src/GlobalDeclarations.h"
 #include <iostream>
 #include <fstream>
@@ -85,7 +86,7 @@ void PlayerTest::Run_SubractFromBalance()
 void PlayerTest::Run_PutCardsBack()
 {
 	_player.Start();
-	auto hand = pHandManager(new HandManager(_deck, _originalWager,1));
+	auto hand = pHandManager(new PlayerHand(_deck, _originalWager,1));
 	hand->Start();
 	_player.AddHand(std::move(hand));
 	EXPECT_EQ(2u, _player.GetNumHands());
@@ -133,7 +134,7 @@ void PlayerTest::Run_Play()
 	_player.SetWager(1.0);
 	_player.Start();
 	// Emulate splitting (cant set balance though)
-	auto newHand = std::unique_ptr<HandManager>(new HandManager(_deck, _originalWager, handNr + 1 ));
+	auto newHand = std::unique_ptr<PlayerHand>(new PlayerHand(_deck, _originalWager, handNr + 1 ));
 	newHand->Start();
 	_player.AddHand(std::move(newHand));
 	_player.Play();

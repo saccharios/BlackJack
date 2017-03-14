@@ -10,11 +10,11 @@
 #include "Player.h"
 #include "Card.h"
 #include "HoleCards.h"
-#include "HandManager.h"
 #include "Deck.h"
 #include "GlobalDeclarations.h"
 #include "assert.h"
 #include "Console.h"
+#include "PlayerHand.h"
 
 Player::Player(Deck & deck, std::string name, double balance) :
 _balance(balance),
@@ -30,7 +30,7 @@ _name(name)
 void Player::Start()
 {
 	// Initial start routine for the player
-	_handManager.push_back(std::move(pHandManager(new HandManager(_deck, _orignialWager, 0))));
+	_handManager.push_back(std::move(pPlayerHand(new PlayerHand(_deck, _orignialWager, 0))));
 	_handManager.at(0)->Start();
 
 	std::stringstream strm;
@@ -56,7 +56,7 @@ void Player::Play()
 	}
 }
 
-void Player::PlayOneHand(pHandManager const & hand)
+void Player::PlayOneHand(pPlayerHand const & hand)
 {
 
 	std::stringstream strm;
@@ -83,7 +83,7 @@ void Player::PlayOneHand(pHandManager const & hand)
 		PlayAction(action, hand);
 	}
 }
-void Player::PlayAction(std::string action, pHandManager const & hand)
+void Player::PlayAction(std::string action, pPlayerHand const & hand)
 {
 	// Actions are identified by a string. Using polymorphism to deal with actions would require
 	// to introduce an interface action class and four derivatives. However, one still would
@@ -106,23 +106,23 @@ void Player::PlayAction(std::string action, pHandManager const & hand)
 		Stand(hand);
 	}
 }
-void Player::Hit(pHandManager const & hand)
+void Player::Hit(pPlayerHand const & hand)
 {
 	console.WriteString("You choose to Hit. ");
 	hand->ActionHit();
 }
-void Player::Stand(pHandManager const & hand)
+void Player::Stand(pPlayerHand const & hand)
 {
 	console.WriteString("You choose to Stand.\n");
 	hand->ActionStand();
 }
-void Player::Double(pHandManager const & hand)
+void Player::Double(pPlayerHand const & hand)
 {
 	console.WriteString("You choose to Double. ");
 	SubtractFromBalance(_orignialWager);
 	hand->ActionDouble();
 }
-void Player::Split(pHandManager const & hand)
+void Player::Split(pPlayerHand const & hand)
 {
 	console.WriteString("You choose to Split.");
 	SubtractFromBalance(_orignialWager);
@@ -130,7 +130,7 @@ void Player::Split(pHandManager const & hand)
 	AddHand(std::move(newHand));
 }
 
-void Player::AddHand(pHandManager hand)
+void Player::AddHand(pPlayerHand hand)
 {
 	// Routine is used for testing PutCardsBack()
 	_handManager.push_back(std::move(hand));

@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "../../BlackJack/src/Player.h"
 #include "../../BlackJack/src/Deck.h"
-class HandManager;
+class PlayerHand;
 
 class PlayerTest : public ::testing::Test
 {
@@ -23,14 +23,14 @@ private:
 	const double _originalWager = 1.0;
 	const std::size_t handNr = 0;
 public:
-	using pHandManager = std::unique_ptr<HandManager>;
+	using pHandManager = std::unique_ptr<PlayerHand>;
 	using pCard = std::unique_ptr<Card>;
 	PlayerTest() : _deck(0), _player(_deck, _name, _initBalance)
 	// Use seed 0 to always draw the same card.
 	// The card drawn depends only on their order in the deck.
 	{
 		_deck.AddSets(_numDecks);
-		_hand = pHandManager(new HandManager(_deck, _originalWager, handNr));
+		_hand = pHandManager(new PlayerHand(_deck, _originalWager, handNr));
 	}
 //	void SetUp()
 //	{

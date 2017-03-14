@@ -1,12 +1,12 @@
 /*
- * HandManager.h
+ * PlayerHand.h
  *
  *  Created on: 07.01.2017
  *      Author: Stefan
  */
 
-#ifndef HANDMANAGER_H_
-#define HANDMANAGER_H_
+#ifndef PLAYERHAND_H_
+#define PLAYERHAND_H_
 
 #include <memory>
 #include "HoleCards.h"
@@ -15,25 +15,25 @@
 class Card;
 class Deck;
 
-// The HandManager is a wrapper class for the hole cards for a player.
+// The PlayerHand is a wrapper class for the hole cards for a player.
 // Note that a dealer is not a player, as a player has more options available.
 // A dealer also has hole cards. In addition, this class lets you set wagers
 // on hole cards, evaluate the payout, keeps track whether a player can keep playing
 // and evaluates possible user actions.
-class HandManager {
+class PlayerHand {
 	using pCard = std::unique_ptr<Card>;
-	using pHandManager = std::unique_ptr<HandManager>;
+	using pPlayerHand = std::unique_ptr<PlayerHand>;
 public:
-	HandManager (Deck & deck, double const & wager, std::size_t const & handNumber);
+	PlayerHand (Deck & deck, double const & wager, std::size_t const & handNumber);
 
 	// Not allowed to copy or assign, because it contains a card container (which has unique_ptrs)
-	HandManager (HandManager const & player) = delete;
-	HandManager & operator= (const HandManager & other) = delete;
+	PlayerHand (PlayerHand const & player) = delete;
+	PlayerHand & operator= (const PlayerHand & other) = delete;
 
 	void Start();
 	void Start( pCard card1 );
 	bool IsFirstAction() const { return (_holeCards.Size() == 2); }
-	pHandManager ActionSplit();
+	pPlayerHand ActionSplit();
 	void ActionDouble();
 	void ActionHit();
 	void ActionStand();
@@ -66,4 +66,4 @@ private:
 };
 
 
-#endif /* HANDMANAGER_H_ */
+#endif /* PLAYERHAND_H_ */

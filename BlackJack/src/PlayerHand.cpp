@@ -1,19 +1,20 @@
 /*
- * HandManager.cpp
+ * PlayerHand.cpp
  *
  *  Created on: 11.01.2017
  *      Author: Stefan
  */
 
 
+#include "PlayerHand.h"
+
 #include <memory>
-#include "HandManager.h"
 #include "HoleCards.h"
 #include "Card.h"
 #include "Deck.h"
 #include "GlobalDeclarations.h"
 
-HandManager::HandManager (Deck & deck, double const & wager, std::size_t const & handNumber):
+PlayerHand::PlayerHand (Deck & deck, double const & wager, std::size_t const & handNumber):
 _deck(deck),
 _handNumber(handNumber),
 _isPlayed(false)
@@ -39,7 +40,7 @@ _isPlayed(false)
 }
 
 
-void HandManager::Start()
+void PlayerHand::Start()
 {
 	// Normal start function for the player
 	auto card1 = _deck.Draw();
@@ -54,7 +55,7 @@ void HandManager::Start()
 	_isPlayed = false;
 }
 
-void HandManager::Start( pCard card1 )
+void PlayerHand::Start( pCard card1 )
 {
 	// Start function only used when one card is known, so during splitting
 	console.WriteString("Draw second card: ");
@@ -66,7 +67,7 @@ void HandManager::Start( pCard card1 )
 	_isPlayed = false;
 }
 
-HandManager::pHandManager HandManager::ActionSplit()
+PlayerHand::pPlayerHand PlayerHand::ActionSplit()
 {
 	// Save if pair is Aces for later
 	auto wasAces = _holeCards.ArePairAces();
@@ -78,7 +79,7 @@ HandManager::pHandManager HandManager::ActionSplit()
 	Start(std::move(card1));
 	// Create new hand with incremented hand number
 	auto nextNr = GetHandNumber() + 1;
-	auto newHand = pHandManager(new HandManager(_deck, _wager,nextNr));
+	auto newHand = pPlayerHand(new PlayerHand(_deck, _wager,nextNr));
 
 	newHand->PrintHandNumber();
 	newHand->Start(std::move(cardForNewHand));
@@ -91,13 +92,13 @@ HandManager::pHandManager HandManager::ActionSplit()
 
 	return newHand;
 }
-void HandManager::ActionDouble()
+void PlayerHand::ActionDouble()
 {
 	_wager *= 2.0;
 	ActionHit();
 	_isPlayed = true;
 }
-void HandManager::ActionHit()
+void PlayerHand::ActionHit()
 {
 	console.WriteString("Draw a card....\n");
 	auto card = _deck.Draw();
@@ -109,12 +110,12 @@ void HandManager::ActionHit()
 	PrintCards();
 	_isPlayed = GetValue() > 20; // No need to keep playing if you have 21 points
 }
-void HandManager::ActionStand()
+void PlayerHand::ActionStand()
 {
 	_isPlayed = true; // Stops the actions
 }
 
-double HandManager::Evaluate(double const & dealerHasBlackJack,
+double PlayerHand::Evaluate(double const & dealerHasBlackJack,
 		bool const & dealerIsBusted,
 		unsigned int const & dealerValue) const
 {
@@ -156,44 +157,44 @@ double HandManager::Evaluate(double const & dealerHasBlackJack,
 		return PayoutPush();
 	}
 }
-double HandManager::PayoutPush () const
+double PlayerHand::PayoutPush () const
 {
 	console.WriteString("Push.\n");
 	return GetWager();
 }
-double HandManager::PayoutLoose () const
+double PlayerHand::PayoutLoose () const
 {
 	console.WriteString("Loose.\n");
 	return 0.0;
 
 }
-double HandManager::PayoutWin () const
+double PlayerHand::PayoutWin () const
 {
 	console.WriteString("Win.\n");
 	return 2.0*GetWager();
 }
-double HandManager::PayoutBlackJack () const
+double PlayerHand::PayoutBlackJack () const
 {
 	console.WriteString("BlackJack pays 5 to 2\n");
 	return 2.5*GetWager();
 }
 
 
-void HandManager::PrintHandNumber() const
+void PlayerHand::PrintHandNumber() const
 {
 	std::stringstream strm;
 	strm << "Hand " << GetHandNumber() << ": ";
 	console.Write(strm);
 }
 
-void HandManager::PutCardsBack()
+void PlayerHand::PutCardsBack()
 {
 	while(!IsEmpty())
 	{
 		_deck.AddCard(std::move(_holeCards.RemoveLastCard()));
 	}
 }
-std::set<std::string>  HandManager::GetAvailableActionSet() const
+std::set<std::string>  PlayerHand::GetAvailableActionSet() const
 {
 	// Depending only on status of the hand, returns available actions
 	if(IsFirstAction() )
