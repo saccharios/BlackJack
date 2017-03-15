@@ -78,7 +78,6 @@ void Player::PlayOneHand(pPlayerHand const & hand)
 		auto actionSetPlayer = GetAvailableActionSet(actionSetCards);
 		console.WriteString("Enter action: ");
 		auto action = console.ReadInAction(actionSetPlayer);
-		// TODO			auto action = PlayBasicStrategy(); // AutoPlayer
 
 		PlayAction(action, hand);
 	}
@@ -146,7 +145,6 @@ std::string Player::PlayBasicStrategy() const
 	{
 		return "s";
 	}
-
 }
 
 std::set<std::string> Player::GetAvailableActionSet(std::set<std::string> const & actionSet) const

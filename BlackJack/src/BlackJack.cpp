@@ -9,7 +9,7 @@
 #include "Card.h"
 #include "GlobalDeclarations.h"
 #include "HoleCards.h"
-// TODO Write Unittest with gtest (Game) (or a simulation)
+// TODO Write Unittest with gtest (Game) (that would be then a simulation)
 // TODO Use make_unique instead of new. Problem: Eclipse indexer does not recoginze make_unique<T>()
 
 int main(int argc, char ** argv)

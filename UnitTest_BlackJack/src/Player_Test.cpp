@@ -115,9 +115,8 @@ void PlayerTest::Run_GetAvailableActionSet()
 void PlayerTest::Run_Play()
 {
 	std::stringstream in_stream;
-//	std::stringstream out_stream;
-	auto cinbuf = std::cin.rdbuf(in_stream.rdbuf()); //save and redirect
-//	auto coutbuf = std::cout.rdbuf(out_stream.rdbuf()); //save and redirect
+	// Save and redirect "std::cin" because the console in the game only uses the standard console
+	auto cinbuf = std::cin.rdbuf(in_stream.rdbuf());
 
 	// First test, play one hand
 	in_stream << "h\n" << "h\n" << "h\n" << "s" << std::endl;
@@ -144,5 +143,4 @@ void PlayerTest::Run_Play()
 
 
     std::cin.rdbuf(cinbuf);   //reset to standard input again
-//    std::cout.rdbuf(coutbuf); //reset to standard output again
 }
