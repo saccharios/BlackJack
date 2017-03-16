@@ -17,7 +17,8 @@ int main(int argc, char ** argv)
 	Game game;
 	game.PrintRules();
 	game.AddDecks();
-	game.AddPlayers();
+	game.AddHumanPlayers();
+	game.AddAIPlayers();
 	do
 	{
 		game.PlayRound();

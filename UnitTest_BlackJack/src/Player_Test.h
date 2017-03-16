@@ -11,6 +11,7 @@
 
 #include "gtest/gtest.h"
 #include "../../BlackJack/src/Player.h"
+#include "../../BlackJack/src/Player_Strategy.h"
 #include "../../BlackJack/src/Deck.h"
 class PlayerHand;
 
@@ -57,7 +58,7 @@ public:
 	void Run_Play();
 private:
 	Deck _deck;
-	Player _player;
+	HumanPlayer _player;
 	pHandManager _hand;
 };
 TEST_F(PlayerTest, Create)

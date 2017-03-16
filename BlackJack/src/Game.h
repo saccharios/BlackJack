@@ -6,10 +6,10 @@
  */
 
 #include "Deck.h"
-#include "Player.h"
 #include "Dealer.h"
 #include <memory>
 #include "GlobalDeclarations.h"
+#include "Player_Strategy.h"
 
 #ifndef GAME_H_
 #define GAME_H_
@@ -18,6 +18,8 @@
 // It guides the game.
 class Game {
 	using pPlayer = std::unique_ptr<Player>;
+	using pHumanPlayer = std::unique_ptr<HumanPlayer>;
+	using pAIPlayer = std::unique_ptr<AIPlayer>;
 public:
 	Game () : _deck(), _dealer(_deck), _players() {}
 
@@ -26,7 +28,8 @@ public:
 	void operator=(Game const&) = delete;
 
 	void AddDecks();
-	void AddPlayers();
+	void AddHumanPlayers();
+	void AddAIPlayers();
 	void PlayRound();
 	void SetWagers();
 	void GetStartCards();

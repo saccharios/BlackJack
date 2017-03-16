@@ -20,6 +20,7 @@ class Player {
 public:
 
 	Player(Deck & deck, std::string name, double balance);
+	virtual ~Player(){}
 	// Not allowed to copy or assign
 	Player (Player const & player) = delete;
 	Player & operator= (const Player & other) = delete;
@@ -47,6 +48,7 @@ public:
 	void SubtractFromBalance(double const & value);
 	std::size_t GetNumHands() {return _handManager.size();}
 	void AddHand(pPlayerHand hand);
+	virtual std::string strategy(std::set<std::string> const & stringSet) const = 0;
 
 private:
 	double _balance;

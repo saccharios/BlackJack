@@ -24,11 +24,11 @@ void Game::AddDecks()
 	_deck.AddSets(NSets);
 }
 
-void Game::AddPlayers()
+void Game::AddHumanPlayers()
 {
 	// Player creator function. Needs user input.
-	console.WriteString("How many players want to play?\n");
-	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS);
+	console.WriteString("How many human players want to play?\n");
+	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS - _players.size());
 	console.WriteString("Enter names and balances for each player:\n" );
 	std::stringstream strm;
 	for( std::size_t i = 0; i < NPlayers; ++i )
@@ -38,10 +38,20 @@ void Game::AddPlayers()
 		console.Write(strm);
 		auto balance = console.ReadInNumber( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
 
-		_players.push_back(std::move(pPlayer(new Player(_deck, name, balance))));
+		_players.push_back(std::move(pHumanPlayer(new HumanPlayer(_deck, name, balance))));
 	}
 }
-
+void Game::AddAIPlayers()
+{
+	// Player creator function. Needs user input.
+	console.WriteString("How many computer players want to play?\n");
+	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS - _players.size());
+	for( std::size_t i = 0; i < NPlayers; ++i )
+	{
+		std::string name = "AIPlayer_" + i;
+		_players.push_back(std::move(pAIPlayer(new AIPlayer(_deck, name, MAX_INIT_BALANCE))));
+	}
+}
 
 void Game::PlayRound()
 {
