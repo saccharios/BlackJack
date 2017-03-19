@@ -206,7 +206,7 @@ const std::map<Key,std::string> AIPlayer_Optimal::optimalStrategy = {
 
 		// Define soft, non pair hands
 		//{Key{  Value, isSoft, isPair, isAces, Dealer Value}, Action }
-		//  Value 21
+		//  Value Soft 21
 		{Key{21,true,false,false,2},STAND},
 		{Key{21,true,false,false,3},STAND},
 		{Key{21,true,false,false,4},STAND},
@@ -217,7 +217,7 @@ const std::map<Key,std::string> AIPlayer_Optimal::optimalStrategy = {
 		{Key{21,true,false,false,9},STAND},
 		{Key{21,true,false,false,10},STAND},
 		{Key{21,true,false,false,11},STAND},
-		//  Value 20
+		//  Value Soft  20
 		{Key{20,true,false,false,2},STAND},
 		{Key{20,true,false,false,3},STAND},
 		{Key{20,true,false,false,4},STAND},
@@ -228,7 +228,7 @@ const std::map<Key,std::string> AIPlayer_Optimal::optimalStrategy = {
 		{Key{20,true,false,false,9},STAND},
 		{Key{20,true,false,false,10},STAND},
 		{Key{20,true,false,false,11},STAND},
-		//  Value 19
+		//  Value Soft  19
 		{Key{19,true,false,false,2},STAND},
 		{Key{19,true,false,false,3},STAND},
 		{Key{19,true,false,false,4},STAND},
@@ -239,18 +239,18 @@ const std::map<Key,std::string> AIPlayer_Optimal::optimalStrategy = {
 		{Key{19,true,false,false,9},STAND},
 		{Key{19,true,false,false,10},STAND},
 		{Key{19,true,false,false,11},STAND},
-		//  Value 18
+		//  Value Soft  18
 		{Key{18,true,false,false,2},STAND},
-		{Key{18,true,false,false,3},HIT},
-		{Key{18,true,false,false,4},HIT},
-		{Key{18,true,false,false,5},HIT},
-		{Key{18,true,false,false,6},HIT},
+		{Key{18,true,false,false,3},DOUBLE},
+		{Key{18,true,false,false,4},DOUBLE},
+		{Key{18,true,false,false,5},DOUBLE},
+		{Key{18,true,false,false,6},DOUBLE},
 		{Key{18,true,false,false,7},STAND},
 		{Key{18,true,false,false,8},STAND},
 		{Key{18,true,false,false,9},HIT},
 		{Key{18,true,false,false,10},HIT},
 		{Key{18,true,false,false,11},HIT},
-		//  Value 17
+		//  Value Soft  17
 		{Key{17,true,false,false,2},HIT},
 		{Key{17,true,false,false,3},DOUBLE},
 		{Key{17,true,false,false,4},DOUBLE},
@@ -261,7 +261,7 @@ const std::map<Key,std::string> AIPlayer_Optimal::optimalStrategy = {
 		{Key{17,true,false,false,9},HIT},
 		{Key{17,true,false,false,10},HIT},
 		{Key{17,true,false,false,11},HIT},
-		//  Value 16
+		//  Value Soft  16
 		{Key{16,true,false,false,2},HIT},
 		{Key{16,true,false,false,3},HIT},
 		{Key{16,true,false,false,4},DOUBLE},
@@ -272,18 +272,18 @@ const std::map<Key,std::string> AIPlayer_Optimal::optimalStrategy = {
 		{Key{16,true,false,false,9},HIT},
 		{Key{16,true,false,false,10},HIT},
 		{Key{16,true,false,false,11},HIT},
-		//  Value 15
+		//  Value Soft  15
 		{Key{15,true,false,false,2},HIT},
-		{Key{15,true,false,false,3},DOUBLE},
+		{Key{15,true,false,false,3},HIT},
 		{Key{15,true,false,false,4},DOUBLE},
 		{Key{15,true,false,false,5},DOUBLE},
-		{Key{15,true,false,false,6},HIT},
+		{Key{15,true,false,false,6},DOUBLE},
 		{Key{15,true,false,false,7},HIT},
 		{Key{15,true,false,false,8},HIT},
 		{Key{15,true,false,false,9},HIT},
 		{Key{15,true,false,false,10},HIT},
 		{Key{15,true,false,false,11},HIT},
-		//  Value 14
+		//  Value Soft  14
 		{Key{14,true,false,false,2},HIT},
 		{Key{14,true,false,false,3},HIT},
 		{Key{14,true,false,false,4},HIT},
@@ -294,7 +294,7 @@ const std::map<Key,std::string> AIPlayer_Optimal::optimalStrategy = {
 		{Key{14,true,false,false,9},HIT},
 		{Key{14,true,false,false,10},HIT},
 		{Key{14,true,false,false,11},HIT},
-		//  Value 13
+		//  Value Soft  13
 		{Key{13,true,false,false,2},HIT},
 		{Key{13,true,false,false,3},HIT},
 		{Key{13,true,false,false,4},HIT},

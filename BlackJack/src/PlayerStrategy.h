@@ -102,7 +102,6 @@ public:
 	strategy_optimal(unsigned int value, bool isSoft, bool isPair, bool isAces, unsigned int dealerValue) const
 	{
 		Key key{value, isSoft, isPair, isAces, dealerValue};
-		std::cout << " YOO.----------------------------------------------------- action = " << optimalStrategy.at(key) << std::endl;
 		return optimalStrategy.at(key);
 	}
 
