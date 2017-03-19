@@ -53,14 +53,25 @@ void HoleCards::StartCards(pCard card1, pCard card2)
 
 void HoleCards::AddCard(pCard card)
 {
-	// Adds card to the container and evaluates if it is blackjack or busted
+	// Adds card to the container
 	_cardContainer.push_back(std::move(card));
+	// Set characteristics
+//	_areBlackJack = false;
+//	_areBusted = false;
+//	_arePairAces = false;
+//	_arePair = false;
+//	_numSoftAces = 0;
+
+	// Evaluate characteristics
 	CalculateValue();
 	auto value = GetValue();
-	if( _cardContainer.size() == 2u && value ==  21u)
+
+	if( _cardContainer.size() == 2u )
 	{
-		_areBlackJack = true;
-		console.WriteString("BLACK JACK!\n");
+		if( value ==  21u)
+		{
+			_areBlackJack = true;
+		}
 	}
 	else if ( value > 21u)
 	{
@@ -98,6 +109,7 @@ unsigned int HoleCards::GetValue() const
 
 void HoleCards::Reset()
 {
+	// TODO Should become obsolete if AddCard is done properly.
 	_areBlackJack = false;
 	_arePair = false;
 	_arePairAces = false;

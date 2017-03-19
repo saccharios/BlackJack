@@ -47,42 +47,59 @@ void HoleCardsTest::Run_TwoStartCard()
 }
 void HoleCardsTest::Run_GetValue()
 {
-		auto valueSum(0u);
-		// Test Value for all cards of spades, handle the ace special
-		for(const auto & face : FACE)
+	auto valueSum(0u);
+	// Test Value for all cards of spades, handle the ace special
+	for(const auto & face : FACE)
+	{
+		_holeCards.AddCard(pCard(new Card(face.first,"s")));
+		valueSum += face.second;
+		if( face.first == "A" && valueSum > 21u)
 		{
-			_holeCards.AddCard(pCard(new Card(face.first,"s")));
-			valueSum += face.second;
-			if( face.first == "A" && valueSum > 21u)
-			{
-				valueSum -= 10u;
-			}
-			EXPECT_EQ(valueSum, _holeCards.GetValue());
+			valueSum -= 10u;
 		}
-		// By now value is busted
-		EXPECT_TRUE(_holeCards.AreBusted());
-		_holeCards.Reset();
-		EXPECT_FALSE(_holeCards.AreBusted());
+		EXPECT_EQ(valueSum, _holeCards.GetValue());
+	}
+	// By now value is busted
+	EXPECT_TRUE(_holeCards.AreBusted());
+	// Check if reset works
+	_holeCards.Reset();
+	EXPECT_FALSE(_holeCards.AreBusted());
 }
 void HoleCardsTest::Run_Pair()
 {
+	// Add a pair
 	_holeCards.StartCards(pCard(new Card("K","s")),pCard(new Card("K","d")));
 	EXPECT_TRUE(_holeCards.ArePair());
+	// Add another card, hole Cards are no longer pair
+	_holeCards.AddCard(pCard(new Card("2","s")));
+	EXPECT_FALSE(_holeCards.ArePair());
+
 }
 void HoleCardsTest::Run_PairAces()
 {
+	// Add pair of aces
 	_holeCards.StartCards(pCard(new Card("A","s")),pCard(new Card("A","d")));
 	EXPECT_TRUE(_holeCards.ArePair());
 	EXPECT_TRUE(_holeCards.ArePairAces());
+	// Add another card, hole Cards are no longer pair
+	_holeCards.AddCard(pCard(new Card("2","s")));
+	EXPECT_FALSE(_holeCards.ArePair());
+	EXPECT_FALSE(_holeCards.ArePairAces());
+	// Check if reset works
 	_holeCards.Reset();
 	EXPECT_FALSE(_holeCards.ArePair());
 	EXPECT_FALSE(_holeCards.ArePairAces());
 }
 void HoleCardsTest::Run_BlackJack()
 {
+	// Add BlackJack
 	_holeCards.StartCards(pCard(new Card("A","s")),pCard(new Card("K","s")));
 	EXPECT_TRUE(_holeCards.AreBlackJack());
 	EXPECT_EQ(21u, _holeCards.GetValue());
+	// Add another card (altough this cannot happen in the game)
+	_holeCards.AddCard(pCard(new Card("2","s")));
+	EXPECT_FALSE(_holeCards.AreBlackJack());
+	// Check if reset works
 	_holeCards.Reset();
 	EXPECT_FALSE(_holeCards.AreBlackJack());
 }

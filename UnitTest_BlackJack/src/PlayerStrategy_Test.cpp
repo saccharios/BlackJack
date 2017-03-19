@@ -11,6 +11,6 @@
 void
 AIPlayer_OptimalTest::Run_OptimalStrategy()
 {
-
+	//_AIPlayer.strategy_optimal()
 
 }
