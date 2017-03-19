@@ -48,8 +48,9 @@ void Game::AddAIPlayers()
 	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS - _players.size());
 	for( std::size_t i = 0; i < NPlayers; ++i )
 	{
-		std::string name = "AIPlayer_" + i;
-		_players.push_back(std::move(pAIPlayer(new AIPlayer(_deck, name, MAX_INIT_BALANCE))));
+		std::ostringstream stm ;
+		stm << "AIPlayer_" << i ;
+		_players.push_back(std::move(pAIPlayer(new AIPlayer_Basic(_deck, stm.str(), MAX_INIT_BALANCE))));
 	}
 }
 

@@ -19,7 +19,7 @@
 class Game {
 	using pPlayer = std::unique_ptr<Player>;
 	using pHumanPlayer = std::unique_ptr<HumanPlayer>;
-	using pAIPlayer = std::unique_ptr<AIPlayer>;
+	using pAIPlayer = std::unique_ptr<AIPlayer_Basic>;
 public:
 	Game () : _deck(), _dealer(_deck), _players() {}
 

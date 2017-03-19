@@ -77,8 +77,7 @@ void Player::PlayOneHand(pPlayerHand const & hand)
 		auto actionSetCards = hand->GetAvailableActionSet();
 		auto actionSetPlayer = GetAvailableActionSet(actionSetCards);
 		console.WriteString("Enter action: ");
-//		auto action = console.ReadInAction(actionSetPlayer);
-		auto action = strategy(actionSetPlayer);
+		auto action = strategy(actionSetPlayer, hand);
 
 		PlayAction(action, hand);
 	}
@@ -134,18 +133,6 @@ void Player::AddHand(pPlayerHand hand)
 {
 	// Routine is used for testing PutCardsBack()
 	_handManager.push_back(std::move(hand));
-}
-
-std::string Player::PlayBasicStrategy() const
-{
-	if( _handManager.at(0)->GetValue() < 17 )
-	{
-		return "h";
-	}
-	else
-	{
-		return "s";
-	}
 }
 
 std::set<std::string> Player::GetAvailableActionSet(std::set<std::string> const & actionSet) const

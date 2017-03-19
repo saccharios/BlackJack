@@ -29,7 +29,6 @@ public:
 	void Play();
 	void PlayOneHand(pPlayerHand const & hand);
 	void PlayAction(std::string action, pPlayerHand const & hand);
-	std::string PlayBasicStrategy() const;
 	std::set<std::string> GetAvailableActionSet(std::set<std::string> const & actionSet) const;
 	void Evaluate(	bool const & dealerHasBlackJack, bool const & dealerIsBusted, unsigned int const & dealerValue);
 	void PutCardsBack();
@@ -48,7 +47,7 @@ public:
 	void SubtractFromBalance(double const & value);
 	std::size_t GetNumHands() {return _handManager.size();}
 	void AddHand(pPlayerHand hand);
-	virtual std::string strategy(std::set<std::string> const & stringSet) const = 0;
+	virtual std::string strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const = 0;
 
 private:
 	double _balance;
