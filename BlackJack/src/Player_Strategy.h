@@ -13,6 +13,7 @@
 #include "console.h"
 #include "GlobalDeclarations.h"
 #include "PlayerHand.h"
+#include "Dealer.h"
 
 class HumanPlayer : public Player{
 	using pPlayerHand = std::unique_ptr<PlayerHand>;
@@ -75,15 +76,24 @@ public:
 class AIPlayer_Optimal: public Player{
 	using pPlayerHand = std::unique_ptr<PlayerHand>;
 public:
-	AIPlayer_Optimal(Deck & deck, std::string name, double balance) : 	Player(deck, name, balance) {}
+	AIPlayer_Optimal(Deck & deck, std::string name, double balance, Dealer & dealer) : 	Player(deck, name, balance), _dealer(dealer) {}
 
-	// Always hit
 	std::string
 	strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const override
 	{
-		return "s"; // TODO Implement optimal strategy
+
+		return strategy_optimal(stringSet, hand, _dealer.GetValue());
+	}
+	// Optimal strategy depends on the first card of the dealer.
+	std::string
+	strategy_optimal(std::set<std::string> const & stringSet, pPlayerHand const & hand, unsigned int dealerValue) const
+	{
+		return "s";
 	}
 
+
+private:
+	Dealer & _dealer;
 };
 
 #endif /* SRC_PLAYER_STRATEGY_H_ */

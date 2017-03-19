@@ -43,15 +43,16 @@ void Game::AddHumanPlayers()
 }
 void Game::AddAIPlayers()
 {
-	// Player creator function. Needs user input.
-	console.WriteString("How many computer players want to play?\n");
-	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS - _players.size());
-	for( std::size_t i = 0; i < NPlayers; ++i )
-	{
-		std::ostringstream stm ;
-		stm << "AIPlayer_" << i ;
-		_players.push_back(std::move(pAIPlayer(new AIPlayer_Basic(_deck, stm.str(), MAX_INIT_BALANCE))));
-	}
+	// TODO Decommented because not used
+//	// Player creator function. Needs user input.
+//	console.WriteString("How many computer players want to play?\n");
+//	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS - _players.size());
+//	for( std::size_t i = 0; i < NPlayers; ++i )
+//	{
+//		std::ostringstream stm ;
+//		stm << "AIPlayer_" << i ;
+//		_players.push_back(std::move(pAIPlayer(new AIPlayer_Basic(_deck, stm.str(), MAX_INIT_BALANCE))));
+//	}
 }
 
 void Game::PlayRound()

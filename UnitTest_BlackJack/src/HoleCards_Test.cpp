@@ -53,9 +53,9 @@ void HoleCardsTest::Run_GetValue()
 		{
 			_holeCards.AddCard(pCard(new Card(face.first,"s")));
 			valueSum += face.second;
-			if( face.first == "A" && valueSum > 21)
+			if( face.first == "A" && valueSum > 21u)
 			{
-				valueSum -= 10;
+				valueSum -= 10u;
 			}
 			EXPECT_EQ(valueSum, _holeCards.GetValue());
 		}
@@ -95,10 +95,12 @@ void HoleCardsTest::Run_SoftAces()
 		if( i < 11 )
 		{
 			EXPECT_EQ(11u + i, _holeCards.GetValue()) <<" at " << i;
+			EXPECT_TRUE(_holeCards.AreSoft());
 		}
 		else
 		{
 			EXPECT_EQ(i+1, _holeCards.GetValue()) << " at " << i;
+			EXPECT_FALSE(_holeCards.AreSoft());
 		}
 	}
 }
