@@ -25,6 +25,12 @@ const std::set<std::string> SUIT{"h","d","c","s"};
 const std::map<std::string, unsigned int> FACE = {{"2", 2}, {"3", 3}, {"4", 4}, {"5", 5}, {"6", 6}, {"7", 7}, {"8", 8}, {"9", 9}, {"T", 10}, {"J", 10}, {"Q", 10}, {"K", 10}, {"A", 11}};
 
 // The actions of a player are identified by a string.
+// TODO replace usage of action strings with these:
+static const std::string HIT = "h";
+static const std::string DOUBLE = "d";
+static const std::string SPLIT = "p";
+static const std::string STAND = "s";
+
 const std::set<std::string> ACTION_SPLIT_DOUBLE{"h","s","d","p"};
 const std::set<std::string> ACTION_DOUBLE{"h","s","d"};
 const std::set<std::string> ACTION_STANDARD{"h","s"};

@@ -14,6 +14,8 @@
 #include "GlobalDeclarations.h"
 #include "PlayerHand.h"
 #include "Dealer.h"
+#include <map>
+
 
 class HumanPlayer : public Player{
 	using pPlayerHand = std::unique_ptr<PlayerHand>;
@@ -75,8 +77,15 @@ public:
 };
 class AIPlayer_Optimal: public Player{
 	using pPlayerHand = std::unique_ptr<PlayerHand>;
+	using Key = std::tuple<unsigned int, bool, bool, bool, unsigned int>;
+	using MapElement = std::pair<Key,std::string>;
 public:
-	AIPlayer_Optimal(Deck & deck, std::string name, double balance, Dealer & dealer) : 	Player(deck, name, balance), _dealer(dealer) {}
+	AIPlayer_Optimal(Deck & deck, std::string name, double balance, Dealer & dealer) :
+	Player(deck, name, balance),
+	_dealer(dealer)
+	{}
+
+	static const std::map<Key,std::string> optimalStrategy;
 
 	std::string
 	strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const override
@@ -86,14 +95,15 @@ public:
 		bool isPair = hand->IsPair();
 		bool isAces = hand->IsPairAces();
 
-
 		return strategy_optimal( value, isSoft, isPair, isAces, _dealer.GetValue());
 	}
 	// Optimal strategy depends on the first card of the dealer.
 	std::string
 	strategy_optimal(unsigned int value, bool isSoft, bool isPair, bool isAces, unsigned int dealerValue) const
 	{
-		return "s";
+		Key key{value, isSoft, isPair, isAces, dealerValue};
+		std::cout << " YOO.----------------------------------------------------- action = " << optimalStrategy.at(key) << std::endl;
+		return optimalStrategy.at(key);
 	}
 
 
