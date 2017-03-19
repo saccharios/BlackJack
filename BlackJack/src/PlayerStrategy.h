@@ -81,12 +81,17 @@ public:
 	std::string
 	strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const override
 	{
+		unsigned int value = hand->GetValue();
+		bool isSoft = hand->IsSoft();
+		bool isPair = hand->IsPair();
+		bool isAces = hand->IsPairAces();
 
-		return strategy_optimal(stringSet, hand, _dealer.GetValue());
+
+		return strategy_optimal( value, isSoft, isPair, isAces, _dealer.GetValue());
 	}
 	// Optimal strategy depends on the first card of the dealer.
 	std::string
-	strategy_optimal(std::set<std::string> const & stringSet, pPlayerHand const & hand, unsigned int dealerValue) const
+	strategy_optimal(unsigned int value, bool isSoft, bool isPair, bool isAces, unsigned int dealerValue) const
 	{
 		return "s";
 	}

@@ -41,6 +41,7 @@ public:
 	void PrintCards() const { _holeCards.PrintCards(); }
 	unsigned int GetValue() const { return _holeCards.GetValue(); }
 	bool const & IsPair() const { return _holeCards.ArePair(); }
+	bool const & IsPairAces() const { return _holeCards.ArePairAces(); }
 	bool const & IsBlackJack() const { return _holeCards.AreBlackJack(); }
 	bool IsSoft() const { return _holeCards.AreSoft(); }
 	bool IsEmpty() const { return _holeCards.IsEmpty(); }
