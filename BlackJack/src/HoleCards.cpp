@@ -27,7 +27,6 @@ void HoleCards::StartCards(pCard card)
 {
 	// Start method for the dealer. Can only start if the hand is empty.
 	assert(IsEmpty());
-	Reset();
 	AddCard(std::move(card));
 }
 
@@ -36,17 +35,6 @@ void HoleCards::StartCards(pCard card1, pCard card2)
 	// Start method for the player. Can only start if the hand if it is empty.
 	// Save if the two start hands are paired or even paired aces
 	assert(IsEmpty());
-	Reset();
-	// Check for a pair at start:
-	if ( card1->GetFace() == card2->GetFace())
-	{
-		_arePair = true;
-		if ( card1->IsAce())
-		{
-			_arePairAces = true;
-		}
-	}
-
 	AddCard(std::move(card1));
 	AddCard(std::move(card2));
 }
@@ -55,22 +43,27 @@ void HoleCards::AddCard(pCard card)
 {
 	// Adds card to the container
 	_cardContainer.push_back(std::move(card));
-	// Set characteristics
-//	_areBlackJack = false;
-//	_areBusted = false;
-//	_arePairAces = false;
-//	_arePair = false;
-//	_numSoftAces = 0;
-
+	// Resset characteristics
+	_areBlackJack = false;
+	_areBusted = false;
+	_arePairAces = false;
+	_arePair = false;
 	// Evaluate characteristics
 	CalculateValue();
 	auto value = GetValue();
-
 	if( _cardContainer.size() == 2u )
 	{
 		if( value ==  21u)
 		{
 			_areBlackJack = true;
+		}
+		else if(_cardContainer.at(0)->GetFace() == _cardContainer.at(1)->GetFace())
+		{
+			_arePair = true;
+			if ( _cardContainer.at(0)->IsAce())
+			{
+				_arePairAces = true;
+			}
 		}
 	}
 	else if ( value > 21u)
@@ -105,17 +98,6 @@ void HoleCards::CalculateValue()
 unsigned int HoleCards::GetValue() const
 {
 	return _value;
-}
-
-void HoleCards::Reset()
-{
-	// TODO Should become obsolete if AddCard is done properly.
-	_areBlackJack = false;
-	_arePair = false;
-	_arePairAces = false;
-	_areBusted = false;
-	_value = 0;
-	_numSoftAces = 0;
 }
 
 void HoleCards::PrintCards() const

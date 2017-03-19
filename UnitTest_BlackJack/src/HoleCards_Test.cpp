@@ -61,9 +61,6 @@ void HoleCardsTest::Run_GetValue()
 	}
 	// By now value is busted
 	EXPECT_TRUE(_holeCards.AreBusted());
-	// Check if reset works
-	_holeCards.Reset();
-	EXPECT_FALSE(_holeCards.AreBusted());
 }
 void HoleCardsTest::Run_Pair()
 {
@@ -85,10 +82,6 @@ void HoleCardsTest::Run_PairAces()
 	_holeCards.AddCard(pCard(new Card("2","s")));
 	EXPECT_FALSE(_holeCards.ArePair());
 	EXPECT_FALSE(_holeCards.ArePairAces());
-	// Check if reset works
-	_holeCards.Reset();
-	EXPECT_FALSE(_holeCards.ArePair());
-	EXPECT_FALSE(_holeCards.ArePairAces());
 }
 void HoleCardsTest::Run_BlackJack()
 {
@@ -98,9 +91,6 @@ void HoleCardsTest::Run_BlackJack()
 	EXPECT_EQ(21u, _holeCards.GetValue());
 	// Add another card (altough this cannot happen in the game)
 	_holeCards.AddCard(pCard(new Card("2","s")));
-	EXPECT_FALSE(_holeCards.AreBlackJack());
-	// Check if reset works
-	_holeCards.Reset();
 	EXPECT_FALSE(_holeCards.AreBlackJack());
 }
 void HoleCardsTest::Run_SoftAces()

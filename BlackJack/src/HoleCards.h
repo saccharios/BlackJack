@@ -37,7 +37,6 @@ public:
 	bool const & ArePairAces() const { return _arePairAces; }
 	bool const & AreBusted() const { return _areBusted; }
 	bool AreSoft() const { return (_numSoftAces > 0 );}
-	void Reset();
 	void PrintCards() const;
 	void PrintNumCards() const;
 	bool IsEmpty() const { return _cardContainer.empty(); }
