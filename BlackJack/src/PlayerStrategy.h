@@ -1,12 +1,12 @@
 /*
- * AIPlayer.h
+ * PayerStrategy.h
  *
  *  Created on: 16.03.2017
  *      Author: Stefan
  */
 
-#ifndef SRC_PLAYER_STRATEGY_H_
-#define SRC_PLAYER_STRATEGY_H_
+#ifndef SRC_PLAYERSTRATEGY_H_
+#define SRC_PLAYERSTRATEGY_H_
 
 #include "Player.h"
 #include <string>
@@ -35,14 +35,14 @@ public:
 	std::string
 	strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const override
 	{
-	if( hand->GetValue() < 17 )
-	{
-		return "h";
-	}
-	else
-	{
-		return "s";
-	}
+		if( hand->GetValue() < 17 )
+		{
+			return "h";
+		}
+		else
+		{
+			return "s";
+		}
 	}
 
 };
@@ -96,4 +96,4 @@ private:
 	Dealer & _dealer;
 };
 
-#endif /* SRC_PLAYER_STRATEGY_H_ */
+#endif /* SRC_PLAYERSTRATEGY_H_ */

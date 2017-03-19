@@ -9,7 +9,7 @@
 #include "Dealer.h"
 #include <memory>
 #include "GlobalDeclarations.h"
-#include "Player_Strategy.h"
+#include "PlayerStrategy.h"
 
 #ifndef GAME_H_
 #define GAME_H_

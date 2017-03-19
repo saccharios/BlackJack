@@ -9,9 +9,9 @@
 #define SRC_PLAYER_TEST_H_
 
 
+#include <PlayerStrategy.h>
 #include "gtest/gtest.h"
 #include "../../BlackJack/src/Player.h"
-#include "../../BlackJack/src/Player_Strategy.h"
 #include "../../BlackJack/src/Deck.h"
 class PlayerHand;
 

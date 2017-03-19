@@ -25,7 +25,7 @@ _cardContainer()
 
 void HoleCards::StartCards(pCard card)
 {
-	// Start method for the dealer. Can only start the hand is empty.
+	// Start method for the dealer. Can only start if the hand is empty.
 	assert(IsEmpty());
 	Reset();
 	AddCard(std::move(card));
