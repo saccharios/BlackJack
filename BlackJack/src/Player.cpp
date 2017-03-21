@@ -88,15 +88,15 @@ void Player::PlayAction(std::string action, pPlayerHand const & hand)
 	// to introduce an interface action class and four derivatives. However, one still would
 	// not get rid of a switch or if/else statements like those below, because the input
 	// from the user is a string. This string needs to be mapped to a derived class anyways.
-	if(action == "h") // Hit
+	if(action == HIT) // Hit
 	{
 		Hit(hand);
 	}
-	else if(action == "d") // Double
+	else if(action == DOUBLE) // Double
 	{
 		Double(hand);
 	}
-	else if(action == "p") // Split
+	else if(action == SPLIT) // Split
 	{
 		Split(hand);
 	}

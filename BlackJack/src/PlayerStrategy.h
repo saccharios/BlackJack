@@ -39,11 +39,11 @@ public:
 	{
 		if( hand->GetValue() < 17 )
 		{
-			return "h";
+			return HIT;
 		}
 		else
 		{
-			return "s";
+			return STAND;
 		}
 	}
 
@@ -58,7 +58,7 @@ public:
 	std::string
 	strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const override
 	{
-		return "s";
+		return STAND;
 	}
 
 };
@@ -71,7 +71,7 @@ public:
 	std::string
 	strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const override
 	{
-		return "h";
+		return HIT;
 	}
 
 };

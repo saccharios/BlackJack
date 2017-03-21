@@ -7,11 +7,12 @@
 
 #include "PlayerStrategy_Test.h"
 #include "../../BlackJack/src/PlayerStrategy.h"
+#include "../../BlackJack/src/GlobalDeclarations.h"
 #include <string>
 void
 AIPlayer_OptimalTest::Run_OptimalStrategy()
 {
-	std::string action = "s";
+	std::string action = STAND;
 	// Loop over all values and dealervalues, with no pair and no aces
 	unsigned int value = 0;
 	bool isSoft = false;
@@ -25,31 +26,31 @@ AIPlayer_OptimalTest::Run_OptimalStrategy()
 			action = _AIPlayer.strategy_optimal(value, isSoft, isPair, isAces, dealerValue);
 			if(value >= 17)
 			{
-				EXPECT_EQ("s",action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
+				EXPECT_EQ(STAND,action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
 			}
 			else if ( (16 >= value && value >= 13 ) && dealerValue <= 6)
 			{
-				EXPECT_EQ("s",action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
+				EXPECT_EQ(STAND,action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
 			}
 			else if (value == 12 && (4 <= dealerValue && dealerValue  <= 6))
 			{
-				EXPECT_EQ("s",action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
+				EXPECT_EQ(STAND,action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
 			}
 			else if (value == 11 && dealerValue <= 10 )
 			{
-				EXPECT_EQ("d",action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
+				EXPECT_EQ(DOUBLE,action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
 			}
 			else if (value == 10 && dealerValue  <= 9)
 			{
-				EXPECT_EQ("d",action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
+				EXPECT_EQ(DOUBLE,action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
 			}
 			else if (value == 9 && (3 <= dealerValue && dealerValue  <= 6))
 			{
-				EXPECT_EQ("d",action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
+				EXPECT_EQ(DOUBLE,action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
 			}
 			else
 			{
-				EXPECT_EQ("h",action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
+				EXPECT_EQ(HIT,action) << "Normal. Value = " <<value << ", dealer = " << dealerValue;
 			}
 		}
 	}
@@ -65,34 +66,34 @@ AIPlayer_OptimalTest::Run_OptimalStrategy()
 			action = _AIPlayer.strategy_optimal(value, isSoft, isPair, isAces, dealerValue);
 			if(value >= 19)
 			{
-				EXPECT_EQ("s",action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
+				EXPECT_EQ(STAND,action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
 			}
 			else if ( value == 18 &&  dealerValue  <= 8)
 			{
 				if( 3 <= dealerValue && dealerValue  <= 6)
 				{
-					EXPECT_EQ("d",action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
+					EXPECT_EQ(DOUBLE,action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
 				}
 				else
 				{
-					EXPECT_EQ("s",action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
+					EXPECT_EQ(STAND,action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
 				}
 			}
 			else if (value == 17 && (3 <= dealerValue && dealerValue  <= 6))
 			{
-				EXPECT_EQ("d",action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
+				EXPECT_EQ(DOUBLE,action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
 			}
 			else if ( (16 >= value && value >= 15 ) && (4 <= dealerValue && dealerValue  <= 6) )
 			{
-				EXPECT_EQ("d",action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
+				EXPECT_EQ(DOUBLE,action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
 			}
 			else if ( (14 >= value && value >= 13 ) && (5 <= dealerValue && dealerValue  <= 6) )
 			{
-				EXPECT_EQ("d",action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
+				EXPECT_EQ(DOUBLE,action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
 			}
 			else
 			{
-				EXPECT_EQ("h",action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
+				EXPECT_EQ(HIT,action) << "Soft. Value = " <<value << ", dealer = " << dealerValue;
 			}
 		}
 	}
@@ -106,7 +107,7 @@ AIPlayer_OptimalTest::Run_OptimalStrategy()
 	for( dealerValue = 2; dealerValue <= 11; ++dealerValue )
 	{
 		action = _AIPlayer.strategy_optimal(value, isSoft, isPair, isAces, dealerValue);
-		EXPECT_EQ("p",action) << "Pair Aces. Value = " <<value << ", dealer = " << dealerValue;
+		EXPECT_EQ(SPLIT,action) << "Pair Aces. Value = " <<value << ", dealer = " << dealerValue;
 	}
 	isSoft = false;
 	isAces = false;
@@ -115,7 +116,7 @@ AIPlayer_OptimalTest::Run_OptimalStrategy()
 	for( dealerValue = 2; dealerValue <= 11; ++dealerValue )
 	{
 		action = _AIPlayer.strategy_optimal(value, isSoft, isPair, isAces, dealerValue);
-		EXPECT_EQ("s",action) << "Pair Tens, Jacks, Queens, Kings. Value = " <<value << ", dealer = " << dealerValue;
+		EXPECT_EQ(STAND,action) << "Pair Tens, Jacks, Queens, Kings. Value = " <<value << ", dealer = " << dealerValue;
 	}
 	// Pair of Nines
 	value = 18;
@@ -124,11 +125,11 @@ AIPlayer_OptimalTest::Run_OptimalStrategy()
 		action = _AIPlayer.strategy_optimal(value, isSoft, isPair, isAces, dealerValue);
 		if( dealerValue <=6 || dealerValue == 8 || dealerValue == 9)
 		{
-			EXPECT_EQ("p",action) << "Pair Nines. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(SPLIT,action) << "Pair Nines. Value = " <<value << ", dealer = " << dealerValue;
 		}
 		else
 		{
-			EXPECT_EQ("s",action) << "Pair Nines. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(STAND,action) << "Pair Nines. Value = " <<value << ", dealer = " << dealerValue;
 		}
 	}
 	// Pair of Eights
@@ -136,7 +137,7 @@ AIPlayer_OptimalTest::Run_OptimalStrategy()
 	for( dealerValue = 2; dealerValue <= 11; ++dealerValue )
 	{
 		action = _AIPlayer.strategy_optimal(value, isSoft, isPair, isAces, dealerValue);
-		EXPECT_EQ("p",action) << "Pair Eights. Value = " <<value << ", dealer = " << dealerValue;
+		EXPECT_EQ(SPLIT,action) << "Pair Eights. Value = " <<value << ", dealer = " << dealerValue;
 	}
 	// Pair of Sevens
 	value = 14;
@@ -145,11 +146,11 @@ AIPlayer_OptimalTest::Run_OptimalStrategy()
 		action = _AIPlayer.strategy_optimal(value, isSoft, isPair, isAces, dealerValue);
 		if(dealerValue <= 7 )
 		{
-			EXPECT_EQ("p",action) << "Pair Sevens. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(SPLIT,action) << "Pair Sevens. Value = " <<value << ", dealer = " << dealerValue;
 		}
 		else
 		{
-			EXPECT_EQ("h",action) << "Pair Sevens. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(HIT,action) << "Pair Sevens. Value = " <<value << ", dealer = " << dealerValue;
 		}
 	}
 	// Pair of Sixes
@@ -159,11 +160,11 @@ AIPlayer_OptimalTest::Run_OptimalStrategy()
 		action = _AIPlayer.strategy_optimal(value, isSoft, isPair, isAces, dealerValue);
 		if(dealerValue <= 6 )
 		{
-			EXPECT_EQ("p",action) << "Pair Sixes. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(SPLIT,action) << "Pair Sixes. Value = " <<value << ", dealer = " << dealerValue;
 		}
 		else
 		{
-			EXPECT_EQ("h",action) << "Pair Sixes. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(HIT,action) << "Pair Sixes. Value = " <<value << ", dealer = " << dealerValue;
 		}
 	}
 //	 Pair of Fives
@@ -173,11 +174,11 @@ AIPlayer_OptimalTest::Run_OptimalStrategy()
 		action = _AIPlayer.strategy_optimal(value, isSoft, isPair, isAces, dealerValue);
 		if( dealerValue <= 9 )
 		{
-			EXPECT_EQ("d",action) << "Pair Fives. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(DOUBLE,action) << "Pair Fives. Value = " <<value << ", dealer = " << dealerValue;
 		}
 		else
 		{
-			EXPECT_EQ("h",action) << "Pair Fives. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(HIT,action) << "Pair Fives. Value = " <<value << ", dealer = " << dealerValue;
 		}
 	}
 	// Pair of Fours
@@ -187,11 +188,11 @@ AIPlayer_OptimalTest::Run_OptimalStrategy()
 		action = _AIPlayer.strategy_optimal(value, isSoft, isPair, isAces, dealerValue);
 		if( dealerValue == 5 || dealerValue == 6 )
 		{
-			EXPECT_EQ("p",action) << "Pair Fours. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(SPLIT,action) << "Pair Fours. Value = " <<value << ", dealer = " << dealerValue;
 		}
 		else
 		{
-			EXPECT_EQ("h",action) << "Pair Fours. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(HIT,action) << "Pair Fours. Value = " <<value << ", dealer = " << dealerValue;
 		}
 	}
 	// Pair of Threes
@@ -201,11 +202,11 @@ AIPlayer_OptimalTest::Run_OptimalStrategy()
 		action = _AIPlayer.strategy_optimal(value, isSoft, isPair, isAces, dealerValue);
 		if(dealerValue <= 7 )
 		{
-			EXPECT_EQ("p",action) << "Pair Threes. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(SPLIT,action) << "Pair Threes. Value = " <<value << ", dealer = " << dealerValue;
 		}
 		else
 		{
-			EXPECT_EQ("h",action) << "Pair Threes. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(HIT,action) << "Pair Threes. Value = " <<value << ", dealer = " << dealerValue;
 		}
 	}
 	// Pair of Twos
@@ -215,11 +216,11 @@ AIPlayer_OptimalTest::Run_OptimalStrategy()
 		action = _AIPlayer.strategy_optimal(value, isSoft, isPair, isAces, dealerValue);
 		if(dealerValue <= 7 )
 		{
-			EXPECT_EQ("p",action) << "Pair Twos. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(SPLIT,action) << "Pair Twos. Value = " <<value << ", dealer = " << dealerValue;
 		}
 		else
 		{
-			EXPECT_EQ("h",action) << "Pair Twos. Value = " <<value << ", dealer = " << dealerValue;
+			EXPECT_EQ(HIT,action) << "Pair Twos. Value = " <<value << ", dealer = " << dealerValue;
 		}
 	}
 
