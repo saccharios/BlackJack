@@ -11,7 +11,7 @@
 #include <set>
 #include "Card.h"
 #include "PlayerHand.h"
-
+// TODO Separate Game from Console_Game and Simulation_Game (== implement 2 new classes, each of them containing the a member game)
 // Forward declaration to avoid #include
 class Deck;
 
@@ -33,18 +33,18 @@ public:
 	void Evaluate(	bool const & dealerHasBlackJack, bool const & dealerIsBusted, unsigned int const & dealerValue);
 	void PutCardsBack();
 	void SetWagerUser ();
-	void SetWager (double const & wager);
+	void SetWager (double wager);
 	void PrintWager () const;
-	double const & GetBalance () const;
+	double GetBalance () const;
 	void PrintBalance () const;
-	std::string const & GetName() const;
+	std::string GetName() const;
 	void PrintName () const;
 	void Hit(pPlayerHand const & hand);
 	void Split(pPlayerHand const & hand);
 	void Double(pPlayerHand const & hand);
 	void Stand(pPlayerHand const & hand);
-	void AddToBalance(double const & value);
-	void SubtractFromBalance(double const & value);
+	void AddToBalance(double value);
+	void SubtractFromBalance(double value);
 	std::size_t GetNumHands() {return _handManager.size();}
 	void AddHand(pPlayerHand hand);
 	virtual std::string strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const = 0;

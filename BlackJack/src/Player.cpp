@@ -189,15 +189,15 @@ void Player::SetWagerUser ()
 	console.Write(strm);
 	auto wager = console.ReadInNumber( MIN_WAGER, _balance);
 	SetWager(wager);
-	PrintWager();
 }
-void Player::SetWager (double const & wager)
+void Player::SetWager (double wager)
 {
 	// Wager must be within bounds.
 	assert(wager >= MIN_WAGER);
 	assert(wager <= MAX_WAGER);
 	_orignialWager = wager;
 	SubtractFromBalance(_orignialWager);
+	PrintWager();
 }
 
 
@@ -208,7 +208,7 @@ void Player::PrintWager () const
 	console.Write(strm);
 }
 
-double const & Player::GetBalance () const
+double Player::GetBalance () const
 {
 	return _balance;
 }
@@ -224,7 +224,7 @@ void Player::PrintBalance () const
 	console.Write(strm);
 }
 
-std::string const & Player::GetName() const
+std::string Player::GetName() const
 {
 	return _name;
 }
@@ -236,11 +236,11 @@ void Player::PrintName () const
 	console.Write(strm);
 }
 
-void Player::AddToBalance(double const & value)
+void Player::AddToBalance(double value)
 {
 	_balance += value;
 }
-void Player::SubtractFromBalance(double const & value)
+void Player::SubtractFromBalance(double value)
 {
 	_balance -= value;
 }
