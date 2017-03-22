@@ -19,10 +19,13 @@ int main(int argc, char ** argv)
 	Game game;
 	game.Simulation_Setup(8,1);
 
-	for(int i = 0; i < 4; ++i)
+	int N_Simulation_Steps = 4;
+	for(int i = 0; i < N_Simulation_Steps; ++i)
 	{
 		game.Simulation_PlayRound();
-
+		// TODO Add statistics for first decision of player.
+		// TODO Add mechanic to restart the game if player is broke but N_Simulation_Steps is not done yet.
+		// Simulation does not print to the console. Maybe, it should not print the game, but only some statistics at the end to a file.
 	}
 
 	return 0;

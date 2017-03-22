@@ -115,9 +115,7 @@ void PlayerTest::Run_GetAvailableActionSet()
 void PlayerTest::Run_Play()
 {
 	std::stringstream in_stream;
-	// Save and redirect "std::cin" because the console in the game only uses the standard console
-	auto cinbuf = std::cin.rdbuf(in_stream.rdbuf());
-
+	console.SetInputStream(in_stream);
 	// First test, play one hand
 	in_stream << "h\n" << "h\n" << "h\n" << "s" << std::endl;
 	in_stream << "d\n" << "h\n" << "h\n" << "s\n" << std::endl;
@@ -140,7 +138,4 @@ void PlayerTest::Run_Play()
 	_player.Evaluate(false, false, 17);
 	EXPECT_EQ( balance + 4.0*_originalWager, _player.GetBalance());
 	_player.PutCardsBack();
-
-
-    std::cin.rdbuf(cinbuf);   //reset to standard input again
 }

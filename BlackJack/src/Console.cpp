@@ -15,23 +15,23 @@
 
 void Console::Write( std::stringstream const & strm )
 {
-	_ostream << strm.str();
+	*_ostream << strm.str();
 }
 void Console::WriteString( std::string const & str )
 {
-	_ostream << str;
+	*_ostream << str;
 }
 
 
 void Console::PrintStringSet (std::set<std::string> const & stringSet)
 {
 	// Print possible user input strings defined in stringSet
-	_ostream << " ";
+	*_ostream << " ";
 	for(auto const & str : stringSet)
 	{
-		_ostream << "("<< str << ") ";
+		*_ostream << "("<< str << ") ";
 	}
-	_ostream<< "\n";
+	*_ostream<< "\n";
 }
 std::string Console::ReadInAction(std::set<std::string> const & stringSet)
 {
@@ -43,10 +43,10 @@ std::string Console::ReadInAction(std::set<std::string> const & stringSet)
 		if(++i > 1)
 		{
 
-			_ostream << "You have entered "<< readIn << ". Enter";
+			*_ostream << "You have entered "<< readIn << ". Enter";
 		}
 		PrintStringSet(stringSet);
-		std::getline (_istream, readIn);
+		std::getline (*_istream, readIn);
 	}while(stringSet.find(readIn) == stringSet.end());
 	return readIn;
 }
@@ -57,22 +57,22 @@ std::string Console::ReadInName(std::size_t const & numPlayer, std::size_t const
 	// Read in user input name for current player with number numPlayer
 	std::string name("");
 	std::string readIn("");
-	_ostream << "Enter name of player " << numPlayer <<": " << std::endl;
+	*_ostream << "Enter name of player " << numPlayer <<": " << std::endl;
 
 	auto i = 0u;
 	do
 	{
 		if(++i > 1)
 		{
-			_ostream << "Do not enter an empty name.";
+			*_ostream << "Do not enter an empty name.";
 		}
-		std::getline (_istream, readIn);
+		std::getline (*_istream, readIn);
 		std::stringstream(readIn) >> name;
 	}while(name.empty());
 
 	if( name.size() > maxChars )
 	{
-		_ostream << "Your name is too long, truncating after " << maxChars << " characters." << std::endl;
+		*_ostream << "Your name is too long, truncating after " << maxChars << " characters." << std::endl;
 		name = name.substr( 0, maxChars ) ;
 	}
 	return name;

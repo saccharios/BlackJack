@@ -14,7 +14,7 @@
 
 class Console{
 public:
-	Console (std::ostream & ostrm, std::istream & istrm) : _ostream(ostrm), _istream(istrm) {}
+	Console (std::ostream & ostrm, std::istream & istrm) : _ostream(&ostrm), _istream(&istrm) {}
 	void PrintStringSet (std::set<std::string> const & stringSet);
 	std::string ReadInAction(std::set<std::string> const & stringSet);
 	std::string ReadInName(std::size_t const & numPlayer, std::size_t const & maxChars);
@@ -26,18 +26,20 @@ public:
 		T value;
 		do
 		{
-			_ostream << "Enter a number between " << min << " and " << max <<"."<<std::endl;
-			std::getline (_istream, readIn);
+			*_ostream << "Enter a number between " << min << " and " << max <<"."<<std::endl;
+			std::getline (*_istream, readIn);
 			std::stringstream(readIn) >> value;
 		}while(value < min || value > max);
-		_ostream << "You have entered " << value << "."<<std::endl;
+		*_ostream << "You have entered " << value << "."<<std::endl;
 		return value;
 	}
 	void Write( std::stringstream const & strm );
 	void WriteString( std::string const & str );
+	void SetInputStream(std::istream & istrm) {_istream = &istrm;}
+	void SetOutStream(std::ostream & ostrm) {_ostream = &ostrm;}
 private:
-	std::ostream & _ostream;
-	std::istream & _istream;
+	std::ostream* _ostream;
+	std::istream* _istream;
 
 };
 
