@@ -6,7 +6,6 @@
  */
 
 #include "gtest/gtest.h"
-// TODO Make always build upon click run, ctrl f11 and in console c/c++ unit run
 
 int main(int argc, char ** argv)
 { ::testing::InitGoogleTest(&argc, argv);

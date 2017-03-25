@@ -16,14 +16,6 @@
 #include "Console.h"
 #include "GlobalDeclarations.h"
 
-void Game::AddDecks()
-{
-	// Adds sets to the deck
-	console.WriteString("With how many decks do you want to play?\n");
-	auto NSets = console.ReadInNumber(1u, MAX_SETS);
-	_deck.AddSets(NSets);
-}
-
 
 void Game::PlayRound()
 {

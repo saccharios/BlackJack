@@ -6,8 +6,7 @@
  */
 
 
-// TODO Make always build upon click run, ctrl f11 and in console c/c++ unit run
-// Use Scons (Sconsolidate) for building three different builds in one project.
+// TODO Use Scons (Sconsolidate) for building three different builds in one project.
 #include <memory>
 #include "../../BlackJack/src/SimulationGame.h"
 #include "../../BlackJack/src/Card.h"
@@ -25,7 +24,9 @@ int main(int argc, char ** argv)
     double duration;
 
     start = std::clock();
-
+    // TODO EV calculation for "always hit" "always stand" "dealer" "optimal" strategies.
+    // TODO simple rederict std::cout buffer to a file. Is there a better solution to
+    // reset the output strem of the console?
 	std::ofstream out_file;
 	out_file.open("simulation_output.txt");
 	std::streambuf* coutbuf = std::cout.rdbuf(); //save old buf

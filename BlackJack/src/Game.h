@@ -25,7 +25,7 @@ public:
 	Game(Game const &) = delete ;
 	void operator=(Game const&) = delete;
 
-	void AddDecks();
+
 	void PlayRound();
 	virtual bool PlayAnotherRound () const = 0;
 

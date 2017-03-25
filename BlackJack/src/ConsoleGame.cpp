@@ -8,11 +8,21 @@
 #include "ConsoleGame.h"
 #include "PlayerStrategy.h"
 #include "GlobalDeclarations.h"
+
+void ConsoleGame::AddDecks()
+{
+	// Adds sets to the deck
+	console.WriteString("With how many decks do you want to play?\n");
+	auto NSets = console.ReadInNumber(1u, MAX_SETS);
+	_deck.AddSets(NSets);
+}
+
+
 void ConsoleGame::AddHumanPlayers()
 {
 	// Player creator function. Needs user input.
 	console.WriteString("How many human players want to play?\n");
-	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS - _players.size());
+	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS - Base::_players.size());
 	console.WriteString("Enter names and balances for each player:\n" );
 	std::stringstream strm;
 	for( std::size_t i = 0; i < NPlayers; ++i )
@@ -22,7 +32,7 @@ void ConsoleGame::AddHumanPlayers()
 		console.Write(strm);
 		auto balance = console.ReadInNumber( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
 
-		_players.push_back(std::move(pHumanPlayer(new HumanPlayer(_deck, name, balance))));
+		Base::_players.push_back(std::move(pHumanPlayer(new HumanPlayer(Base::_deck, name, balance))));
 	}
 }
 
@@ -95,7 +105,7 @@ void ConsoleGame::PrintRules()
 bool ConsoleGame::PlayAnotherRound () const
 {
 	// Ask the user if they want to play another round if there are still players with enough money
-	if ( _players.size() < 1u)
+	if ( Base::_players.size() < 1u)
 	{
 		console.WriteString("There are no more players left!\n");
 		console.WriteString("--------------------BYE BYE--------------------\n");
@@ -124,7 +134,7 @@ void ConsoleGame::SetWagers()
 {
 	// Set wager for each player
 	console.WriteString("-------Set Wagers------\n");
-	for(auto const & player : _players)
+	for(auto const & player : Base::_players)
 	{
 		player->SetWagerUser();
 	}

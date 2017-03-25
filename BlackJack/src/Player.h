@@ -11,7 +11,7 @@
 #include <set>
 #include "Card.h"
 #include "PlayerHand.h"
-// TODO Separate Game from Console_Game and Simulation_Game (== implement 2 new classes, each of them containing the a member game)
+
 // Forward declaration to avoid #include
 class Deck;
 

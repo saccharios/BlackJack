@@ -14,6 +14,7 @@ class ConsoleGame : public Game{
 	using Base = Game;
 	using pHumanPlayer = std::unique_ptr<HumanPlayer>;
 public:
+	void AddDecks();
 	void AddHumanPlayers();
 	void PrintRules();
 	void SetWagers() override;
