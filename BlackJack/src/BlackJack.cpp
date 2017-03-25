@@ -5,7 +5,7 @@
  *      Author: Stefan
  */
 #include <memory>
-#include "Game.h"
+#include "ConsoleGame.h"
 #include "Card.h"
 #include "GlobalDeclarations.h"
 #include "HoleCards.h"
@@ -15,11 +15,10 @@
 
 int main(int argc, char ** argv)
 {
-	Game game;
+	ConsoleGame game;
 	game.PrintRules();
 	game.AddDecks();
 	game.AddHumanPlayers();
-	game.AddAIPlayers();
 	do
 	{
 		game.PlayRound();

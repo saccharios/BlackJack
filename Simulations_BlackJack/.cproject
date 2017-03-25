@@ -41,13 +41,14 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.291711406" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.631121657" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
-								<option id="gnu.cpp.link.option.libs.142446061" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" useByScannerDiscovery="false" valueType="libs"/>
-								<option id="gnu.cpp.link.option.paths.1051388239" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" useByScannerDiscovery="false" valueType="libPaths"/>
+								<option id="gnu.cpp.link.option.libs.142446061" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" useByScannerDiscovery="false"/>
+								<option id="gnu.cpp.link.option.paths.1051388239" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" useByScannerDiscovery="false"/>
 								<option id="gnu.cpp.link.option.userobjs.1389705018" name="Other objects" superClass="gnu.cpp.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
 									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\Console.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\Game.o&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\Dealer.o&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\Deck.o&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\Game.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\SimulationGame.o&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\PlayerHand.o&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\HoleCards.o&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;E:\Code\BlackJack_Repo\BlackJack\Debug\src\Player.o&quot;"/>

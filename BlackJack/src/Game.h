@@ -18,32 +18,27 @@
 // It guides the game.
 class Game {
 	using pPlayer = std::unique_ptr<Player>;
-	using pHumanPlayer = std::unique_ptr<HumanPlayer>;
-	using pAIPlayer = std::unique_ptr<AIPlayer_Basic>;
-	using pAIPlayer_Optimal = std::unique_ptr<AIPlayer_Optimal>;
+
 public:
 	Game () : _deck(), _dealer(_deck), _players() {}
-
 	// Not allowed to copy or assign game
 	Game(Game const &) = delete ;
 	void operator=(Game const&) = delete;
 
 	void AddDecks();
-	void AddHumanPlayers();
-	void AddAIPlayers();
 	void PlayRound();
-	void SetWagers();
 	void GetStartCards();
 	void PlayCards();
 	void Evaluate();
 	void PutCardsBack();
 	void RemoveBrokePlayers();
-	void PrintRules();
 	void PrintNumPlayers () const;
-	bool PlayAnotherRound () const;
-	void Simulation_Setup(std::size_t N_Decks, std::size_t N_AIPlayers);
-	void Simulation_PlayRound();
-private:
+
+	virtual void SetWagers() = 0;
+	virtual bool PlayAnotherRound () const = 0;
+
+protected:
+	virtual ~Game(){}; // Not allowed to polymorphic delete derivatives
 
 	Deck _deck;
 	Dealer _dealer;

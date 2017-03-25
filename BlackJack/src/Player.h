@@ -20,7 +20,7 @@ class Player {
 public:
 
 	Player(Deck & deck, std::string name, double balance);
-	virtual ~Player(){}
+	virtual ~Player(){} // Allow polymorphic deletion of players
 	// Not allowed to copy or assign
 	Player (Player const & player) = delete;
 	Player & operator= (const Player & other) = delete;
