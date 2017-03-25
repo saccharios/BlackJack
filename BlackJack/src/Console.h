@@ -36,7 +36,7 @@ public:
 	void Write( std::stringstream const & strm );
 	void WriteString( std::string const & str );
 	void SetInputStream(std::istream & istrm) {_istream = &istrm;}
-	void SetOutStream(std::ostream & ostrm) {_ostream = &ostrm;}
+
 private:
 	std::ostream* _ostream;
 	std::istream* _istream;

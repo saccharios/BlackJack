@@ -21,21 +21,6 @@ class Console_Test : public ::testing::Test
 	Console_Test() : _console(_out_stream, _in_stream)
 	{
 	}
-//	void SetUpTestCase()
-//	{
-//		std::ifstream in("file.txt");
-//		_cinbuf = std::cin.rdbuf(in.rdbuf()); //save and redirect
-//		std::ofstream out("file.txt");
-//		_coutbuf = std::cout.rdbuf(out.rdbuf());
-//	}
-//	void TearDownTestCase()
-//	{
-//		std::cout.rdbuf(_coutbuf);
-//		std::cin.rdbuf(_cinbuf);
-//
-//	}
-	void redirect();
-	void direct();
 
 	void Run_Write();
 	void Run_WriteString();
