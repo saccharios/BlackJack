@@ -27,23 +27,27 @@ public:
 
 	void AddDecks();
 	void PlayRound();
-	void GetStartCards();
-	void PlayCards();
-	void Evaluate();
-	void PutCardsBack();
-	void RemoveBrokePlayers();
+	virtual bool PlayAnotherRound () const = 0;
+
 	void PrintNumPlayers () const;
 
-	virtual void SetWagers() = 0;
-	virtual bool PlayAnotherRound () const = 0;
 
 protected:
 	virtual ~Game(){}; // Not allowed to polymorphic delete derivatives
+
+	virtual void SetWagers() = 0;
 
 	Deck _deck;
 	Dealer _dealer;
 	// Players are pointers to avoid issues with card pointers
 	std::vector<pPlayer> _players;
+private:
+	void GetStartCards();
+	void PlayCards();
+	void Evaluate();
+	void PutCardsBack();
+	void RemoveBrokePlayers();
+
 };
 
 #endif /* GAME_H_ */
