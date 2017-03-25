@@ -16,24 +16,15 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+
+#include <ctime>
+
 int main(int argc, char ** argv)
 {
+    std::clock_t start;
+    double duration;
 
-//	std::ofstream filestream;
-//	filestream.open("myFile.txt", std::ofstream::out | std::ofstream::app);
-//
-//	std::stringstream _out_stream;
-//	std::stringstream istrm;
-//
-//	Console console(filestream, istrm);
-//	console.WriteString("abc");
-//	filestream.close();
-//
-//
-//	filestream.open("myFile.txt", std::ofstream::out | std::ofstream::app);
-//	console.WriteString("def");
-//	filestream.close();
-
+    start = std::clock();
 
 	std::ofstream out_file;
 	out_file.open("simulation_output.txt");
@@ -46,7 +37,7 @@ int main(int argc, char ** argv)
 	Game game;
 	game.Simulation_Setup(8,1);
 
-	int N_Simulation_Steps = 10000;
+	int N_Simulation_Steps = 1000;
 	for(int i = 0; i < N_Simulation_Steps; ++i)
 	{
 		game.Simulation_PlayRound();
@@ -54,7 +45,15 @@ int main(int argc, char ** argv)
 		// TODO Add mechanic to restart the game if player is broke but N_Simulation_Steps is not done yet.
 		// Simulation does not print to the console. Maybe, it should not print the game, but only some statistics at the end to a file.
 	}
+
 	std::cout.rdbuf(coutbuf); //reset to standard output again
+	out_file.close();
+
+	std::ofstream stat_file;
+	stat_file.open("statistics_output.txt");
+	duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+	stat_file <<"Total elapsed time: "<< duration << " sec.\n";
+	stat_file.close();
 	return 0;
 }
 
