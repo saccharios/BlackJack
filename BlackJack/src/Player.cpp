@@ -77,7 +77,7 @@ void Player::PlayOneHand(pPlayerHand const & hand)
 		auto actionSetCards = hand->GetAvailableActionSet();
 		auto actionSetPlayer = GetAvailableActionSet(actionSetCards);
 		console.WriteString("Enter action: ");
-		auto action = strategy(actionSetPlayer, hand);
+		auto action = Strategy(actionSetPlayer, hand);
 
 		PlayAction(action, hand);
 	}

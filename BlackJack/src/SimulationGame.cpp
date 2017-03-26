@@ -33,5 +33,15 @@ SimulationGame::SetWagers()
 
 bool SimulationGame::PlayAnotherRound ()
 {
+	// If a player has less than the minimum wager, they are removed.
+	// Conventional for-loop because it needs access to the index to remove it
+	for(auto const & player : _players)
+	{
+		if(player->GetBalance() < MIN_WAGER)
+		{
+			player->ResetBalance();
+		}
+	}
+
 	return (++_currentRound < _numRounds);
 }
