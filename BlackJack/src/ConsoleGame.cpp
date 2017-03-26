@@ -102,7 +102,7 @@ void ConsoleGame::PrintRules()
 	console.Write(strm);
 }
 
-bool ConsoleGame::PlayAnotherRound () const
+bool ConsoleGame::PlayAnotherRound ()
 {
 	// Ask the user if they want to play another round if there are still players with enough money
 	if ( Base::_players.size() < 1u)
@@ -137,5 +137,21 @@ void ConsoleGame::SetWagers()
 	for(auto const & player : Base::_players)
 	{
 		player->SetWagerUser();
+	}
+}
+
+
+
+void ConsoleGame::RemoveBrokePlayers()
+{
+	// If a player has less than the minimum wager, they are removed.
+	// Conventional for-loop because it needs access to the index to remove it
+	for( std::size_t i = 0; i <_players.size(); ++i)
+	{
+		if(_players[i]->GetBalance() < MIN_WAGER)
+		{
+			_players.erase(_players.begin()+i);
+			--i; // Don't forget to decrement the counter as you just have removed player nr i
+		}
 	}
 }

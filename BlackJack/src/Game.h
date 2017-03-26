@@ -27,7 +27,7 @@ public:
 
 
 	void PlayRound();
-	virtual bool PlayAnotherRound () const = 0;
+	virtual bool PlayAnotherRound () = 0;
 
 	void PrintNumPlayers () const;
 
@@ -36,6 +36,7 @@ protected:
 	virtual ~Game(){}; // Not allowed to polymorphic delete derivatives
 
 	virtual void SetWagers() = 0;
+	virtual void RemoveBrokePlayers() = 0;
 
 	Deck _deck;
 	Dealer _dealer;
@@ -46,7 +47,6 @@ private:
 	void PlayCards();
 	void Evaluate();
 	void PutCardsBack();
-	void RemoveBrokePlayers();
 
 };
 

@@ -31,7 +31,7 @@ SimulationGame::SetWagers()
 	}
 }
 
-bool SimulationGame::PlayAnotherRound () const
+bool SimulationGame::PlayAnotherRound ()
 {
-	return false;
+	return (++_currentRound < _numRounds);
 }

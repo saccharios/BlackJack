@@ -18,7 +18,8 @@ public:
 	void AddHumanPlayers();
 	void PrintRules();
 	void SetWagers() override;
-	bool PlayAnotherRound () const override;
+	bool PlayAnotherRound () override;
+	void RemoveBrokePlayers() override;
 };
 
 #endif /* CONSOLEGAME_H_ */

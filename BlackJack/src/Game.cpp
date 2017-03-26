@@ -75,22 +75,6 @@ void Game::PutCardsBack()
 	_dealer.PutCardsBack();
 }
 
-void Game::RemoveBrokePlayers()
-{
-	// If a player has less than the minimum wager, they are removed.
-	// Conventional for loop because it beed access to the index to remove it
-	for( std::size_t i = 0; i <_players.size(); ++i)
-	{
-		if(_players[i]->GetBalance() < MIN_WAGER)
-		{
-			_players.erase(_players.begin()+i);
-			--i; // Don't forget to decrement the counter as you just have removed player nr i
-		}
-	}
-}
-
-
-
 
 void Game::PrintNumPlayers () const
 {
