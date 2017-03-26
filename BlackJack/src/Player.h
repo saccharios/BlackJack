@@ -50,7 +50,7 @@ public:
 	virtual std::string Strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const = 0;
 
 	virtual void ResetBalance () = 0;
-	virtual std::size_t GetNumBalanceResets () = 0;
+	virtual double GetTotalInvestedBalance () = 0;
 
 private:
 	double _balance;

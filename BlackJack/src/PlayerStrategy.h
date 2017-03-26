@@ -34,7 +34,7 @@ public:
 	{
 	}
 
-	std::size_t GetNumBalanceResets() override final
+	double GetTotalInvestedBalance() override final
 	{
 		return 0;
 	}
@@ -47,24 +47,25 @@ class AIPlayer : public Player {
 public:
 	AIPlayer(Deck & deck, std::string name, double initialBalance) 	:
 		Player(deck, name, initialBalance),
+		_totalInvestedBalance(initialBalance),
 		_initialBalance(initialBalance)
 {}
 
 	virtual std::string Strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const  = 0;
 	void ResetBalance () override final
 	{
-		++_numBalanceReset;
 		auto difference = _initialBalance - Base::GetBalance();
 		Base::AddToBalance(difference);
+		_totalInvestedBalance += difference;
 	}
 
-	std::size_t GetNumBalanceResets() override final
+	double GetTotalInvestedBalance() override final
 	{
-		return _numBalanceReset;
+		return _totalInvestedBalance;
 	}
 
 private:
-	std::size_t _numBalanceReset = 0;
+	double _totalInvestedBalance = 0;
 	double _initialBalance;
 };
 
