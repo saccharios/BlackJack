@@ -47,7 +47,7 @@ public:
 	void SubtractFromBalance(double value);
 	std::size_t GetNumHands() {return _handManager.size();}
 	void AddHand(pPlayerHand hand);
-	virtual std::string Strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const = 0;
+	virtual std::string Strategy(std::set<std::string> const & validActions, pPlayerHand const & hand) const = 0;
 
 	virtual void ResetBalance () = 0;
 	virtual double GetTotalInvestedBalance () = 0;

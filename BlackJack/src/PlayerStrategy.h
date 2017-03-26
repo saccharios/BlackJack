@@ -25,19 +25,13 @@ public:
 {}
 
 	std::string
-	Strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const override final
+	Strategy(std::set<std::string> const & validActions, pPlayerHand const & hand) const override final
 	{
-		return console.ReadInAction(stringSet);
+		return console.ReadInAction(validActions);
 	}
 
-	void ResetBalance () override final
-	{
-	}
-
-	double GetTotalInvestedBalance() override final
-	{
-		return 0;
-	}
+	void ResetBalance () override final {}
+	double GetTotalInvestedBalance() override final {return 0;}
 };
 
 
@@ -51,7 +45,7 @@ public:
 		_initialBalance(initialBalance)
 {}
 
-	virtual std::string Strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const  = 0;
+	virtual std::string Strategy(std::set<std::string> const & validActions, pPlayerHand const & hand) const  = 0;
 	void ResetBalance () override final
 	{
 		auto difference = _initialBalance - Base::GetBalance();
@@ -79,16 +73,16 @@ public:
 
 	// Play like the dealer
 	std::string
-	Strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const override final
+	Strategy(std::set<std::string> const & validActions, pPlayerHand const & hand) const override final
 	{
+		std::string action = STAND;
 		if( hand->GetValue() < 17 )
 		{
-			return HIT;
+			action =  HIT;
 		}
-		else
-		{
-			return STAND;
-		}
+		// No need to check for validity of action, HIT and STAND are always valid.
+
+		return action;
 	}
 
 };
@@ -102,8 +96,9 @@ public:
 
 	// Always stand
 	std::string
-	Strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const override final
+	Strategy(std::set<std::string> const & validActions, pPlayerHand const & hand) const override final
 	{
+		// No need to check for validity of action, HIT and STAND are always valid.
 		return STAND;
 	}
 
@@ -117,8 +112,9 @@ public:
 
 	// Always hit
 	std::string
-	Strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const override final
+	Strategy(std::set<std::string> const & validActions, pPlayerHand const & hand) const override final
 	{
+		// No need to check for validity of action, HIT and STAND are always valid.
 		return HIT;
 	}
 
@@ -137,14 +133,20 @@ public:
 	static const std::map<Key,std::string> optimalStrategy;
 
 	std::string
-	Strategy(std::set<std::string> const & stringSet, pPlayerHand const & hand) const override final
+	Strategy(std::set<std::string> const & validActions, pPlayerHand const & hand) const override final
 	{
 		unsigned int value = hand->GetValue();
 		bool isSoft = hand->IsSoft();
 		bool isPair = hand->IsPair();
 		bool isAces = hand->IsPairAces();
+		std::string action = StrategyOptimal( value, isSoft, isPair, isAces, _dealer.GetValue());
+		// Check if action double is valid
+		if((action == DOUBLE) && (validActions.find(action) == validActions.end()))
+		{
+			action = HIT; // Turn double into a hit.
+		}
 
-		return StrategyOptimal( value, isSoft, isPair, isAces, _dealer.GetValue());
+		return action;
 	}
 	// Optimal strategy depends on the first card of the dealer.
 	std::string

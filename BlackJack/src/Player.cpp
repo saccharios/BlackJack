@@ -78,7 +78,7 @@ void Player::PlayOneHand(pPlayerHand const & hand)
 		auto actionSetPlayer = GetAvailableActionSet(actionSetCards);
 		console.WriteString("Enter action: ");
 		auto action = Strategy(actionSetPlayer, hand);
-
+		assert(actionSetPlayer.find(action) != actionSetPlayer.end()); // Program crashes if an invalid action is chosen
 		PlayAction(action, hand);
 	}
 }
