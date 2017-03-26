@@ -35,6 +35,7 @@ public:
 	bool PlayAnotherRound () override;
 	void RemoveBrokePlayers() override {}; // In the simulation, players are not removed if they are broke
 	void PrintStatistics(std::ostream & ostrm);
+	void Simulate();
 private:
 	const std::size_t _simulationRounds;
 	std::size_t _currentRound = 0;

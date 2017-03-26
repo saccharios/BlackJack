@@ -9,7 +9,8 @@
 #include "PlayerStrategy.h"
 #include <ostream>
 #include "assert.h"
-
+#include <iostream>
+#include <fstream>
 
 SimulationGame::SimulationGame(Setup setup) : Game(), _simulationRounds(setup.N_Simulation_Steps)
 {
@@ -89,4 +90,24 @@ void SimulationGame::PrintStatistics(std::ostream & ostrm)
 		ostrm << "Resulting edge = " << edge << "\n";
 	}
 
+}
+
+
+void SimulationGame::Simulate()
+{
+
+    // TODO simple rederict std::cout buffer to a file. Is there a better solution to
+    // reset the output strem of the console?
+	std::ofstream out_file;
+	out_file.open("simulation_output.txt");
+	std::streambuf* coutbuf = std::cout.rdbuf(); //save old buf
+	std::cout.rdbuf(out_file.rdbuf()); //redirect std::cout to output file
+	// Run simulation
+	do
+	{
+		PlayRound();
+	}while ( PlayAnotherRound() );
+
+	std::cout.rdbuf(coutbuf); //reset to standard output again
+	out_file.close();
 }
