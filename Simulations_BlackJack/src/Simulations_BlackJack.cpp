@@ -35,14 +35,19 @@ int main(int argc, char ** argv)
 	std::cout.rdbuf(out_file.rdbuf()); //redirect std::cout to output file
 
 
-	double initialBalance = MAX_INIT_BALANCE;
+	SimulationGame::Setup setup;
 
-	std::size_t N_Simulation_Steps = 10;
-	SimulationGame game(N_Simulation_Steps);
+	setup.N_Simulation_Steps = 100;
+	setup.initialBalance = MAX_INIT_BALANCE;
+	setup.N_Sets = MAX_SETS;
+	setup.N_Basic_AIPlayers = 0;
+	setup.N_Conservative_AIPlayers = 0;
+	setup.N_Aggressive_AIPlayers= 0;
+	setup.N_Optimal_AIPlayers = 1;
 
-	std::size_t numAIPlayers = 1;
-	std::size_t numDecks = MAX_SETS;
-	game.Setup(numDecks, numAIPlayers, initialBalance);
+	SimulationGame game(setup);
+
+
 
 	do
 	{
@@ -50,17 +55,16 @@ int main(int argc, char ** argv)
 	}while ( game.PlayAnotherRound() );
 
 //		// TODO Add statistics for first decision of player.
-//		// TODO Simulation does not print to the console. Maybe, it should not print the game, but only some statistics at the end to a file.
 
 	std::cout.rdbuf(coutbuf); //reset to standard output again
 	out_file.close();
 
-	game.PrintStatistics();
 
 	std::ofstream stat_file;
 	stat_file.open("statistics_output.txt");
 	duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
 	stat_file <<"Total elapsed time: "<< duration << " sec.\n";
+	game.PrintStatistics(stat_file);
 	stat_file.close();
 	return 0;
 }

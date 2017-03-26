@@ -7,33 +7,55 @@
 
 #include "SimulationGame.h"
 #include "PlayerStrategy.h"
-void
-SimulationGame::Setup(std::size_t N_Sets, std::size_t N_AIPlayers, double initialBalance)
+#include <ostream>
+#include "assert.h"
+
+
+SimulationGame::SimulationGame(Setup setup) : Game(), _simulationRounds(setup.N_Simulation_Steps)
 {
-	_deck.AddSets(N_Sets);
+	// Cant have more than MAX_PLAYERS
+	assert((setup.N_Basic_AIPlayers + setup.N_Conservative_AIPlayers + setup.N_Aggressive_AIPlayers + setup.N_Optimal_AIPlayers )< MAX_PLAYERS );
 
-	if(initialBalance < _balanceLowLimit)
+	_deck.AddSets(setup.N_Sets);
+
+	if(setup.initialBalance < _balanceLowLimit)
 	{
-		initialBalance = _balanceLowLimit;
+		setup.initialBalance = _balanceLowLimit;
 	}
 
-	for( std::size_t i = 0; i < N_AIPlayers; ++i )
+	for( std::size_t i = 0; i < setup.N_Basic_AIPlayers; ++i )
 	{
-		std::ostringstream stm ;
-		stm << "AIPlayer_" << i ;
-		_players.push_back(std::move(pAIPlayer_Optimal(new AIPlayer_Optimal(_deck, stm.str(), initialBalance, _dealer))));
+		std::ostringstream strm ;
+		strm << "Basic_AIPlayer_" << i ;
+		_players.push_back(std::move(pAIPlayer_Basic(new AIPlayer_Basic(_deck, strm.str(), setup.initialBalance))));
 	}
-
+	for( std::size_t i = 0; i < setup.N_Conservative_AIPlayers; ++i )
+	{
+		std::ostringstream strm ;
+		strm << "Conservative_AIPlayer_" << i ;
+		_players.push_back(std::move(pAIPlayer_Conservative(new AIPlayer_Conservative(_deck, strm.str(), setup.initialBalance))));
+	}
+	for( std::size_t i = 0; i < setup.N_Aggressive_AIPlayers; ++i )
+	{
+		std::ostringstream strm ;
+		strm << "Aggressive_AIPlayer_" << i ;
+		_players.push_back(std::move(pAIPlayer_Aggressive(new AIPlayer_Aggressive(_deck, strm.str(), setup.initialBalance))));
+	}
+	for( std::size_t i = 0; i < setup.N_Optimal_AIPlayers; ++i )
+	{
+		std::ostringstream strm ;
+		strm << "Optimal_AIPlayer_" << i ;
+		_players.push_back(std::move(pAIPlayer_Optimal(new AIPlayer_Optimal(_deck, strm.str(), setup.initialBalance, _dealer))));
+	}
 }
 
 void
 SimulationGame::SetWagers()
 {
-	double wager = 1.0;
 	console.WriteString("-------Set Wagers------\n");
 	for(auto const & player : _players)
 	{
-		player->SetWager(wager);
+		player->SetWager(_wager);
 	}
 }
 
@@ -50,17 +72,21 @@ bool SimulationGame::PlayAnotherRound ()
 		}
 	}
 
-	return (++_currentRound < _numRounds);
+	return (++_currentRound < _simulationRounds);
 }
 
 
 
-void SimulationGame::PrintStatistics()
+void SimulationGame::PrintStatistics(std::ostream & ostrm)
 {
 	for(auto const & player : _players)
 	{
-		std::cout << "Player total investment = " << player->GetTotalInvestedBalance() << std::endl;
+		ostrm <<  player->GetName()<< "'s statistics:\n";
+		ostrm << "Total investment = " << player->GetTotalInvestedBalance() << "\n";
+		ostrm << "Balance at the end = " << player->GetBalance() << "\n";
+		ostrm << "Hands played = " << _simulationRounds << "\n";
+		double edge = (player->GetBalance() - player->GetTotalInvestedBalance()) / static_cast<double>(_simulationRounds) / _wager;
+		ostrm << "Resulting edge = " << edge << "\n";
 	}
-
 
 }
