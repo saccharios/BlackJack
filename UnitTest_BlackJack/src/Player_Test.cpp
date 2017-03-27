@@ -86,7 +86,7 @@ void PlayerTest::Run_SubractFromBalance()
 void PlayerTest::Run_PutCardsBack()
 {
 	_player.Start();
-	auto hand = pHandManager(new PlayerHand(_deck, _originalWager,1));
+	auto hand = std::make_unique<PlayerHand>(_deck, _originalWager,1);
 	hand->Start();
 	_player.AddHand(std::move(hand));
 	EXPECT_EQ(2u, _player.GetNumHands());

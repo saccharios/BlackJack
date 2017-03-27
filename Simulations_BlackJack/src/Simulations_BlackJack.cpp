@@ -28,16 +28,11 @@ int main(int argc, char ** argv)
     std::string statFileName = "statistics_output.txt";
     remove(statFileName.c_str());// Remove statistic file from previous run.
 
-
     start = std::clock();
-    // TODO EV calculation for "always hit" "always stand" "dealer" "optimal" strategies.
-
-
-
 
 	SimulationGame::Setup setup;
 
-	setup.N_Simulation_Steps = 1000;
+	setup.N_Simulation_Steps = 100;
 	setup.initialBalance = MAX_INIT_BALANCE;
 	setup.N_Sets = MAX_SETS;
 	setup.N_Basic_AIPlayers = 0;
@@ -59,12 +54,6 @@ int main(int argc, char ** argv)
 	setup.N_Aggressive_AIPlayers = 1;
 	SimulationGame aggresiveGame(setup);
 	aggresiveGame.Simulate();
-
-
-//		// TODO Add statistics for first decision of player.
-
-
-
 
 
 	std::ofstream stat_file;

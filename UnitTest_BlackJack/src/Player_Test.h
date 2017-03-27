@@ -31,7 +31,7 @@ public:
 	// The card drawn depends only on their order in the deck.
 	{
 		_deck.AddSets(_numDecks);
-		_hand = pHandManager(new PlayerHand(_deck, _originalWager, handNr));
+		_hand = std::make_unique<PlayerHand>(_deck, _originalWager, handNr);
 	}
 //	void SetUp()
 //	{

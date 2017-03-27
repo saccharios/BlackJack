@@ -42,8 +42,8 @@ void DealerTest::Run_BlackJack()
 { // This test case is easier if the deck contains only {As, Ks}
 	Deck deck(0);
 	Dealer dealer(deck);
-	deck.AddCard(pCard(new Card("A","s")));
-	deck.AddCard(pCard(new Card("K","s")));
+	deck.AddCard(std::make_unique<Card>("A","s"));
+	deck.AddCard(std::make_unique<Card>("K","s"));
 	dealer.Start();
 	dealer.ActionHit();
 	EXPECT_TRUE(dealer.HasBlackJack());

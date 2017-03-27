@@ -45,11 +45,6 @@ void PlayerHand::Start()
 	// Normal start function for the player
 	auto card1 = _deck.Draw();
 	auto card2 = _deck.Draw();
-	// TODO Debugging only
-//			pCard card1 = _deck.Draw(1); //Pair 3
-//			pCard card2 = _deck.Draw(13); //Pair 3
-//	pCard card1 = _deck.Draw(8); //Pair  A
-//	pCard card2 = _deck.Draw(20); //Pair  A
 
 	_holeCards.StartCards(std::move(card1), std::move(card2));
 	_isPlayed = false;
@@ -79,7 +74,7 @@ PlayerHand::pPlayerHand PlayerHand::ActionSplit()
 	Start(std::move(card1));
 	// Create new hand with incremented hand number
 	auto nextNr = GetHandNumber() + 1;
-	auto newHand = pPlayerHand(new PlayerHand(_deck, _wager,nextNr));
+	auto newHand = std::make_unique<PlayerHand>(_deck, _wager,nextNr);
 
 	newHand->PrintHandNumber();
 	newHand->Start(std::move(cardForNewHand));

@@ -33,7 +33,7 @@ void Deck::AddCompleteSet()
 	{
 		for(const auto & face : FACE)
 		{
-			_cardContainer.push_back(std::move(pCard( new Card(face.first, suit))));
+			_cardContainer.push_back(std::move(std::make_unique<Card>(face.first, suit)));
 		}
 	}
 }

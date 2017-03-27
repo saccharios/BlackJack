@@ -15,9 +15,9 @@
 class SimulationGame : public Game{
 	using Base = Game;
 	using pAIPlayer_Basic = std::unique_ptr<AIPlayer_Basic>;
-	using pAIPlayer_Conservative = std::unique_ptr<AIPlayer_Conservative>;
-	using pAIPlayer_Aggressive = std::unique_ptr<AIPlayer_Aggressive>;
-	using pAIPlayer_Optimal = std::unique_ptr<AIPlayer_Optimal>;
+//	using pAIPlayer_Conservative = std::unique_ptr<AIPlayer_Conservative>;
+//	using pAIPlayer_Aggressive = std::unique_ptr<AIPlayer_Aggressive>;
+//	using pAIPlayer_Optimal = std::unique_ptr<AIPlayer_Optimal>;
 public:
 
 	struct Setup {

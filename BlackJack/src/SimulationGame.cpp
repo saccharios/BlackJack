@@ -28,25 +28,25 @@ SimulationGame::SimulationGame(Setup setup) : Game(), _simulationRounds(setup.N_
 	{
 		std::ostringstream strm ;
 		strm << "Basic_AIPlayer_" << i ;
-		_players.push_back(std::move(pAIPlayer_Basic(new AIPlayer_Basic(_deck, strm.str(), setup.initialBalance))));
+		_players.push_back(std::move(std::make_unique<AIPlayer_Basic>(_deck, strm.str(), setup.initialBalance)));
 	}
 	for( std::size_t i = 0; i < setup.N_Conservative_AIPlayers; ++i )
 	{
 		std::ostringstream strm ;
 		strm << "Conservative_AIPlayer_" << i ;
-		_players.push_back(std::move(pAIPlayer_Conservative(new AIPlayer_Conservative(_deck, strm.str(), setup.initialBalance))));
+		_players.push_back(std::move(std::make_unique<AIPlayer_Conservative>(_deck, strm.str(), setup.initialBalance)));
 	}
 	for( std::size_t i = 0; i < setup.N_Aggressive_AIPlayers; ++i )
 	{
 		std::ostringstream strm ;
 		strm << "Aggressive_AIPlayer_" << i ;
-		_players.push_back(std::move(pAIPlayer_Aggressive(new AIPlayer_Aggressive(_deck, strm.str(), setup.initialBalance))));
+		_players.push_back(std::move(std::make_unique<AIPlayer_Aggressive>(_deck, strm.str(), setup.initialBalance)));
 	}
 	for( std::size_t i = 0; i < setup.N_Optimal_AIPlayers; ++i )
 	{
 		std::ostringstream strm ;
 		strm << "Optimal_AIPlayer_" << i ;
-		_players.push_back(std::move(pAIPlayer_Optimal(new AIPlayer_Optimal(_deck, strm.str(), setup.initialBalance, _dealer))));
+		_players.push_back(std::move(std::make_unique<AIPlayer_Optimal>(_deck, strm.str(), setup.initialBalance, _dealer)));
 	}
 }
 

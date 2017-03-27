@@ -44,14 +44,14 @@ void PlayerHandTest::Run_ActionSplit_Aces()
 	// This is a special case and can best be tested with a special deck.
 	// Thus the deck and playerHand are not the member variables.
 	Deck deck;
-	deck.AddCard(pCard(new Card("A","s")));
-	deck.AddCard(pCard(new Card("A","d")));
+	deck.AddCard(std::make_unique<Card>("A","s"));
+	deck.AddCard(std::make_unique<Card>("A","d"));
 
 	PlayerHand hand(deck,_wager, 0);
 	hand.Start();
 	// Add more cards to the deck, so spliting is ok
-	deck.AddCard(pCard(new Card("2","d")));
-	deck.AddCard(pCard(new Card("3","d")));
+	deck.AddCard(std::make_unique<Card>("2","d"));
+	deck.AddCard(std::make_unique<Card>("3","d"));
 	auto newHand = hand.ActionSplit();
 	EXPECT_TRUE( hand.IsPlayed());
 	EXPECT_TRUE(newHand->IsPlayed());
@@ -99,8 +99,8 @@ void PlayerHandTest::Run_IsBlackJack()
 	Deck deck(0);
 	double wager = 10.0;
 	PlayerHand hand (deck, wager, 0);
-	deck.AddCard(pCard(new Card("A","s")));
-	deck.AddCard(pCard(new Card("K","s")));
+	deck.AddCard(std::make_unique<Card>("A","s"));
+	deck.AddCard(std::make_unique<Card>("K","s"));
 	hand.Start();
 	EXPECT_TRUE(hand.IsBlackJack());
 }
@@ -110,8 +110,8 @@ void PlayerHandTest::Run_EvaluateBlackJack()
 	Deck deck(0);
 	double wager = 10.0;
 	PlayerHand hand (deck, wager, 0);
-	deck.AddCard(pCard(new Card("A","s")));
-	deck.AddCard(pCard(new Card("K","s")));
+	deck.AddCard(std::make_unique<Card>("A","s"));
+	deck.AddCard(std::make_unique<Card>("K","s"));
 	hand.Start(); // hand now holds BlackJack
 	auto payout = hand.Evaluate(true, false, 21); // Dealer also has Black Jack
 	EXPECT_EQ(wager, payout);
@@ -125,9 +125,9 @@ void PlayerHandTest::Run_EvaluateBusted()
 	Deck deck(0);
 	double wager = 10.0;
 	PlayerHand hand (deck, wager, 0);
-	deck.AddCard(pCard(new Card("K","s")));
-	deck.AddCard(pCard(new Card("K","s")));
-	deck.AddCard(pCard(new Card("6","s")));
+	deck.AddCard(std::make_unique<Card>("K","s"));
+	deck.AddCard(std::make_unique<Card>("K","s"));
+	deck.AddCard(std::make_unique<Card>("6","s"));
 	hand.Start(); // hand is busted
 	hand.ActionHit();
 	auto payout = hand.Evaluate(true, false, 21); // Dealer has Black Jack
@@ -142,8 +142,8 @@ void PlayerHandTest::Run_EvaluateValue()
 	Deck deck(0);
 	double wager = 10.0;
 	PlayerHand hand (deck, wager, 0);
-	deck.AddCard(pCard(new Card("6","s")));
-	deck.AddCard(pCard(new Card("6","s")));
+	deck.AddCard(std::make_unique<Card>("6","s"));
+	deck.AddCard(std::make_unique<Card>("6","s"));
 	hand.Start(); // hand has 12 points
 	auto payout = hand.Evaluate(true, false, 21); // Dealer has Black Jack
 	EXPECT_EQ(0.0, payout);
@@ -174,15 +174,15 @@ void PlayerHandTest::Run_GetAvailableActionSet()
 	Deck deck(0);
 	double wager = 10.0;
 	PlayerHand hand (deck, wager, 0);
-	deck.AddCard(pCard(new Card("6","s")));
-	deck.AddCard(pCard(new Card("6","s")));
+	deck.AddCard(std::make_unique<Card>("6","s"));
+	deck.AddCard(std::make_unique<Card>("6","s"));
 	hand.Start(); // hand has a pair
 	EXPECT_EQ(ACTION_SPLIT_DOUBLE, hand.GetAvailableActionSet());
-	deck.AddCard(pCard(new Card("3","s")));
+	deck.AddCard(std::make_unique<Card>("3","s"));
 	hand.ActionHit(); // hand has a pair
 	EXPECT_EQ(ACTION_STANDARD, hand.GetAvailableActionSet());
-	deck.AddCard(pCard(new Card("K","s")));
-	deck.AddCard(pCard(new Card("6","s")));
+	deck.AddCard(std::make_unique<Card>("K","s"));
+	deck.AddCard(std::make_unique<Card>("6","s"));
 	hand.PutCardsBack();
 	hand.Start(); // hand hols Ks6s
 	EXPECT_EQ(ACTION_DOUBLE, hand.GetAvailableActionSet());

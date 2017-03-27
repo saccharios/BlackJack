@@ -30,7 +30,7 @@ _name(name)
 void Player::Start()
 {
 	// Initial start routine for the player
-	_handManager.push_back(std::move(pPlayerHand(new PlayerHand(_deck, _orignialWager, 0))));
+	_handManager.push_back(std::make_unique<PlayerHand>(_deck, _orignialWager, 0));
 	_handManager.at(0)->Start();
 
 	std::stringstream strm;

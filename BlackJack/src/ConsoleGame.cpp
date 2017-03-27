@@ -32,7 +32,7 @@ void ConsoleGame::AddHumanPlayers()
 		console.Write(strm);
 		auto balance = console.ReadInNumber( MIN_INIT_BALANCE, MAX_INIT_BALANCE);
 
-		Base::_players.push_back(std::move(pHumanPlayer(new HumanPlayer(Base::_deck, name, balance))));
+		Base::_players.push_back(std::move(std::make_unique<HumanPlayer>(Base::_deck, name, balance)));
 	}
 }
 
