@@ -11,7 +11,6 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-// TODO Add enable / disable functionality for the console
 class Console{
 public:
 	Console (std::ostream & ostrm, std::istream & istrm) : _ostream(&ostrm), _istream(&istrm) {}

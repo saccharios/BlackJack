@@ -6,7 +6,6 @@
  */
 
 
-// TODO Use Scons (Sconsolidate) for building three different builds in one project.
 #include <memory>
 #include "../../BlackJack/src/SimulationGame.h"
 #include "../../BlackJack/src/Card.h"
@@ -17,8 +16,6 @@
 #include <iostream>
 
 #include <ctime>
-
-// TODO Profile the program
 
 int main(int argc, char ** argv)
 {

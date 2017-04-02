@@ -96,8 +96,8 @@ void SimulationGame::PrintStatistics(std::ostream & ostrm)
 void SimulationGame::Simulate()
 {
 
-    // TODO simple rederict std::cout buffer to a file. Is there a better solution to
-    // reset the output strem of the console?
+    // Simple rederict std::cout buffer to a file. Is there a better solution to
+    // reset the output stream of the console?
 	std::ofstream out_file;
 	out_file.open("simulation_output.txt");
 	std::streambuf* coutbuf = std::cout.rdbuf(); //save old buf

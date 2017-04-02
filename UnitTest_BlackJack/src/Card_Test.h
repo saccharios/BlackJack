@@ -24,12 +24,13 @@ public:
 private:
 };
 
+using CardTestDeathTest = CardTest;
 
 //TEST_F(CardTest, CreateCard_Face_DEATH)
 //{
 //	Run_CreateCard_Face_DEATH();
 //}
-//TEST_F(CardTest, CreateCard_Suit_DEATH)
+//TEST_F(CardTestDeathTest, CreateCard_Suit_DEATH)
 //{
 //	Run_CreateCard_Suit_DEATH();
 //}
