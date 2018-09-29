@@ -12,8 +12,9 @@ src_files=  [
 'HoleCards.cpp',
 'Player.cpp',
 'PlayerHand.cpp',
-'PlayerStrategy.cpp',
-'SimulationGame.cpp',
-
 ]
-ret = env.Program(target = 'BlackJack', source = src_files)
+
+ret = env.Program(target='BlackJack', source=src_files)
+
+
+Return('ret')
