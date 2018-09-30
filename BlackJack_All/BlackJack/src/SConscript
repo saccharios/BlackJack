@@ -1,0 +1,20 @@
+#!python
+Import('env')
+
+src_files=  [
+'BlackJack.cpp',
+'Card.cpp',
+'Console.cpp',
+'ConsoleGame.cpp',
+'Dealer.cpp',
+'Deck.cpp',
+'Game.cpp',
+'HoleCards.cpp',
+'Player.cpp',
+'PlayerHand.cpp',
+]
+
+ret = env.Program(target='BlackJack', source=src_files)
+
+
+Return('ret')

@@ -1,0 +1,27 @@
+#!python
+import os
+
+# build with `scons --debug_build` for debug.
+AddOption(
+    '--debug_build',
+    action='store_true',
+    help='debug build',
+    default=False)
+
+env = Environment(ENV = os.environ, tools = ['mingw'])
+path = ['C:\\MinGW_63\\bin']
+env.PrependENVPath('PATH', path)
+env.Append(CXXFLAGS='--std=c++17') 
+
+
+project = 'BlackJack' 
+build_dir = 'build'
+if GetOption('debug_build'):
+    env.ParseFlags('-DDEBUG')
+    mode = '_debug'
+else:
+    mode = '_release'
+ 
+variant_dir = build_dir + '/' + project + mode 
+ 
+SConscript(project +'/src/SConscript', variant_dir=variant_dir, duplicate=False, exports=['env'])
