@@ -1,5 +1,5 @@
 #!python
-Import('env','target_name')
+Import('env','lib_name')
 local_env = env.Clone()
 
 src = 'src/'
@@ -15,7 +15,7 @@ src + 'PlayerHand.cpp',
 src + 'PlayerStrategy.cpp',
 ]
 
-ret = local_env.Library(target=target_name, source=src_files)
+ret = local_env.Library(target=lib_name, source=src_files)
 local_env.AlwaysBuild(ret)
 
 Return('ret')
