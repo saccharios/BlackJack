@@ -61,11 +61,5 @@ variant_dir = build_dir + '/' + target_name + '_'+mode
 SConscript(target_name +'/SConscript', 
            variant_dir=variant_dir, 
            duplicate=False, 
-           exports=['env','target_name','libpath'])
+           exports=['env','target_name'])
 
-
-# project = 'Simulations' 
-#    
-# variant_dir = build_dir + '/' + project + '_'+mode 
-#    
-# SConscript(project +'/src/SConscript', variant_dir=variant_dir, duplicate=False, exports=['env','variant_dir'])
