@@ -5,10 +5,10 @@
  *      Author: Stefan
  */
 
-#include "../../Console_Game/src/ConsoleGame.h"
+#include "ConsoleGame.h"
 
-#include "../../Black_Jack_lib/src/GlobalDeclarations.h"
-#include "../../Black_Jack_lib/src/PlayerStrategy.h"
+#include "GlobalDeclarations.h"
+#include "PlayerStrategy.h"
 
 void ConsoleGame::AddDecks()
 {

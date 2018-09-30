@@ -8,8 +8,8 @@
 #ifndef CONSOLEGAME_H_
 #define CONSOLEGAME_H_
 
-#include "../../Black_Jack_lib/src/Game.h"
-#include "../../Black_Jack_lib/src/PlayerStrategy.h"
+#include "Game.h"
+#include "PlayerStrategy.h"
 class ConsoleGame : public Game{
 	using Base = Game;
 	using pHumanPlayer = std::unique_ptr<HumanPlayer>;

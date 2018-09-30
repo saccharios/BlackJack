@@ -6,7 +6,7 @@
  */
 #include <memory>
 
-#include "../../Console_Game/src/ConsoleGame.h"
+#include "ConsoleGame.h"
 
 int main(int argc, char ** argv)
 {

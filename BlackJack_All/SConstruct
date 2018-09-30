@@ -55,9 +55,13 @@ SConscript(lib_name +'/SConscript', variant_dir=libpath, duplicate=False, export
 
 env.Append(LIBPATH=[libpath])
 env.Append(LIBS=[lib_name]) 
+env.Append(CPPPATH=[libpath + '/src'])
 
 variant_dir = build_dir + '/' + target_name + '_'+mode 
-SConscript(target_name +'/SConscript', variant_dir=variant_dir, duplicate=False, exports=['env','target_name'])
+SConscript(target_name +'/SConscript', 
+           variant_dir=variant_dir, 
+           duplicate=False, 
+           exports=['env','target_name','libpath'])
 
 
 # project = 'Simulations' 

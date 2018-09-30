@@ -8,8 +8,8 @@
 #ifndef SIMULATIONGAME_H_
 #define SIMULATIONGAME_H_
 
-#include "../../Black_Jack_lib/src/Game.h"
-#include "../../Black_Jack_lib/src/PlayerStrategy.h"
+#include "Game.h"
+#include "PlayerStrategy.h"
 #include <ostream>
 
 class SimulationGame : public Game{
