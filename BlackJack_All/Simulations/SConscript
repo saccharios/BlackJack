@@ -1,5 +1,5 @@
 #!python
-Import('env','target_name','libpath')
+Import('env','target_name')
 local_env = env.Clone()
 
 

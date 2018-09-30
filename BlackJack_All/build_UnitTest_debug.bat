@@ -1,0 +1,1 @@
+scons UnitTest --debug_build

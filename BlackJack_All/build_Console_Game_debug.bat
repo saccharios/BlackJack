@@ -1,0 +1,1 @@
+scons Console_Game --debug_build
