@@ -5,16 +5,18 @@
  *      Author: Stefan
  */
 
+#include "../../Black_Jack_lib/src/Player.h"
+
 #include <memory>
 #include <sstream>
-#include "Player.h"
-#include "Card.h"
-#include "HoleCards.h"
-#include "Deck.h"
-#include "GlobalDeclarations.h"
+
+#include "../../Black_Jack_lib/src/Card.h"
+#include "../../Black_Jack_lib/src/Console.h"
+#include "../../Black_Jack_lib/src/Deck.h"
+#include "../../Black_Jack_lib/src/GlobalDeclarations.h"
+#include "../../Black_Jack_lib/src/HoleCards.h"
+#include "../../Black_Jack_lib/src/PlayerHand.h"
 #include "assert.h"
-#include "Console.h"
-#include "PlayerHand.h"
 
 Player::Player(Deck & deck, std::string name, double balance) :
 _balance(balance),

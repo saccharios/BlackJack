@@ -9,8 +9,9 @@
 #define PLAYER_H_
 #include <memory>
 #include <set>
-#include "Card.h"
-#include "PlayerHand.h"
+
+#include "../../Black_Jack_lib/src/Card.h"
+#include "../../Black_Jack_lib/src/PlayerHand.h"
 
 // Forward declaration to avoid #include
 class Deck;

@@ -6,13 +6,15 @@
  */
 
 
+#include "../../Black_Jack_lib/src/Dealer.h"
+
 #include <memory>
-#include "Dealer.h"
-#include "Deck.h"
-#include "HoleCards.h"
-#include "Card.h"
 #include <sstream>
-#include "GlobalDeclarations.h"
+
+#include "../../Black_Jack_lib/src/Card.h"
+#include "../../Black_Jack_lib/src/Deck.h"
+#include "../../Black_Jack_lib/src/GlobalDeclarations.h"
+#include "../../Black_Jack_lib/src/HoleCards.h"
 
 Dealer::Dealer(Deck & deck) :
 _deck(deck)

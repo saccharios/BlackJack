@@ -9,7 +9,8 @@
 #define DEALER_H_
 
 #include <memory>
-#include "HoleCards.h"
+
+#include "../../Black_Jack_lib/src/HoleCards.h"
 
 // Forward declaration to avoid #include
 class Deck;

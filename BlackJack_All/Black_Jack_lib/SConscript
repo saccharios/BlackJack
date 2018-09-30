@@ -1,0 +1,21 @@
+#!python
+Import('env','target_name')
+local_env = env.Clone()
+
+src = 'src/'
+src_files=  [
+src + 'Card.cpp',
+src + 'Console.cpp',
+src + 'Dealer.cpp',
+src + 'Deck.cpp',
+src + 'Game.cpp',
+src + 'HoleCards.cpp',
+src + 'Player.cpp',
+src + 'PlayerHand.cpp',
+src + 'PlayerStrategy.cpp',
+]
+
+ret = local_env.Library(target=target_name, source=src_files)
+local_env.AlwaysBuild(ret)
+
+Return('ret')

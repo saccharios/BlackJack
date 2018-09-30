@@ -1,0 +1,29 @@
+#!python
+Import('env','variant_dir')
+
+
+local_env = env.Clone()
+
+BlackJack_src = '#BlackJack/src/'
+
+
+src_files=  [
+BlackJack_src + 'Card.cpp',
+BlackJack_src + 'Console.cpp',
+BlackJack_src + 'ConsoleGame.cpp',
+BlackJack_src + 'Dealer.cpp',
+BlackJack_src + 'Deck.cpp',
+BlackJack_src + 'Game.cpp',
+BlackJack_src + 'HoleCards.cpp',
+BlackJack_src + 'Player.cpp',
+BlackJack_src + 'PlayerHand.cpp',
+BlackJack_src + 'PlayerStrategy.cpp',
+'Simulations_BlackJack.cpp',
+'SimulationGame.cpp',
+]
+
+local_env.VariantDir(variant_dir, BlackJack_src, duplicate=False)
+ret = local_env.Program(target='Simulation', source=src_files)
+
+
+Return('ret')

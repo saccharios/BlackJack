@@ -6,13 +6,14 @@
  */
 
 
-#include "PlayerHand.h"
+#include "../../Black_Jack_lib/src/PlayerHand.h"
 
 #include <memory>
-#include "HoleCards.h"
-#include "Card.h"
-#include "Deck.h"
-#include "GlobalDeclarations.h"
+
+#include "../../Black_Jack_lib/src/Card.h"
+#include "../../Black_Jack_lib/src/Deck.h"
+#include "../../Black_Jack_lib/src/GlobalDeclarations.h"
+#include "../../Black_Jack_lib/src/HoleCards.h"
 
 PlayerHand::PlayerHand (Deck & deck, double const & wager, std::size_t const & handNumber):
 _deck(deck),

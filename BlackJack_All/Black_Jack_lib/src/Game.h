@@ -5,11 +5,12 @@
  *      Author: Stefan
  */
 
-#include "Deck.h"
-#include "Dealer.h"
 #include <memory>
-#include "GlobalDeclarations.h"
-#include "PlayerStrategy.h"
+
+#include "../../Black_Jack_lib/src/Dealer.h"
+#include "../../Black_Jack_lib/src/Deck.h"
+#include "../../Black_Jack_lib/src/GlobalDeclarations.h"
+#include "../../Black_Jack_lib/src/PlayerStrategy.h"
 
 #ifndef GAME_H_
 #define GAME_H_

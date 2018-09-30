@@ -10,7 +10,7 @@
 #include <map>
 #include <set>
 
-#include "Console.h"
+#include "../../Black_Jack_lib/src/Console.h"
 // constexpr because all values are known at compile time
 constexpr auto MIN_WAGER = 1.0;
 constexpr auto MAX_WAGER = 500.0;

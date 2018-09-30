@@ -5,10 +5,8 @@
  *      Author: Stefan
  */
 #include <memory>
-#include "ConsoleGame.h"
-#include "Card.h"
-#include "GlobalDeclarations.h"
-#include "HoleCards.h"
+
+#include "../../Console_Game/src/ConsoleGame.h"
 
 int main(int argc, char ** argv)
 {

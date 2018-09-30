@@ -7,7 +7,7 @@
 
 
 #include <memory>
-#include "../../BlackJack/src/SimulationGame.h"
+#include "SimulationGame.h"
 #include "../../BlackJack/src/Card.h"
 #include "../../BlackJack/src/GlobalDeclarations.h"
 #include "../../BlackJack/src/HoleCards.h"

@@ -5,12 +5,13 @@
  *      Author: Stefan
  */
 
-#include "Console.h"
+#include "../../Black_Jack_lib/src/Console.h"
 
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "GlobalDeclarations.h"
+
+#include "../../Black_Jack_lib/src/GlobalDeclarations.h"
 
 
 void Console::Write( std::stringstream const & strm )

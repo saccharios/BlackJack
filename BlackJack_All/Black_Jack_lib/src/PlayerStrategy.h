@@ -8,13 +8,13 @@
 #ifndef SRC_PLAYERSTRATEGY_H_
 #define SRC_PLAYERSTRATEGY_H_
 
-#include "Player.h"
 #include <string>
-#include "console.h"
-#include "GlobalDeclarations.h"
-#include "PlayerHand.h"
-#include "Dealer.h"
 #include <map>
+#include "../../Black_Jack_lib/src/Console.h"
+#include "../../Black_Jack_lib/src/Dealer.h"
+#include "../../Black_Jack_lib/src/GlobalDeclarations.h"
+#include "../../Black_Jack_lib/src/Player.h"
+#include "../../Black_Jack_lib/src/PlayerHand.h"
 
 
 class HumanPlayer : public Player{

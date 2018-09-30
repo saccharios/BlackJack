@@ -14,14 +14,34 @@ env.PrependENVPath('PATH', path)
 env.Append(CXXFLAGS='--std=c++17') 
 
 
-project = 'BlackJack' 
+
+env.Append(CCCOMSTR = "Compiling $TARGET",
+           LINKCOMSTR = "Linking $TARGET")
+
+
 build_dir = 'build'
 if GetOption('debug_build'):
     env.ParseFlags('-DDEBUG')
-    mode = '_debug'
+    mode = 'debug'
 else:
-    mode = '_release'
+    mode = 'release'
+
+
+target_name = 'Black_Jack_lib'
+libpath = build_dir + '/' + target_name + '_'+mode 
+SConscript(target_name +'/SConscript', variant_dir=libpath, duplicate=False, exports=['env','target_name'])
  
-variant_dir = build_dir + '/' + project + mode 
- 
-SConscript(project +'/src/SConscript', variant_dir=variant_dir, duplicate=False, exports=['env'])
+env.Append(LIBPATH=['E:\\Code\\BlackJack_Repo\\BlackJack_All\\build\\Black_Jack_lib_release'])
+env.Append(LIBS=[target_name]) 
+
+target_name = 'Console_Game'    
+variant_dir = build_dir + '/' + target_name + '_'+mode 
+  
+SConscript(target_name +'/SConscript', variant_dir=variant_dir, duplicate=False, exports=['env','target_name'])
+
+
+# project = 'Simulations' 
+#    
+# variant_dir = build_dir + '/' + project + '_'+mode 
+#    
+# SConscript(project +'/src/SConscript', variant_dir=variant_dir, duplicate=False, exports=['env','variant_dir'])

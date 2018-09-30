@@ -9,8 +9,9 @@
 #define PLAYERHAND_H_
 
 #include <memory>
-#include "HoleCards.h"
 #include <set>
+
+#include "../../Black_Jack_lib/src/HoleCards.h"
 // Forward declaration to avoid #include
 class Card;
 class Deck;
