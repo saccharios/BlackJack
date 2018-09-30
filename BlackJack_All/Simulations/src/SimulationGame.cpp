@@ -6,7 +6,7 @@
  */
 
 #include "SimulationGame.h"
-#include "../../BlackJack/src/PlayerStrategy.h"
+#include "../../Black_Jack_lib/src/PlayerStrategy.h"
 #include <ostream>
 #include "assert.h"
 #include <iostream>

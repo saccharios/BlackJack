@@ -8,6 +8,27 @@ AddOption(
     help='debug build',
     default=False)
 
+# SetOption('cache_disable' ,True) --cache-disable
+if(len(COMMAND_LINE_TARGETS) != 1):
+    print('Specify exactly one target.Aborting...')
+    Exit(0)
+    
+target_name =  COMMAND_LINE_TARGETS[0]
+
+Target_List =[
+    'Black_Jack_lib',
+    'Console_Game',
+    'Simulations',
+    'UnitTest',
+    ]
+
+
+if (target_name not in Target_List):
+    print('You have entered an invalid target. Aborting...')
+
+print('Start to build ', target_name)
+
+
 env = Environment(ENV = os.environ, tools = ['mingw'])
 path = ['C:\\MinGW_63\\bin']
 env.PrependENVPath('PATH', path)
@@ -31,13 +52,11 @@ lib_name = 'Black_Jack_lib'
 libpath = build_dir + '/' + lib_name + '_'+mode 
 SConscript(lib_name +'/SConscript', variant_dir=libpath, duplicate=False, exports=['env','lib_name'])
  
-print('Using lib path = ' , libpath)
+
 env.Append(LIBPATH=[libpath])
 env.Append(LIBS=[lib_name]) 
 
-target_name = 'Console_Game'    
 variant_dir = build_dir + '/' + target_name + '_'+mode 
-  
 SConscript(target_name +'/SConscript', variant_dir=variant_dir, duplicate=False, exports=['env','target_name'])
 
 

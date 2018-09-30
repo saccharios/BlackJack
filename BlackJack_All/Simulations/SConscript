@@ -5,8 +5,8 @@ local_env = env.Clone()
 
 src = 'src/'
 src_files=  [
-src + 'ConsoleGame_Main.cpp',
-src + 'ConsoleGame.cpp',
+src + 'Simulations_Main.cpp',
+src + 'SimulationGame.cpp',
 ]
 
 

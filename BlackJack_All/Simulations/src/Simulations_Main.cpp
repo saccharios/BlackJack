@@ -8,9 +8,9 @@
 
 #include <memory>
 #include "SimulationGame.h"
-#include "../../BlackJack/src/Card.h"
-#include "../../BlackJack/src/GlobalDeclarations.h"
-#include "../../BlackJack/src/HoleCards.h"
+#include "../../Black_Jack_lib/src/Card.h"
+#include "../../Black_Jack_lib/src/GlobalDeclarations.h"
+#include "../../Black_Jack_lib/src/HoleCards.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
