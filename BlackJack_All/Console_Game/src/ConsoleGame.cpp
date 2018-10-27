@@ -23,7 +23,7 @@ void ConsoleGame::AddHumanPlayers()
 {
 	// Player creator function. Needs user input.
 	console.WriteString("How many human players want to play?\n");
-	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS - Base::_players.size());
+	auto NPlayers = console.ReadInNumber(1u,static_cast<unsigned int>( MAX_PLAYERS - Base::_players.size()));
 	console.WriteString("Enter names and balances for each player:\n" );
 	std::stringstream strm;
 	for( unsigned int i = 0; i < NPlayers; ++i )
