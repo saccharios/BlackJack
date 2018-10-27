@@ -10,7 +10,7 @@ AddOption(
 
 # SetOption('cache_disable' ,True) --cache-disable
 if(len(COMMAND_LINE_TARGETS) != 1):
-    print('Specify exactly one target.Aborting...')
+    print('Error: Specify exactly one target. \nAborting...')
     Exit(0)
     
 target_name =  COMMAND_LINE_TARGETS[0]
@@ -29,9 +29,7 @@ if (target_name not in Target_List):
 print('Start to build ', target_name)
 
 
-env = Environment(ENV = os.environ, tools = ['mingw'])
-path = ['C:\\MinGW_63\\bin']
-env.PrependENVPath('PATH', path)
+env = Environment(ENV = os.environ,)
 env.Append(CXXFLAGS='--std=c++17') 
 
 
@@ -50,7 +48,7 @@ else:
 
 lib_name = 'Black_Jack_lib'
 libpath = build_dir + '/' + lib_name + '_'+mode 
-SConscript(lib_name +'/SConscript', variant_dir=libpath, duplicate=False, exports=['env','lib_name'])
+SConscript(lib_name +'/SConscript.py', variant_dir=libpath, duplicate=False, exports=['env','lib_name'])
  
 
 env.Append(LIBPATH=[libpath])
@@ -58,7 +56,7 @@ env.Append(LIBS=[lib_name])
 env.Append(CPPPATH=[libpath + '/src'])
 
 variant_dir = build_dir + '/' + target_name + '_'+mode 
-SConscript(target_name +'/SConscript', 
+SConscript(target_name +'/SConscript.py', 
            variant_dir=variant_dir, 
            duplicate=False, 
            exports=['env','target_name'])

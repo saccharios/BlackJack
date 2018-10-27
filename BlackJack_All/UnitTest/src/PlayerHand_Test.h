@@ -19,7 +19,7 @@ class PlayerHandTest : public ::testing::Test
 {
 private:
 	const double _wager = 10.0;
-	const std::size_t _numDecks = 1;
+	const unsigned int _numDecks = 1;
 public:
 	using pCard = std::unique_ptr<Card>;
 	PlayerHandTest() : _deck(0), _hand (_deck, _wager, 0)

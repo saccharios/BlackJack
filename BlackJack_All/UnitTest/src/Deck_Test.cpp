@@ -31,11 +31,11 @@ void DeckTest::Run_RemoveOneCard_EmptyDesk_DEATH()
 
 void DeckTest::Run_AddEigthSets()
 {
-	std::size_t NumDecks = 8;
-	std::size_t NumCardsDeck = 52;
+	unsigned int NumDecks = 8;
+	unsigned int NumCardsDeck = 52;
 	_deck.AddSets(NumDecks);
 	EXPECT_EQ(NumDecks*NumCardsDeck, _deck.Size());
-	for(std::size_t i = 0; i < NumDecks*NumCardsDeck; ++i)
+	for(unsigned int i = 0; i < NumDecks*NumCardsDeck; ++i)
 	{
 		_deck.Draw();
 	}
@@ -43,11 +43,11 @@ void DeckTest::Run_AddEigthSets()
 }
 void DeckTest::Run_AddMAX1Sets_DEATH()
 {
-	std::size_t NumDecks = MAX_SETS +1 ;
+	unsigned int NumDecks = MAX_SETS +1 ;
 	EXPECT_DEATH(_deck.AddSets(NumDecks),"");
 }
 void DeckTest::Run_AddZeroSets_DEATH()
 {
-	std::size_t NumDecks = 0;
+	unsigned int NumDecks = 0;
 	EXPECT_DEATH(_deck.AddSets(NumDecks),"");
 }

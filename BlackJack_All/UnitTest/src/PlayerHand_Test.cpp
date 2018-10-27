@@ -59,7 +59,7 @@ void PlayerHandTest::Run_ActionSplit_Aces()
 }
 void PlayerHandTest::Run_ActionHit()
 {
-	for(std::size_t i = 0; i < 10; ++i)
+	for(unsigned int i = 0; i < 10; ++i)
 	{
 		_hand.ActionHit();
 		EXPECT_EQ(i+1u, _hand.GetHoleCards().Size());

@@ -26,12 +26,12 @@ public:
 	Deck(Deck const &) = delete ;
 	void operator=(Deck const&) = delete;
 
-	void AddSets(std::size_t N);
+	void AddSets(unsigned int N);
 	void AddCard( pCard  card) { _cardContainer.push_back(std::move(card)); }
 	pCard Draw();
 	pCard Draw(unsigned int number);
 	void PrintNumCards() const;
-	std::size_t Size() const {return _cardContainer.size();}
+	unsigned int Size() const {return _cardContainer.size();}
 	void SetSeed(unsigned int seed) { _seed = seed; }
 
 private:

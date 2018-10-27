@@ -25,7 +25,7 @@ class PlayerHand {
 	using pCard = std::unique_ptr<Card>;
 	using pPlayerHand = std::unique_ptr<PlayerHand>;
 public:
-	PlayerHand (Deck & deck, double const & wager, std::size_t const & handNumber);
+	PlayerHand (Deck & deck, double const & wager, unsigned int const & handNumber);
 
 	// Not allowed to copy or assign, because it contains a card container (which has unique_ptrs)
 	PlayerHand (PlayerHand const & player) = delete;
@@ -52,7 +52,7 @@ public:
 	double PayoutLoose () const;
 	double PayoutWin () const;
 	double PayoutBlackJack () const;
-	std::size_t const & GetHandNumber() const { return _handNumber; }
+	unsigned int const & GetHandNumber() const { return _handNumber; }
 	void PrintHandNumber() const;
 	bool const & IsPlayed() const { return _isPlayed; }
 	HoleCards const & GetHoleCards() const { return _holeCards;}
@@ -63,7 +63,7 @@ private:
 	Deck & _deck;
 	HoleCards _holeCards;
 	double _wager;
-	const std::size_t _handNumber;
+	const unsigned int _handNumber;
 	bool _isPlayed;
 
 };

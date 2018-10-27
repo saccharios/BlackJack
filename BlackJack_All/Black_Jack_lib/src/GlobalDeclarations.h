@@ -14,8 +14,8 @@
 // constexpr because all values are known at compile time
 constexpr auto MIN_WAGER = 1.0;
 constexpr auto MAX_WAGER = 500.0;
-constexpr std::size_t MAX_SETS = 8;
-constexpr std::size_t MAX_PLAYERS = 8;
+constexpr unsigned int MAX_SETS = 8;
+constexpr unsigned int MAX_PLAYERS = 8;
 constexpr auto MIN_INIT_BALANCE = 1.0;
 constexpr auto MAX_INIT_BALANCE = 100000.0;
 constexpr std::string::size_type MAX_CHARS = 20 ;

@@ -40,7 +40,7 @@ public:
 	void PrintCards() const;
 	void PrintNumCards() const;
 	bool IsEmpty() const { return _cardContainer.empty(); }
-	std::size_t Size() const { return _cardContainer.size(); }
+	unsigned int Size() const { return _cardContainer.size(); }
 
 private:
 	bool _areBlackJack;

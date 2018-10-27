@@ -19,7 +19,7 @@
 class AIPlayer_OptimalTest : public ::testing::Test
 {
 	const double _initBalance = MAX_INIT_BALANCE;
-	const std::size_t _numDecks = 1;
+	const unsigned int _numDecks = 1;
 	const std::string _name = "Optimal";
 public:
 	AIPlayer_OptimalTest() : _deck(0), _dealer(_deck), _AIPlayer(_deck, _name, _initBalance, _dealer)

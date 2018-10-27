@@ -104,8 +104,8 @@ void Console_Test::Run_ReadInName()
 			<< galileo << std::endl
 			;
 
-	std::size_t numPlayer = 0;
-	std::size_t const maxChars = 20;
+	unsigned int numPlayer = 0;
+	unsigned int const maxChars = 20;
 	// Actual tests
 	// First test with "Gauss"
 	auto readIn = _console.ReadInName(++numPlayer, maxChars);

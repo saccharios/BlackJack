@@ -26,7 +26,7 @@ void ConsoleGame::AddHumanPlayers()
 	auto NPlayers = console.ReadInNumber(1u, MAX_PLAYERS - Base::_players.size());
 	console.WriteString("Enter names and balances for each player:\n" );
 	std::stringstream strm;
-	for( std::size_t i = 0; i < NPlayers; ++i )
+	for( unsigned int i = 0; i < NPlayers; ++i )
 	{
 		auto name = console.ReadInName(i, MAX_CHARS);
 		strm << "Welcome " << name <<". Set your balance. "<< std::endl;
@@ -147,7 +147,7 @@ void ConsoleGame::RemoveBrokePlayers()
 {
 	// If a player has less than the minimum wager, they are removed.
 	// Conventional for-loop because it needs access to the index to remove it
-	for( std::size_t i = 0; i <_players.size(); ++i)
+	for( unsigned int i = 0; i <_players.size(); ++i)
 	{
 		if(_players[i]->GetBalance() < MIN_WAGER)
 		{

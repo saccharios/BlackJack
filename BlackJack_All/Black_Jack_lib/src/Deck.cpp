@@ -15,13 +15,13 @@
 #include "../../Black_Jack_lib/src/Card.h"
 #include "../../Black_Jack_lib/src/GlobalDeclarations.h"
 
-void Deck::AddSets(std::size_t  N)
+void Deck::AddSets(unsigned int  N)
 {
 	// Can only have between 1 and MAX_SETS sets.
 	assert(N <= MAX_SETS);
 	assert(N > 0);
 
-	for(std::size_t i = 0; i < N; ++i)
+	for(unsigned int i = 0; i < N; ++i)
 	{
 		AddCompleteSet();
 	}
@@ -40,7 +40,7 @@ void Deck::AddCompleteSet()
 }
 
 
-Deck::pCard Deck::Draw(std::size_t rnd_number)
+Deck::pCard Deck::Draw(unsigned int rnd_number)
 {
 	// Draw card at position number if it is within bounds and return it to the caller.
 	assert(rnd_number < Size());

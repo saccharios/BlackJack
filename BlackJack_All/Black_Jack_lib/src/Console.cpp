@@ -53,7 +53,7 @@ std::string Console::ReadInAction(std::set<std::string> const & stringSet)
 }
 
 
-std::string Console::ReadInName(std::size_t const & numPlayer, std::size_t const & maxChars)
+std::string Console::ReadInName(unsigned int const & numPlayer, unsigned int const & maxChars)
 {
 	// Read in user input name for current player with number numPlayer
 	std::string name("");

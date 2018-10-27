@@ -21,13 +21,13 @@ class SimulationGame : public Game{
 public:
 
 	struct Setup {
-		std::size_t N_Simulation_Steps;
-		std::size_t N_Sets;
+		unsigned int N_Simulation_Steps;
+		unsigned int N_Sets;
 		double initialBalance;
-		std::size_t N_Basic_AIPlayers;
-		std::size_t N_Conservative_AIPlayers;
-		std::size_t N_Aggressive_AIPlayers;
-		std::size_t N_Optimal_AIPlayers;
+		unsigned int N_Basic_AIPlayers;
+		unsigned int N_Conservative_AIPlayers;
+		unsigned int N_Aggressive_AIPlayers;
+		unsigned int N_Optimal_AIPlayers;
 	};
 
 	SimulationGame(Setup setup);
@@ -37,8 +37,8 @@ public:
 	void PrintStatistics(std::ostream & ostrm);
 	void Simulate();
 private:
-	const std::size_t _simulationRounds;
-	std::size_t _currentRound = 0;
+	const unsigned int _simulationRounds;
+	unsigned int _currentRound = 0;
 	static constexpr double _balanceLowLimit = 100.0 * MIN_WAGER;
 	static constexpr double _wager = MIN_WAGER;
 

@@ -46,7 +46,7 @@ public:
 	void Stand(pPlayerHand const & hand);
 	void AddToBalance(double value);
 	void SubtractFromBalance(double value);
-	std::size_t GetNumHands() {return _handManager.size();}
+	unsigned int GetNumHands() {return _handManager.size();}
 	void AddHand(pPlayerHand hand);
 	virtual std::string Strategy(std::set<std::string> const & validActions, pPlayerHand const & hand) const = 0;
 

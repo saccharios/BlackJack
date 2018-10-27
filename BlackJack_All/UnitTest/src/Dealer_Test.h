@@ -44,7 +44,7 @@ public:
 private:
 	Deck _deck;
 	Dealer _dealer;
-	static constexpr std::size_t _numDecks = 1;
+	static constexpr unsigned int _numDecks = 1;
 
 };
 TEST_F(DealerTest, Start)

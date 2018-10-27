@@ -15,7 +15,7 @@
 #include "../../Black_Jack_lib/src/GlobalDeclarations.h"
 #include "../../Black_Jack_lib/src/HoleCards.h"
 
-PlayerHand::PlayerHand (Deck & deck, double const & wager, std::size_t const & handNumber):
+PlayerHand::PlayerHand (Deck & deck, double const & wager, unsigned int const & handNumber):
 _deck(deck),
 _handNumber(handNumber),
 _isPlayed(false)

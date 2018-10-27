@@ -47,7 +47,7 @@ void Player::Play()
 	// Player plays his hands. Number of hands can increase due to spliting
 	strm << "-------" << GetName() <<  "'s turn-------" << std::endl;
 	console.Write(strm);
-	std::size_t  handNr = 0;
+	unsigned int  handNr = 0;
 	while(handNr < _handManager.size()) // Spliting cards creates more hands
 	{
 		while( !_handManager[handNr]->IsPlayed() ) // Play current hand as long as you are allowed to

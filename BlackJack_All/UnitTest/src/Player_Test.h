@@ -19,10 +19,10 @@ class PlayerTest : public ::testing::Test
 {
 private:
 	const double _initBalance = 10.0;
-	const std::size_t _numDecks = 1;
+	const unsigned int _numDecks = 1;
 	const std::string _name = "Player_A";
 	const double _originalWager = 1.0;
-	const std::size_t handNr = 0;
+	const unsigned int handNr = 0;
 public:
 	using pHandManager = std::unique_ptr<PlayerHand>;
 	using pCard = std::unique_ptr<Card>;
